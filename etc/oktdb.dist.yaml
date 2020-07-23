@@ -1,0 +1,50 @@
+
+BACKEND:
+  cfg_db: /tmp/oktdb.db
+  sesame_user: xxxxx
+# perl -MDigest::SHA -e 'print Digest::SHA::hmac_sha1_hex("password")
+  sesame_pass: xxxx
+
+FRONTEND:
+# logo = ../resource/oktdb/logo.png
+# logo_small = ../resource/oktdb/logo-small.png
+  title: OktDB Oltner Kabarett Tage Datenbank
+  company_name: OETIKER+PARETNER AG
+  company_url: https://oetiker.ch
+
+PLUGIN:
+  - InitialUser:
+      module: UserForm
+      mode: init
+      type: add
+      tab-name: Create Initial User
+  - Pers:
+      module: Pers
+      tab-name: Personen
+  - Agency:
+      module: Agency
+      tab-name: Agentur
+  - OKT:
+      module: Okt
+      tab-name: OKT
+  - Progteam:
+      module: ProgTeam
+      tab-name: ProgTeam
+  - Artpers:
+      module: ArtPers
+      tab-name: ArtPers
+  - Production:
+      module: Production
+      tab-name: Produktion
+  - ArtPersMember:
+      module: ArtPersMember
+      tab-name: ArtPersMember
+  - Location:
+      module: Location
+      tab-name: Location
+  - OktEvent:
+      module: OktEvent
+      tab-name: OktEvents
+  - AdminUser:
+      module: Users
+      tab-name: Konto Manager

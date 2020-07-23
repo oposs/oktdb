@@ -1,0 +1,359 @@
+package OktDB::GuiPlugin::ArtPers;
+use Mojo::Base 'CallBackery::GuiPlugin::AbstractTable', -signatures;
+use CallBackery::Translate qw(trm);
+use CallBackery::Exception qw(mkerror);
+use Mojo::JSON qw(true false);
+use Time::Piece;
+use Text::ParseWords;
+
+=head1 NAME
+
+OktDB::GuiPlugin::ArtPers - ArtPers Table
+
+=head1 SYNOPSIS
+
+ use OktDB::GuiPlugin::ArtPers;
+
+=head1 DESCRIPTION
+
+The Table Gui.
+
+=cut
+
+has checkAccess => sub {
+    my $self = shift;
+    return 0 if $self->user->userId eq '__ROOT';
+    return $self->user->may('admin');
+};
+
+
+=head1 METHODS
+
+All the methods of L<CallBackery::GuiPlugin::AbstractTable> plus:
+
+=cut
+
+has formCfg => sub {
+    my $self = shift;
+    return [
+        {
+            key => 'search',
+            widget => 'text',
+            set => {
+                width => 300,
+                placeholder => trm('search words ...'),
+            },
+        },
+    ];
+};
+
+=head2 tableCfg
+
+
+=cut
+
+has tableCfg => sub {
+    my $self = shift;
+    return [
+        {
+            label => trm('Id'),
+            type => 'number',
+            width => '1*',
+            key => 'artpers_id',
+            sortable => true,
+            primary => true
+        },
+        {
+            label => trm('Name'),
+            type => 'string',
+            width => '6*',
+            key => 'artpers_name',
+            sortable => true,
+        },
+        {
+            label => trm('Agency'),
+            type => 'string',
+            width => '6*',
+            key => 'artpers_agency_name',
+            sortable => false,
+        },
+        {
+            label => trm('Agency Contact'),
+            type => 'string',
+            width => '6*',
+            key => 'artpers_agency_pers_name',
+            sortable => false,
+        },
+        {
+            label => trm('Progteam Contact'),
+            type => 'string',
+            width => '6*',
+            key => 'artpers_progteam_name',
+            sortable => true,
+        },
+        {
+            label => trm('eMail'),
+            type => 'string',
+            width => '6*',
+            key => 'artpers_email',
+            sortable => true,
+        },
+        {
+            label => trm('Web'),
+            type => 'string',
+            width => '6*',
+            key => 'artpers_web',
+            sortable => true,
+        },
+        {
+            label => trm('Mobile'),
+            type => 'string',
+            width => '6*',
+            key => 'artpers_mobile',
+            sortable => true,
+        },
+        {
+            label => trm('Postal Address'),
+            type => 'string',
+            width => '6*',
+            key => 'artpers_postaladdress',
+            sortable => true,
+        },
+        {
+            label => trm('Requirements'),
+            type => 'string',
+            width => '6*',
+            key => 'artpers_requirements',
+            sortable => true,
+        },
+        {
+            label => trm('Preis'),
+            type => 'string',
+            width => '2*',
+            key => 'artpers_pt_year',
+            sortable => true,
+        },
+        {
+            label => trm('Ehrenpreis'),
+            type => 'string',
+            width => '6*',
+            key => 'artpers_ep_year',
+            sortable => true,
+        },
+        {
+            label => trm('Note'),
+            type => 'string',
+            width => '6*',
+            key => 'artpers_note',
+            sortable => true,
+        },
+        {
+            label => trm('Start'),
+            type => 'string',
+            width => '6*',
+            key => 'artpers_start_ts',
+            sortable => true,
+        },
+                {
+            label => trm('End'),
+            type => 'string',
+            width => '6*',
+            key => 'artpers_end_ts',
+            sortable => true,
+        },
+
+     ]
+};
+
+=head2 actionCfg
+
+Only users who can write get any actions presented.
+
+=cut
+
+has actionCfg => sub {
+    my $self = shift;
+    return [] if $self->user and not $self->user->may('admin');
+
+    return [
+        {
+            label => trm('Add ArtPerson'),
+            action => 'popup',
+            addToContextMenu => false,
+            name => 'AddArtPersForm',
+            key => 'add',
+            popupTitle => trm('New ArtPerson'),
+            set => {
+                height => 750,
+                width => 400
+            },
+            backend => {
+                plugin => 'ArtPersForm',
+                config => {
+                    type => 'add'
+                }
+            }
+        },
+        {
+            label => trm('Edit ArtPerson'),
+            action => 'popup',
+            key => 'edit',
+            defaultAction => true,
+            addToContextMenu => true,
+            name => 'EditArtPersForm',
+            popupTitle => trm('Edit ArtPerson'),
+            buttonSet => {
+                enabled => false
+            },
+            set => {
+                height => 750,
+                width => 400
+            },
+            backend => {
+                plugin => 'ArtPersForm',
+                config => {
+                    type => 'edit'
+                }
+            }
+        },
+        {
+            label => trm('Delete ArtPerson'),
+            action => 'submitVerify',
+            addToContextMenu => true,
+            question => trm('Do you really want to delete the selected ArtPerson. This will only work if there are no other entries refering to that ArtPerson. Maybe edit the End Date instead.'),
+            key => 'delete',
+            buttonSet => {
+                enabled => false
+            },
+            actionHandler => sub {
+                my $self = shift;
+                my $args = shift;
+                my $id = $args->{selection}{artpers_id};
+                die mkerror(4992,"You have to select a artperson first")
+                    if not $id;
+                eval {
+                    $self->db->delete('artpers',{artpers_id => $id});
+                };
+                if ($@){
+                    $self->log->error("remove artpers $id: $@");
+                    die mkerror(4993,"Failed to remove artperson $id");
+                }
+                return {
+                    action => 'reload',
+                };
+            }
+        }
+    ];
+};
+
+sub db {
+    shift->user->mojoSqlDb;
+};
+
+sub WHERE {
+    my $self = shift;
+    my $args = shift;
+    my $where = {};
+    if (my $str = $args->{formData}{search}) {
+        chomp($str);
+        for my $search (quotewords('\s+', 0, $str)){
+            chomp($search);
+            my $lsearch = "%${search}%";
+            push @{$where->{-and}}, (
+                [
+                    artpers_name => { -like => $lsearch },
+                ]
+            )
+        }
+    }
+    return $where;
+}
+
+my $SUB_SELECT = <<"SELECT_END";
+    SELECT artpers.*,
+        strftime('%Y',pt.okt_start_ts,'unixepoch','localtime') AS artpers_pt_year, 
+        strftime('%Y',ep.okt_start_ts,'unixepoch','localtime') AS artpers_ep_year, 
+        pp.pers_given || ' ' || pp.pers_family AS artpers_progteam_name,
+        ap.pers_given || ' ' || ap.pers_family AS artpers_agency_pers_name,
+        agency_name AS artpers_agency_name,
+        strftime('%d.%m.%Y',artpers_start_ts,'unixepoch','localtime') AS artpers_start_ts,
+        strftime('%d.%m.%Y',artpers_end_ts,'unixepoch','localtime') AS artpers_end_ts
+    FROM artpers
+    LEFT JOIN progteam ON artpers_progteam = progteam_id
+    LEFT JOIN pers AS pp ON progteam_pers = pp.pers_id
+    LEFT JOIN okt AS pt ON artpers_pt_okt = pt.okt_id
+    LEFT JOIN okt AS ep ON artpers_ep_okt = ep.okt_id
+    LEFT JOIN agency ON artpers_agency = agency_id
+    LEFT JOIN pers AS ap ON artpers_agency_pers = ap.pers_id
+SELECT_END
+
+sub getTableRowCount {
+    my $self = shift;
+    my $args = shift;
+    my $db = $self->db;
+    my $WHERE = $self->WHERE($args);
+    my $sql = SQL::Abstract->new;
+    my ($where,@where_bind) = $sql->where($WHERE);
+    return $db->query(<<"SQL_END",@where_bind)->hash->{count};
+    SELECT COUNT(*) AS count FROM (
+        $SUB_SELECT
+    )
+    $where
+SQL_END
+}
+
+sub getTableData {
+    my $self = shift;
+    my $args = shift;
+    my $SORT = '';
+    my $db = $self->db;
+    my $dbh = $db->dbh;
+    my $sql = SQL::Abstract->new;
+    if ( $args->{sortColumn} ){
+        $SORT = $dbh->quote_identifier($args->{sortColumn}).(
+            $args->{sortDesc} 
+            ? ' DESC' 
+            : ' ASC' 
+        );
+    }
+    my $WHERE = $self->WHERE($args);
+    my ($where,@where_bind) = $sql->where($WHERE,$SORT);
+    my $data = $db->query(<<"SQL_END",
+    SELECT * FROM ( $SUB_SELECT )
+    $where
+    LIMIT ? OFFSET ?
+SQL_END
+       @where_bind,
+       $args->{lastRow}-$args->{firstRow}+1,
+       $args->{firstRow},
+    )->hashes;
+    for my $row (@$data) {
+        $row->{_actionSet} = {
+            edit => {
+                enabled => true
+            },
+            delete => {
+                enabled => true,
+            },
+        };
+    }
+    return $data;
+}
+
+1;
+
+__END__
+
+=head1 COPYRIGHT
+
+Copyright (c) 2020 by Tobias Oetiker. All rights reserved.
+
+=head1 AUTHOR
+
+S<Tobias Oetiker E<lt>tobi@oetiker.chE<gt>>
+
+=head1 HISTORY
+
+ 2020-07-20 oetiker 0.0 first version
+
+=cut
