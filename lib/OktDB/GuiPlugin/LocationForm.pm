@@ -3,7 +3,6 @@ use Mojo::Base 'CallBackery::GuiPlugin::AbstractForm';
 use CallBackery::Translate qw(trm);
 use CallBackery::Exception qw(mkerror);
 use Mojo::JSON qw(true false);
-use OktDB::Model::OperatingHours;
 
 =head1 NAME
 

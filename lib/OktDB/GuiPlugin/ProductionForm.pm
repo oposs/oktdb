@@ -108,7 +108,15 @@ has formCfg => sub {
                 $_[0] = $t;
                 return "";
             },
-        }
+        },
+        {
+            key => 'production_note',
+            label => trm('Note'),
+            widget => 'textArea',
+            set => {
+                placeholder => 'Anything noteworthy on that production.'
+            }
+        },
     ];
 };
 
@@ -122,7 +130,7 @@ has actionCfg => sub {
         my %metaInfo;
         my $fieldMap = { map { 
             "production_".$_ => $args->{"production_".$_} 
-            } qw(title artpers premiere_ts derniere_ts)
+            } qw(title artpers premiere_ts derniere_ts note)
         };
         if ($type eq 'add')  {
             $metaInfo{recId} = $self->db->insert('production',$fieldMap)->last_insert_id;

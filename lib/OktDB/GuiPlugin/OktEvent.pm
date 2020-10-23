@@ -233,9 +233,10 @@ sub WHERE {
             }
             else {
                 my $lsearch = "%${search}%";
-                push @{$where->{-and}}, (
+                push @{$where->{-or}}, (
                     [
-                        oktevent_name => { -like => $lsearch },
+                        okt_edition => { -like => $lsearch },
+                        production_title => { -like => $lsearch },
                     ]
                 )
             }

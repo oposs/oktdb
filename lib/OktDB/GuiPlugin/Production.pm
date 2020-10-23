@@ -61,6 +61,13 @@ has tableCfg => sub {
             sortable => true,
         },
         {
+            label => trm('Note'),
+            type => 'string',
+            width => '6*',
+            key => 'production_note',
+            sortable => true,
+        },
+        {
             label => trm('Premiere'),
             type => 'string',
             width => '6*',

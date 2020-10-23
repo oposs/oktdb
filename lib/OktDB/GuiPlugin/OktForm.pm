@@ -164,12 +164,10 @@ sub getAllFieldValues {
     my $db = $self->db;
     my $data = $db->select('okt','*',
         ,{okt_id => $id})->hash;
-    $data->{okt_start_ts} = localtime
-        ->strptime($data->{okt_start_ts},"%s")
+    $data->{okt_start_ts} = localtime($data->{okt_start_ts})
         ->strftime("%d.%m.%Y") 
         if $data->{okt_end_ts};
-    $data->{okt_end_ts} = localtime
-        ->strptime($data->{okt_end_ts},"%s")
+    $data->{okt_end_ts} = localtime($data->{okt_end_ts})
         ->strftime("%d.%m.%Y") 
         if $data->{okt_end_ts};
     return $data;

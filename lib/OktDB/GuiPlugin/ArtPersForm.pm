@@ -97,7 +97,7 @@ has formCfg => sub {
                 structure => [ {
                    key => undef, title => trm('Select OKT Person') 
                 },@{$db->query(<<"SQL_END")->hashes->to_array}]
-                    SELECT pers_id AS key,
+                    SELECT progteam_id AS key,
                         pers_given || ' ' || pers_family || ', ' || pers_email AS title
                     FROM pers JOIN progteam ON progteam_pers = pers_id
                     ORDER by pers_family, pers_given
@@ -149,7 +149,7 @@ SQL_END
             }
         },
         {
-            key => 'artpers_requirement',
+            key => 'artpers_requirements',
             label => trm('Requirements'),
             widget => 'textArea',
             set => {
@@ -158,11 +158,11 @@ SQL_END
         },
         {
             key => 'artpers_pt_okt',
-            label => trm('Kabaretpreis'),
+            label => trm('Kabarettpreis'),
             widget => 'selectBox',
             cfg => {
                 structure => [ {
-                        key => undef, title => trm('Kein Kabaretpreis'),
+                        key => undef, title => trm('Kein Kabarettpreis'),
                     },@{$db->select(
                     'okt',[\"okt_id AS key", \"strftime('%Y',okt_start_ts,'unixepoch') AS title"],undef,[qw(okt_start_ts)]
                 )->hashes->to_array}]
@@ -289,14 +289,12 @@ sub getAllFieldValues {
     my $db = $self->db;
     my $data = $db->select('artpers','*',
         ,{artpers_id => $id})->hash;
-    $data->{artpers_end_ts} = localtime
-        ->strptime($data->{artpers_end_ts},"%s")
-        ->strftime("%d.%m.%Y") 
-        if $data->{artpers_end_ts};
-    $data->{artpers_start_ts} = localtime
-        ->strptime($data->{artpers_start_ts},"%s")
-        ->strftime("%d.%m.%Y") 
-        if $data->{artpers_end_ts};
+    for (qw(start end)) {
+        my $k = "artpers_${_}_ts";
+        my $v = $data->{$k};
+        $data->{$k} = localtime($v)->strftime("%d.%m.%Y") 
+                if $v;
+    }
     return $data;
 }
 

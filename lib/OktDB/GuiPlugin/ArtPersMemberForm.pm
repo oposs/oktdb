@@ -76,7 +76,7 @@ has formCfg => sub {
                 structure => [ 
                     { key => undef, title => trm('Select Person')},
                     @{$db->select(
-                    'pers',[\"pers_id AS key",\"pers_given || ' ' || pers_family || ', ' || pers_email AS title"],undef,[qw(pers_family pers_given)]
+                    'pers',[\"pers_id AS key",\"pers_given || ' ' || pers_family || COALESCE(', ' || pers_email,'') AS title"],undef,[qw(pers_family pers_given)]
                 )->hashes->to_array}]
             }
         },

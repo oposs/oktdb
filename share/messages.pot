@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: oktdb 0.1.0\n"
+"Project-Id-Version: oktdb 0.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-23 15:58+0200\n"
+"POT-Creation-Date: 2020-10-23 17:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: lib/OktDB/GuiPlugin/ArtPersForm.pm:53 lib/OktDB/GuiPlugin/Production.pm:42
 #: lib/OktDB/GuiPlugin/ArtPersMember.pm:42 lib/OktDB/GuiPlugin/ArtPers.pm:59
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:53
-#: lib/OktDB/GuiPlugin/LocationForm.pm:55 lib/OktDB/GuiPlugin/OktForm.pm:53
+#: lib/OktDB/GuiPlugin/LocationForm.pm:54 lib/OktDB/GuiPlugin/OktForm.pm:53
 #: lib/OktDB/GuiPlugin/ProgTeam.pm:53 lib/OktDB/GuiPlugin/AgencyForm.pm:53
 #: lib/OktDB/GuiPlugin/Okt.pm:43
 msgid "Id"
@@ -46,7 +46,7 @@ msgid "Select ArtPers"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:78
-#: lib/OktDB/GuiPlugin/Production.pm:64
+#: lib/OktDB/GuiPlugin/Production.pm:71
 msgid "Premiere"
 msgstr ""
 
@@ -79,23 +79,33 @@ msgid "Invalid date"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:96
-#: lib/OktDB/GuiPlugin/Production.pm:71
+#: lib/OktDB/GuiPlugin/Production.pm:78
 msgid "Derniere"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/ProductionForm.pm:142
+#: lib/OktDB/GuiPlugin/ProductionForm.pm:114 lib/OktDB/GuiPlugin/Pers.pm:114
+#: lib/OktDB/GuiPlugin/OktEventForm.pm:168 lib/OktDB/GuiPlugin/Agency.pm:108
+#: lib/OktDB/GuiPlugin/OktEvent.pm:116 lib/OktDB/GuiPlugin/PersForm.pm:122
+#: lib/OktDB/GuiPlugin/ArtPersForm.pm:186 lib/OktDB/GuiPlugin/Production.pm:64
+#: lib/OktDB/GuiPlugin/ArtPers.pm:144 lib/OktDB/GuiPlugin/AgencyForm.pm:127
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:104
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:74
+msgid "Note"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/ProductionForm.pm:150
 #: lib/OktDB/GuiPlugin/OktEventForm.pm:204 lib/OktDB/GuiPlugin/PersForm.pm:177
 #: lib/OktDB/GuiPlugin/ProgTeamForm.pm:139
 #: lib/OktDB/GuiPlugin/ArtPersForm.pm:259
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:149
-#: lib/OktDB/GuiPlugin/LocationForm.pm:104 lib/OktDB/GuiPlugin/OktForm.pm:134
+#: lib/OktDB/GuiPlugin/LocationForm.pm:103 lib/OktDB/GuiPlugin/OktForm.pm:134
 #: lib/OktDB/GuiPlugin/AgencyForm.pm:181
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:204
 msgid "Save Changes"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/ProductionForm.pm:143
-#: lib/OktDB/GuiPlugin/Production.pm:92
+#: lib/OktDB/GuiPlugin/ProductionForm.pm:151
+#: lib/OktDB/GuiPlugin/Production.pm:99
 msgid "Add Production"
 msgstr ""
 
@@ -140,15 +150,6 @@ msgstr ""
 msgid "Postal Address"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Pers.pm:114 lib/OktDB/GuiPlugin/OktEventForm.pm:168
-#: lib/OktDB/GuiPlugin/Agency.pm:108 lib/OktDB/GuiPlugin/OktEvent.pm:116
-#: lib/OktDB/GuiPlugin/PersForm.pm:122 lib/OktDB/GuiPlugin/ArtPersForm.pm:186
-#: lib/OktDB/GuiPlugin/ArtPers.pm:144 lib/OktDB/GuiPlugin/AgencyForm.pm:127
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:104
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:74
-msgid "Note"
-msgstr ""
-
 #: lib/OktDB/GuiPlugin/Pers.pm:121 lib/OktDB/GuiPlugin/Agency.pm:115
 #: lib/OktDB/GuiPlugin/ArtPersMember.pm:77 lib/OktDB/GuiPlugin/ArtPers.pm:158
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:103
@@ -183,7 +184,7 @@ msgstr ""
 msgid "Location Name"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Location.pm:73 lib/OktDB/GuiPlugin/LocationForm.pm:105
+#: lib/OktDB/GuiPlugin/Location.pm:73 lib/OktDB/GuiPlugin/LocationForm.pm:104
 msgid "Add Location"
 msgstr ""
 
@@ -270,7 +271,7 @@ msgid "Add OktEvent"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/Agency.pm:66 lib/OktDB/GuiPlugin/ArtPersForm.pm:62
-#: lib/OktDB/GuiPlugin/ArtPers.pm:67 lib/OktDB/GuiPlugin/LocationForm.pm:64
+#: lib/OktDB/GuiPlugin/ArtPers.pm:67 lib/OktDB/GuiPlugin/LocationForm.pm:63
 msgid "Name"
 msgstr ""
 
@@ -401,11 +402,11 @@ msgid "Requirements"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/ArtPersForm.pm:161
-msgid "Kabaretpreis"
+msgid "Kabarettpreis"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/ArtPersForm.pm:165
-msgid "Kein Kabaretpreis"
+msgid "Kein Kabarettpreis"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/ArtPersForm.pm:173 lib/OktDB/GuiPlugin/ArtPers.pm:137
@@ -428,19 +429,19 @@ msgstr ""
 msgid "Titel"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Production.pm:97
+#: lib/OktDB/GuiPlugin/Production.pm:104
 msgid "New Production"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Production.pm:110 lib/OktDB/GuiPlugin/Production.pm:115
+#: lib/OktDB/GuiPlugin/Production.pm:117 lib/OktDB/GuiPlugin/Production.pm:122
 msgid "Edit Production"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Production.pm:131
+#: lib/OktDB/GuiPlugin/Production.pm:138
 msgid "Remove Production"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Production.pm:134
+#: lib/OktDB/GuiPlugin/Production.pm:141
 msgid ""
 "Do you really want to delete the selected Production? This will only work if "
 "there are no other entries refering to that Production."
@@ -548,7 +549,7 @@ msgstr ""
 #: lib/OktDB/GuiPlugin/ProgTeam.pm:139
 msgid ""
 "Do you really want to delete the selected Member from the OKT Program Team? "
-"This will only work if there are no other entries refering to that Member. "
+"This will only work if there are no other entries referring to that Member. "
 "Maybe you would rather edit the end date."
 msgstr ""
 
@@ -590,7 +591,7 @@ msgstr ""
 msgid "Failed to send mail to %1"
 msgstr ""
 
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Config.pm:453
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Config.pm:447
 msgid "Wrong password!"
 msgstr ""
 
@@ -673,6 +674,10 @@ msgstr ""
 
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractForm.pm:130
 msgid "sorry, don't know the field you are talking about"
+msgstr ""
+
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractTable.pm:130
+msgid "Export %1"
 msgstr ""
 
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Controller/RpcService.pm:447

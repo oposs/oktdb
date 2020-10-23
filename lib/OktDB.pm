@@ -60,6 +60,11 @@ has mailTransport => sub ($self) {
     return;
 };
 
+sub startup ($self) {
+    $self->database;
+    $self->SUPER::startup;
+}
+
 1;
 
 =head1 COPYRIGHT
@@ -175,3 +180,7 @@ CREATE TABLE oktevent (
     oktevent_duration_s INTEGER,
     oktevent_note TEXT
 );
+
+-- 2 up
+
+ALTER TABLE production ADD  production_note TEXT;
