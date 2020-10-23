@@ -1,6 +1,11 @@
-0.1.2 2020-10-23 17:40:05 +0200 Tobias Oetiker <tobi@oetiker.ch>
+0.1.2 2020-10-23 18:04:16 +0200 Tobias Oetiker <tobi@oetiker.ch>
 
- - various fixes
+ - fix programteam link in artpers
+ - note feld fuer production
+ - requirements feld bei artpers
+ - datumsfeld bei artpers
+ - suche bei oktevents
+ - spell kein kabarettpreis
 
 0.1.1 2020-08-24 16:31:25 +0200 Tobias Oetiker <tobi@oetiker.ch>
 
