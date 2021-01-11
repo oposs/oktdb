@@ -41,6 +41,7 @@ has formCfg => sub {
             widget => 'text',
             set => {
                 width => 300,
+                liveUpdate => true,
                 placeholder => trm('search words ...'),
             },
         },
@@ -129,14 +130,14 @@ has tableCfg => sub {
         {
             label => trm('Preis'),
             type => 'string',
-            width => '2*',
+            width => '3*',
             key => 'artpers_pt_year',
             sortable => true,
         },
         {
             label => trm('Ehrenpreis'),
             type => 'string',
-            width => '6*',
+            width => '3*',
             key => 'artpers_ep_year',
             sortable => true,
         },
@@ -151,14 +152,14 @@ has tableCfg => sub {
             label => trm('Start'),
             type => 'string',
             width => '6*',
-            key => 'artpers_start_ts',
+            key => 'artpers_start',
             sortable => true,
         },
                 {
             label => trm('End'),
             type => 'string',
             width => '6*',
-            key => 'artpers_end_ts',
+            key => 'artpers_end',
             sortable => true,
         },
 
@@ -242,7 +243,29 @@ has actionCfg => sub {
                     action => 'reload',
                 };
             }
-        }
+        },
+        {
+            label => trm('ArtPerson Members'),
+            action => 'popup',
+            key => 'members',
+            defaultAction => false,
+            addToContextMenu => true,
+            name => 'EditArtPersMembers',
+            popupTitle => trm('ArtPerson Members'),
+            buttonSet => {
+                enabled => false
+            },
+            set => {
+                height => 750,
+                width => 1200
+            },
+            backend => {
+                plugin => 'ArtPersMember',
+                config => {
+                    mode => 'filtered'
+                }
+            }
+        },
     ];
 };
 
@@ -262,6 +285,8 @@ sub WHERE {
             push @{$where->{-and}}, (
                 [
                     artpers_name => { -like => $lsearch },
+                    artpers_progteam_name =>  { -like => $lsearch },
+                    artpers_agency_pers_name =>  { -like => $lsearch },
                 ]
             )
         }
@@ -276,8 +301,8 @@ my $SUB_SELECT = <<"SELECT_END";
         pp.pers_given || ' ' || pp.pers_family AS artpers_progteam_name,
         ap.pers_given || ' ' || ap.pers_family AS artpers_agency_pers_name,
         agency_name AS artpers_agency_name,
-        strftime('%d.%m.%Y',artpers_start_ts,'unixepoch','localtime') AS artpers_start_ts,
-        strftime('%d.%m.%Y',artpers_end_ts,'unixepoch','localtime') AS artpers_end_ts
+        strftime('%d.%m.%Y',artpers_start_ts,'unixepoch','localtime') AS artpers_start,
+        strftime('%d.%m.%Y',artpers_end_ts,'unixepoch','localtime') AS artpers_end
     FROM artpers
     LEFT JOIN progteam ON artpers_progteam = progteam_id
     LEFT JOIN pers AS pp ON progteam_pers = pp.pers_id
@@ -333,6 +358,9 @@ SQL_END
                 enabled => true
             },
             delete => {
+                enabled => true,
+            },
+            members => {
                 enabled => true,
             },
         };

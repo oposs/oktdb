@@ -59,15 +59,23 @@ has formCfg => sub {
         {
             key => 'artpersmember_artpers',
             label => trm('ArtPers'),
-            widget => 'selectBox',
-            cfg => {
-                structure => [
-                    { key => undef, title => trm("Select ArtPers") },
-                    @{$db->select(
-                    'artpers',[\"artpers_id AS key",\"artpers_name AS title"],undef,[qw(artpers_name)]
-                )->hashes->to_array}]
-            }
+            widget => 'hiddenText',
+            set => {
+                readOnly => true,
+            },
         },
+        # {
+        #     key => 'artpersmember_artpers',
+        #     label => trm('ArtPers'),
+        #     widget => 'selectBox',
+        #     cfg => {
+        #         structure => [
+        #             { key => undef, title => trm("Select ArtPers") },
+        #             @{$db->select(
+        #             'artpers',[\"artpers_id AS key",\"artpers_name AS title"],undef,[qw(artpers_name)]
+        #         )->hashes->to_array}]
+        #     }
+        # },
         {
             key => 'artpersmember_pers',
             label => trm('Person'),
@@ -76,7 +84,7 @@ has formCfg => sub {
                 structure => [ 
                     { key => undef, title => trm('Select Person')},
                     @{$db->select(
-                    'pers',[\"pers_id AS key",\"pers_given || ' ' || pers_family || COALESCE(', ' || pers_email,'') AS title"],undef,[qw(pers_family pers_given)]
+                    'pers',[\"pers_id AS key",\"pers_family || ', ' || pers_given || COALESCE(', ' || pers_email,'') AS title"],undef,[qw(pers_family pers_given)]
                 )->hashes->to_array}]
             }
         },
@@ -172,7 +180,9 @@ has grammar => sub {
 sub getAllFieldValues {
     my $self = shift;
     my $args = shift;
-    return {} if $self->config->{type} ne 'edit';
+    return {
+        artpersmember_artpers => $args->{artpers_id}
+    } if $self->config->{type} ne 'edit';
     my $id = $args->{selection}{artpersmember_id};
     return {} unless $id;
 

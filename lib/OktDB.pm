@@ -80,10 +80,10 @@ S<Tobias Oetiker E<lt>tobi@oetiker.chE<gt>>
 __DATA__
 
 @@ appdb.sql
-
 -- 1 up
 
 -- people
+--sql
 CREATE TABLE pers (
     pers_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     pers_given TEXT NOT NULL,
@@ -96,6 +96,7 @@ CREATE TABLE pers (
     pers_end_ts INTEGER
 );
 -- agencies
+--sql
 CREATE TABLE agency (
     agency_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     agency_name TEXT NOT NULL,
@@ -109,6 +110,7 @@ CREATE TABLE agency (
 );
 
 -- oltner kabarett tage
+--sql
 CREATE TABLE okt (
     okt_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     okt_edition TEXT NOT NULL,
@@ -117,6 +119,7 @@ CREATE TABLE okt (
 );
 
 -- program team
+--sql
 CREATE TABLE progteam (
     progteam_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     progteam_pers INTEGER NOT NULL REFERENCES pers(pers_id),
@@ -125,6 +128,7 @@ CREATE TABLE progteam (
 );
 
 -- artist, duo, trio, band, ...
+--sql
 CREATE TABLE artpers (
     artpers_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     artpers_name TEXT NOT NULL, 
@@ -144,6 +148,7 @@ CREATE TABLE artpers (
 );
 
 -- production
+--sql
 CREATE TABLE production (
     production_id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     production_artpers INTEGER  NOT NULL  REFERENCES artpers(artpers_id),
@@ -153,6 +158,7 @@ CREATE TABLE production (
 );
 
 -- persons making up an artpers
+--sql
 CREATE TABLE artpersmember (
     artpersmember_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     artpersmember_pers INTEGER NOT NULL REFERENCES pers(pers_id),
@@ -162,12 +168,14 @@ CREATE TABLE artpersmember (
 );
 
 -- location
+--sql
 CREATE TABLE location (
     location_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     location_name TEXT
 );
 
 -- oktevent
+--sql
 CREATE TABLE oktevent (
     oktevent_id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     oktevent_okt INTEGER NOT NULL REFERENCES okt(okt_id),
@@ -183,4 +191,5 @@ CREATE TABLE oktevent (
 
 -- 2 up
 
+--sql
 ALTER TABLE production ADD  production_note TEXT;

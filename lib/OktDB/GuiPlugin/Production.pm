@@ -4,6 +4,7 @@ use CallBackery::Translate qw(trm);
 use CallBackery::Exception qw(mkerror);
 use Mojo::JSON qw(true false);
 use Time::Piece;
+use Text::ParseWords;
 =head1 NAME
 
 OktDB::GuiPlugin::Production - Production Table
@@ -24,6 +25,21 @@ has checkAccess => sub {
     return $self->user->may('admin');
 };
   
+has formCfg => sub {
+    my $self = shift;
+    return [
+        {
+            key => 'search',
+            widget => 'text',
+            set => {
+                width => 300,
+                liveUpdate => true,
+                placeholder => trm('search words ...'),
+            },
+        },
+    ];
+};
+
 =head1 METHODS
 
 All the methods of L<CallBackery::GuiPlugin::AbstractTable> plus:
@@ -103,7 +119,7 @@ has actionCfg => sub {
             key => 'add',
             popupTitle => trm('New Production'),
             set => {
-                height => 300,
+                height => 400,
                 width => 500
             },
             backend => {
@@ -168,12 +184,63 @@ sub db {
     shift->user->mojoSqlDb;
 };
 
+my $keyMap = {
+    production => 'production_name',
+    artpers => 'artpers_name',
+};
+
+sub WHERE {
+    my $self = shift;
+    my $args = shift;
+    my $where = {};
+    if (my $str = $args->{formData}{search}) {
+        chomp($str);
+        for my $search (quotewords('\s+', 0, $str)){
+            chomp($search);
+            my $match = join('|',keys %$keyMap);
+            if ($search =~ m/^($match):(.+)/){
+                my $key = $keyMap->{$1};
+                push @{$where->{-and}},
+                    ref $key eq 'CODE' ?
+                    $key->($2) : ($key => $2) 
+            }
+            else {
+                my $lsearch = "%${search}%";
+                push @{$where->{-or}}, (
+                    [
+                        artpers_name => { -like => $lsearch },
+                        production_title => { -like => $lsearch },
+                    ]
+                )
+            }
+        }
+    }
+    return $where;
+}
+
+my $SUB_SELECT = <<SELECT_END;
+
+SELECT 
+    production.*,
+    artpers_name
+FROM
+    production 
+JOIN artpers ON production_artpers = artpers_id
+
+SELECT_END
 
 
 sub getTableRowCount {
     my $self = shift;
     my $args = shift;
-    return $self->db->select('production','COUNT(*) AS count')->hash->{count};
+    my $WHERE = $self->WHERE($args);
+    my $sql = SQL::Abstract->new;
+    my $db = $self->db;
+    my ($where,@where_bind) = $sql->where($WHERE);
+    return $db->query(<<"SQL_END",@where_bind)->hash->{count};
+    SELECT COUNT(*) AS count FROM ( $SUB_SELECT )
+    $where
+SQL_END
 }
 
 sub getTableData {
@@ -182,25 +249,22 @@ sub getTableData {
     my $SORT = '';
     my $db = $self->db;
     my $dbh = $db->dbh;
+    my $sql = SQL::Abstract->new;
     if ( $args->{sortColumn} ){
-        $SORT = 'ORDER BY '.$dbh->quote_identifier($args->{sortColumn}).(
+        $SORT = $dbh->quote_identifier($args->{sortColumn}).(
             $args->{sortDesc} 
             ? ' DESC' 
             : ' ASC' 
         );
     }
+    my $WHERE = $self->WHERE($args);
+    my ($where,@where_bind) = $sql->where($WHERE,$SORT);
     my $data = $db->query(<<"SQL_END",
-    SELECT * FROM (
-        SELECT 
-            production.*,
-            artpers_name
-        FROM
-            production 
-            JOIN artpers ON production_artpers = artpers_id
-    )
-    $SORT
+    SELECT * FROM ( $SUB_SELECT )
+    $where
     LIMIT ? OFFSET ?
 SQL_END
+       @where_bind,
        $args->{lastRow}-$args->{firstRow}+1,
        $args->{firstRow},
     )->hashes;
@@ -218,6 +282,8 @@ SQL_END
     }
     return $data;
 }
+
+
 
 1;
 

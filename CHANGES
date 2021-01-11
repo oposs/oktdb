@@ -1,3 +1,12 @@
+0.2.0 2020-12-23 17:46:16 +0100 Tobias Oetiker <tobi@oetiker.ch>
+
+ - access artpers members directly from the artpers table
+ - in the person select form show the name first
+ - in oktevent search by okt_edition artpers_name and location_name 
+ - in artpers search by artpers_name, progteam_name and agency_pers_name
+ - add search to production
+ - add live search
+
 0.1.2 2020-10-23 18:04:16 +0200 Tobias Oetiker <tobi@oetiker.ch>
 
  - fix programteam link in artpers

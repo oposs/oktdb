@@ -85,7 +85,7 @@ has formCfg => sub {
                 structure => [ 
                     { key => undef, title => trm('Select Agency Contact')},
                     @{$db->select(
-                    'pers',[\"pers_id AS key",\"pers_given || ' ' || pers_family || ', ' || pers_email AS title"],undef,[qw(pers_family pers_given)]
+                    'pers',[\"pers_id AS key",\"pers_given || ' ' || pers_family || coalesce(', ' || pers_email,'') AS title"],undef,[qw(pers_family pers_given)]
                 )->hashes->to_array}]
             }
         },
@@ -98,7 +98,7 @@ has formCfg => sub {
                    key => undef, title => trm('Select OKT Person') 
                 },@{$db->query(<<"SQL_END")->hashes->to_array}]
                     SELECT progteam_id AS key,
-                        pers_given || ' ' || pers_family || ', ' || pers_email AS title
+                        pers_family || ', ' || pers_given || coalesce(', ' || pers_email,'') AS title
                     FROM pers JOIN progteam ON progteam_pers = pers_id
                     ORDER by pers_family, pers_given
 SQL_END

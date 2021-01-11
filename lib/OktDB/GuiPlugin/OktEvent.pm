@@ -41,6 +41,7 @@ has formCfg => sub {
             widget => 'text',
             set => {
                 width => 300,
+                liveUpdate => true,
                 placeholder => trm('search words ...'),
             },
         },
@@ -236,6 +237,8 @@ sub WHERE {
                 push @{$where->{-or}}, (
                     [
                         okt_edition => { -like => $lsearch },
+                        artpers_name => { -like => $lsearch },
+                        location_name => { -like => $lsearch },
                         production_title => { -like => $lsearch },
                     ]
                 )
@@ -264,6 +267,7 @@ my $SUB_SELECT = <<SELECT_END;
     JOIN artpers ON production_artpers = artpers_id
 
 SELECT_END
+
 sub getTableRowCount {
     my $self = shift;
     my $args = shift;

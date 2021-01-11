@@ -30,6 +30,16 @@ All the methods of L<CallBackery::GuiPlugin::AbstractTable> plus:
 
 =cut
 
+has formCfg => sub ($self) {
+    return [
+        {
+            key => 'artpers_id',
+            widget => 'hiddenText',
+        },
+    ]
+};
+
+
 =head2 tableCfg
 
 
@@ -172,12 +182,19 @@ sub db {
 sub getTableRowCount {
     my $self = shift;
     my $args = shift;
-    return $self->db->select('artpersmember','COUNT(*) AS count')->hash->{count};
+    my $filter =
+        $self->config->{mode} eq 'filtered'
+        ? { artpersmember_artpers => $args->{parentFormData}{selection}{artpers_id} } : {};
+    return $self->db->select('artpersmember','COUNT(*) AS count',$filter)->hash->{count};
 }
 
 sub getTableData {
     my $self = shift;
     my $args = shift;
+    my $WHERE =
+        $self->config->{mode} eq 'filtered'
+        ? 'WHERE artpersmember_artpers = '.int($args->{parentFormData}{selection}{artpers_id}) : '';
+
     my $SORT = '';
     my $db = $self->db;
     my $dbh = $db->dbh;
@@ -203,6 +220,7 @@ sub getTableData {
             artpersmember 
             JOIN artpers ON artpersmember_artpers = artpers_id
             JOIN pers ON artpersmember_pers = pers_id
+        $WHERE
     )
     $SORT
     LIMIT ? OFFSET ?
@@ -224,6 +242,30 @@ SQL_END
     }
     return $data;
 }
+
+sub getAllFieldValues ($self,$args,$current,$options) {
+    my $artPersId = $self->config->{mode} eq 'filtered' ?
+        $args->{selection}{artpers_id} : undef;
+    return {
+        artpers_id => $artPersId,
+    };
+}
+
+
+has grammar => sub ($self) {
+    $self->mergeGrammar(
+        $self->SUPER::grammar,
+        {
+            _vars => [ qw(mode) ],
+            type => {
+                _doc => 'filtered or full',
+                _re => '(filtered|full)',
+                _default => 'full'
+            }
+        },
+    );
+};
+1;
 
 1;
 
