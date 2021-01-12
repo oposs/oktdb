@@ -19,11 +19,6 @@ The Location Edit Form
 
 =cut
 
-has checkAccess => sub {
-    my $self = shift;
-    return $self->user->may('admin');
-};
-
 =head1 METHODS
 
 All the methods of L<CallBackery::GuiPlugin::AbstractForm> plus:

@@ -21,7 +21,6 @@ The Location Edit Form
 
 has checkAccess => sub {
     my $self = shift;
-    return $self->user->may('admin');
 };
 
 =head1 METHODS

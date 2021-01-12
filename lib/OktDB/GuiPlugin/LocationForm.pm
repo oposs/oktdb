@@ -18,12 +18,6 @@ The Location Edit Form
 
 =cut
 
-has checkAccess => sub {
-    my $self = shift;
-    return 0 if $self->user->userId eq '__ROOT';
-
-    return $self->user->may('admin');
-};
 
 =head1 METHODS
 

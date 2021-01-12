@@ -18,10 +18,12 @@ The Location Edit Form
 
 =cut
 
+
 has checkAccess => sub {
     my $self = shift;
-    return $self->user->may('admin');
+    return $self->user->may('oktadmin');
 };
+
 
 =head1 METHODS
 

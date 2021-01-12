@@ -193,3 +193,9 @@ CREATE TABLE oktevent (
 
 --sql
 ALTER TABLE production ADD  production_note TEXT;
+
+-- 3 up
+
+INSERT INTO cbright (cbright_key,cbright_label)
+    VALUES 
+        ('oktadmin','OKT Admin');

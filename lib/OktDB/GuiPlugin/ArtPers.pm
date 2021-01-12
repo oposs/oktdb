@@ -20,13 +20,6 @@ The Table Gui.
 
 =cut
 
-has checkAccess => sub {
-    my $self = shift;
-    return 0 if $self->user->userId eq '__ROOT';
-    return $self->user->may('admin');
-};
-
-
 =head1 METHODS
 
 All the methods of L<CallBackery::GuiPlugin::AbstractTable> plus:
@@ -174,7 +167,6 @@ Only users who can write get any actions presented.
 
 has actionCfg => sub {
     my $self = shift;
-    return [] if $self->user and not $self->user->may('admin');
 
     return [
         {
