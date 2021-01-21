@@ -94,7 +94,7 @@ has formCfg => sub {
                 my $t = eval { 
                     localtime->strptime($value,"%d.%m.%Y")->epoch;;
                 };
-                if ($@) {
+                if ($@ or not $t) {
                     return trm('Invalid date');
                 }
                 $_[0] = $t;
@@ -112,7 +112,7 @@ has formCfg => sub {
                 my $t = eval { 
                     localtime->strptime($value,"%d.%m.%Y")->epoch;;
                 };
-                if ($@) {
+                if ($@ or not $t) {
                     return trm('Invalid date');
                 }
                 $_[0] = $t;

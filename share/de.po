@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oktdb 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-11 16:56+0100\n"
+"POT-Creation-Date: 2021-01-21 15:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,13 +80,13 @@ msgstr ""
 
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:85
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:53
-#: lib/OktDB/GuiPlugin/PersForm.pm:61
+#: lib/OktDB/GuiPlugin/PersForm.pm:57
 msgid "Given Name"
 msgstr ""
 
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:94
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:60
-#: lib/OktDB/GuiPlugin/PersForm.pm:69
+#: lib/OktDB/GuiPlugin/PersForm.pm:65
 msgid "Family Name"
 msgstr ""
 
@@ -94,8 +94,9 @@ msgstr ""
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:74
 #: lib/OktDB/GuiPlugin/Agency.pm:102 lib/OktDB/GuiPlugin/AgencyForm.pm:123
 #: lib/OktDB/GuiPlugin/ArtPers.pm:138 lib/OktDB/GuiPlugin/ArtPersForm.pm:181
+#: lib/OktDB/GuiPlugin/Event.pm:105 lib/OktDB/GuiPlugin/EventForm.pm:123
 #: lib/OktDB/GuiPlugin/OktEvent.pm:112 lib/OktDB/GuiPlugin/OktEventForm.pm:170
-#: lib/OktDB/GuiPlugin/Pers.pm:113 lib/OktDB/GuiPlugin/PersForm.pm:121
+#: lib/OktDB/GuiPlugin/Pers.pm:107 lib/OktDB/GuiPlugin/PersForm.pm:117
 #: lib/OktDB/GuiPlugin/Production.pm:75
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:110
 msgid "Note"
@@ -116,11 +117,13 @@ msgstr ""
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:204
 #: lib/OktDB/GuiPlugin/AgencyForm.pm:177 lib/OktDB/GuiPlugin/ArtPersForm.pm:254
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:152
-#: lib/OktDB/GuiPlugin/LocationForm.pm:97
+#: lib/OktDB/GuiPlugin/EventForm.pm:161 lib/OktDB/GuiPlugin/LocationForm.pm:97
 #: lib/OktDB/GuiPlugin/OktEventForm.pm:206 lib/OktDB/GuiPlugin/OktForm.pm:134
-#: lib/OktDB/GuiPlugin/PersForm.pm:176
+#: lib/OktDB/GuiPlugin/PersForm.pm:172
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:146
-#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:134
+#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:138
+#: lib/OktDB/GuiPlugin/ReviewConfig.pm:193
+#: lib/OktDB/GuiPlugin/ReviewForm.pm:188
 msgid "Save Changes"
 msgstr ""
 
@@ -168,22 +171,25 @@ msgid "Failed to send mail to %1"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/Agency.pm:37 lib/OktDB/GuiPlugin/ArtPers.pm:38
-#: lib/OktDB/GuiPlugin/OktEvent.pm:40 lib/OktDB/GuiPlugin/Pers.pm:48
-#: lib/OktDB/GuiPlugin/Production.pm:32
+#: lib/OktDB/GuiPlugin/Event.pm:40 lib/OktDB/GuiPlugin/OktEvent.pm:40
+#: lib/OktDB/GuiPlugin/Pers.pm:42 lib/OktDB/GuiPlugin/Production.pm:32
+#: lib/OktDB/GuiPlugin/Review.pm:38
 msgid "search words ..."
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/Agency.pm:52 lib/OktDB/GuiPlugin/AgencyForm.pm:49
 #: lib/OktDB/GuiPlugin/ArtPers.pm:53 lib/OktDB/GuiPlugin/ArtPersForm.pm:48
 #: lib/OktDB/GuiPlugin/ArtPersMember.pm:48
-#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:48
+#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:48 lib/OktDB/GuiPlugin/Event.pm:55
+#: lib/OktDB/GuiPlugin/EventForm.pm:48 lib/OktDB/GuiPlugin/EventForm.pm:56
 #: lib/OktDB/GuiPlugin/Location.pm:37 lib/OktDB/GuiPlugin/LocationForm.pm:48
 #: lib/OktDB/GuiPlugin/Okt.pm:38 lib/OktDB/GuiPlugin/OktEvent.pm:55
 #: lib/OktDB/GuiPlugin/OktEventForm.pm:54 lib/OktDB/GuiPlugin/OktForm.pm:53
-#: lib/OktDB/GuiPlugin/Pers.pm:63 lib/OktDB/GuiPlugin/PersForm.pm:52
+#: lib/OktDB/GuiPlugin/Pers.pm:57 lib/OktDB/GuiPlugin/PersForm.pm:48
 #: lib/OktDB/GuiPlugin/Production.pm:53
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:49 lib/OktDB/GuiPlugin/ProgTeam.pm:47
-#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:48
+#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:48 lib/OktDB/GuiPlugin/Review.pm:57
+#: lib/OktDB/GuiPlugin/ReviewForm.pm:101
 msgid "Id"
 msgstr ""
 
@@ -194,19 +200,19 @@ msgstr ""
 
 #: lib/OktDB/GuiPlugin/Agency.pm:67 lib/OktDB/GuiPlugin/AgencyForm.pm:66
 #: lib/OktDB/GuiPlugin/ArtPers.pm:89 lib/OktDB/GuiPlugin/ArtPersForm.pm:104
-#: lib/OktDB/GuiPlugin/Pers.pm:85 lib/OktDB/GuiPlugin/PersForm.pm:77
+#: lib/OktDB/GuiPlugin/Pers.pm:79 lib/OktDB/GuiPlugin/PersForm.pm:73
 msgid "eMail"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/Agency.pm:74 lib/OktDB/GuiPlugin/AgencyForm.pm:89
-#: lib/OktDB/GuiPlugin/ArtPersForm.pm:127 lib/OktDB/GuiPlugin/Pers.pm:92
-#: lib/OktDB/GuiPlugin/PersForm.pm:100
+#: lib/OktDB/GuiPlugin/ArtPersForm.pm:127 lib/OktDB/GuiPlugin/Pers.pm:86
+#: lib/OktDB/GuiPlugin/PersForm.pm:96
 msgid "Phone"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/Agency.pm:81 lib/OktDB/GuiPlugin/AgencyForm.pm:76
 #: lib/OktDB/GuiPlugin/ArtPers.pm:103 lib/OktDB/GuiPlugin/ArtPersForm.pm:114
-#: lib/OktDB/GuiPlugin/Pers.pm:99 lib/OktDB/GuiPlugin/PersForm.pm:87
+#: lib/OktDB/GuiPlugin/Pers.pm:93 lib/OktDB/GuiPlugin/PersForm.pm:83
 msgid "Mobile"
 msgstr ""
 
@@ -216,14 +222,14 @@ msgstr ""
 
 #: lib/OktDB/GuiPlugin/Agency.pm:95 lib/OktDB/GuiPlugin/AgencyForm.pm:115
 #: lib/OktDB/GuiPlugin/ArtPers.pm:110 lib/OktDB/GuiPlugin/ArtPersForm.pm:140
-#: lib/OktDB/GuiPlugin/Pers.pm:106 lib/OktDB/GuiPlugin/PersForm.pm:113
+#: lib/OktDB/GuiPlugin/Pers.pm:100 lib/OktDB/GuiPlugin/PersForm.pm:109
 msgid "Postal Address"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/Agency.pm:109 lib/OktDB/GuiPlugin/ArtPers.pm:152
 #: lib/OktDB/GuiPlugin/ArtPersMember.pm:83
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:106 lib/OktDB/GuiPlugin/Okt.pm:60
-#: lib/OktDB/GuiPlugin/Pers.pm:120 lib/OktDB/GuiPlugin/ProgTeam.pm:69
+#: lib/OktDB/GuiPlugin/Pers.pm:114 lib/OktDB/GuiPlugin/ProgTeam.pm:69
 msgid "End"
 msgstr ""
 
@@ -255,17 +261,17 @@ msgid "Agency Name"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/AgencyForm.pm:69 lib/OktDB/GuiPlugin/ArtPersForm.pm:107
-#: lib/OktDB/GuiPlugin/PersForm.pm:80
+#: lib/OktDB/GuiPlugin/PersForm.pm:76
 msgid "expected user@domain.tld"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/AgencyForm.pm:82 lib/OktDB/GuiPlugin/ArtPersForm.pm:120
-#: lib/OktDB/GuiPlugin/PersForm.pm:93
+#: lib/OktDB/GuiPlugin/PersForm.pm:89
 msgid "expected +41 79 ..."
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/AgencyForm.pm:95 lib/OktDB/GuiPlugin/ArtPersForm.pm:133
-#: lib/OktDB/GuiPlugin/PersForm.pm:106
+#: lib/OktDB/GuiPlugin/PersForm.pm:102
 msgid "expected +41 33 ..."
 msgstr ""
 
@@ -278,7 +284,7 @@ msgid "expected http..."
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/AgencyForm.pm:131 lib/OktDB/GuiPlugin/ArtPersForm.pm:207
-#: lib/OktDB/GuiPlugin/PersForm.pm:129 lib/OktDB/GuiPlugin/ProgTeamForm.pm:88
+#: lib/OktDB/GuiPlugin/PersForm.pm:125 lib/OktDB/GuiPlugin/ProgTeamForm.pm:92
 msgid "End After"
 msgstr ""
 
@@ -287,10 +293,10 @@ msgstr ""
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:91
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:109
 #: lib/OktDB/GuiPlugin/OktForm.pm:73 lib/OktDB/GuiPlugin/OktForm.pm:91
-#: lib/OktDB/GuiPlugin/PersForm.pm:132 lib/OktDB/GuiPlugin/ProductionForm.pm:77
+#: lib/OktDB/GuiPlugin/PersForm.pm:128 lib/OktDB/GuiPlugin/ProductionForm.pm:77
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:95
-#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:73
-#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:91
+#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:77
+#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:95
 msgid "dd.mm.yyyy"
 msgstr ""
 
@@ -298,13 +304,13 @@ msgstr ""
 #: lib/OktDB/GuiPlugin/ArtPersForm.pm:217
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:98
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:116
-#: lib/OktDB/GuiPlugin/OktEventForm.pm:144
+#: lib/OktDB/GuiPlugin/EventForm.pm:92 lib/OktDB/GuiPlugin/OktEventForm.pm:144
 #: lib/OktDB/GuiPlugin/OktEventForm.pm:162 lib/OktDB/GuiPlugin/OktForm.pm:80
-#: lib/OktDB/GuiPlugin/OktForm.pm:98 lib/OktDB/GuiPlugin/PersForm.pm:139
+#: lib/OktDB/GuiPlugin/OktForm.pm:98 lib/OktDB/GuiPlugin/PersForm.pm:135
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:84
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:102
-#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:80
-#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:98
+#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:84
+#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:102
 msgid "Invalid date"
 msgstr ""
 
@@ -443,8 +449,76 @@ msgid "Person"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:80
-#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:62
+#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:65
 msgid "Select Person"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Event.pm:63 lib/OktDB/GuiPlugin/EventForm.pm:81
+msgid "Date"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Event.pm:70 lib/OktDB/GuiPlugin/EventForm.pm:64
+#: lib/OktDB/GuiPlugin/OktEvent.pm:70 lib/OktDB/GuiPlugin/OktEventForm.pm:75
+#: lib/OktDB/GuiPlugin/Review.pm:65
+msgid "Production"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Event.pm:77 lib/OktDB/GuiPlugin/Review.pm:72
+msgid "Artpers"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Event.pm:84 lib/OktDB/GuiPlugin/EventForm.pm:73
+#: lib/OktDB/GuiPlugin/OktEvent.pm:91 lib/OktDB/GuiPlugin/OktEventForm.pm:99
+#: lib/OktDB/GuiPlugin/Review.pm:79
+msgid "Location"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Event.pm:91
+msgid "Responsible"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Event.pm:98
+msgid "Tagalong"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Event.pm:126 lib/OktDB/GuiPlugin/Event.pm:131
+msgid "Edit Event"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Event.pm:147
+msgid "Delete Event"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Event.pm:150
+msgid "Do you really want to delete the selected Event?"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Event.pm:174 lib/OktDB/GuiPlugin/ReviewForm.pm:189
+msgid "Add Review"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Event.pm:179
+msgid "Review"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/EventForm.pm:84 lib/OktDB/GuiPlugin/OktEventForm.pm:137
+msgid "dd.mm.yyyy hh:mm"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/EventForm.pm:100
+msgid "Leader"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/EventForm.pm:107
+msgid "Select Leader"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/EventForm.pm:118
+msgid "Tagalong People"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/EventForm.pm:162 lib/OktDB/GuiPlugin/Production.pm:175
+msgid "Add Event"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/Location.pm:45
@@ -503,16 +577,8 @@ msgstr ""
 msgid "OKT"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/OktEvent.pm:70 lib/OktDB/GuiPlugin/OktEventForm.pm:75
-msgid "Production"
-msgstr ""
-
 #: lib/OktDB/GuiPlugin/OktEvent.pm:84 lib/OktDB/GuiPlugin/OktEventForm.pm:94
 msgid "Type"
-msgstr ""
-
-#: lib/OktDB/GuiPlugin/OktEvent.pm:91 lib/OktDB/GuiPlugin/OktEventForm.pm:99
-msgid "Location"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/OktEvent.pm:105 lib/OktDB/GuiPlugin/OktEventForm.pm:152
@@ -568,10 +634,6 @@ msgstr ""
 msgid "Expense"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/OktEventForm.pm:137
-msgid "dd.mm.yyyy hh:mm"
-msgstr ""
-
 #: lib/OktDB/GuiPlugin/OktEventForm.pm:155
 msgid "hh:mm"
 msgstr ""
@@ -588,35 +650,35 @@ msgstr ""
 msgid "Add OKT Edition"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Pers.pm:41
+#: lib/OktDB/GuiPlugin/Pers.pm:35
 msgid "Show Removed Entries"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Pers.pm:71
+#: lib/OktDB/GuiPlugin/Pers.pm:65
 msgid "Given"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Pers.pm:78
+#: lib/OktDB/GuiPlugin/Pers.pm:72
 msgid "Family"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Pers.pm:140 lib/OktDB/GuiPlugin/PersForm.pm:177
+#: lib/OktDB/GuiPlugin/Pers.pm:134 lib/OktDB/GuiPlugin/PersForm.pm:173
 msgid "Add Person"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Pers.pm:145
+#: lib/OktDB/GuiPlugin/Pers.pm:139
 msgid "New Person"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Pers.pm:158 lib/OktDB/GuiPlugin/Pers.pm:163
+#: lib/OktDB/GuiPlugin/Pers.pm:152 lib/OktDB/GuiPlugin/Pers.pm:157
 msgid "Edit Person"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Pers.pm:179
+#: lib/OktDB/GuiPlugin/Pers.pm:173
 msgid "Delete Person"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Pers.pm:182
+#: lib/OktDB/GuiPlugin/Pers.pm:176
 msgid ""
 "Do you really want to delete the selected Person. This will only work if "
 "there are no other entries refering to that person. Maybe edit the End Date "
@@ -660,6 +722,10 @@ msgid ""
 "there are no other entries refering to that Production."
 msgstr ""
 
+#: lib/OktDB/GuiPlugin/Production.pm:183
+msgid "New Event"
+msgstr ""
+
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:57
 msgid "Title"
 msgstr ""
@@ -699,10 +765,59 @@ msgid ""
 "Maybe you would rather edit the end date."
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:70
+#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:73
 msgid "Start On"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:135
+#: lib/OktDB/GuiPlugin/ProgTeamForm.pm:139
 msgid "Add ProgTeam Member"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Review.pm:87
+msgid "Reviewer"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Review.pm:99
+msgid "Last Update"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Review.pm:120 lib/OktDB/GuiPlugin/Review.pm:125
+msgid "Edit Review"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Review.pm:141 lib/OktDB/GuiPlugin/Review.pm:146
+msgid "View Review"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Review.pm:162
+msgid "Delete Review"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/Review.pm:165
+msgid "Do you really want to delete the selected Review?"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/ReviewConfig.pm:128
+msgid "Form Configuration"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/ReviewConfig.pm:138
+#: lib/OktDB/GuiPlugin/ReviewConfig.pm:159
+msgid "Invalid YAML Syntax"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/ReviewConfig.pm:149
+msgid "Table Configuration"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/ReviewConfig.pm:187
+msgid "Configuration is updated"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/ReviewConfig.pm:188
+msgid "Updated"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/ReviewForm.pm:109 lib/OktDB/GuiPlugin/ReviewForm.pm:117
+msgid "Event"
 msgstr ""

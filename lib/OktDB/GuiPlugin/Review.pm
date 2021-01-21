@@ -1,25 +1,31 @@
-package OktDB::GuiPlugin::Production;
+package OktDB::GuiPlugin::Review;
 use Mojo::Base 'CallBackery::GuiPlugin::AbstractTable', -signatures;
 use CallBackery::Translate qw(trm);
 use CallBackery::Exception qw(mkerror);
-use Mojo::JSON qw(true false);
+use Mojo::JSON qw(true false from_json to_json);
 use Time::Piece;
 use Text::ParseWords;
+
 =head1 NAME
 
-OktDB::GuiPlugin::Production - Production Table
+OktDB::GuiPlugin::Review - Review Table
 
 =head1 SYNOPSIS
 
- use OktDB::GuiPlugin::Production;
+ use OktDB::GuiPlugin::Review;
 
 =head1 DESCRIPTION
 
-The Table Gui.
+The Review Table Gui.
 
 =cut
 
-  
+=head1 METHODS
+
+All the methods of L<CallBackery::GuiPlugin::AbstractTable> plus:
+
+=cut
+
 has formCfg => sub {
     my $self = shift;
     return [
@@ -35,12 +41,6 @@ has formCfg => sub {
     ];
 };
 
-=head1 METHODS
-
-All the methods of L<CallBackery::GuiPlugin::AbstractTable> plus:
-
-=cut
-
 =head2 tableCfg
 
 
@@ -48,50 +48,60 @@ All the methods of L<CallBackery::GuiPlugin::AbstractTable> plus:
 
 has tableCfg => sub {
     my $self = shift;
+    my $db = $self->db;
+    my $extraCols = from_json($db->select('oktdbcfg','*',{
+        oktdbcfg_key => 'reviewTableCfg'
+    })->hash->{oktdbcfg_value});
     return [
         {
             label => trm('Id'),
             type => 'number',
             width => '1*',
-            key => 'production_id',
+            key => 'review_id',
             sortable => true,
             primary => true
         },
         {
-            label => trm('ArtPers'),
+            label => trm('Production'),
             type => 'string',
-            width => '6*',
-            key => 'artpers_name',
-            sortable => true,
-        },
-        {
-            label => trm('Titel'),
-            type => 'string',
-            width => '6*',
+            width => '4*',
             key => 'production_title',
             sortable => true,
         },
         {
-            label => trm('Note'),
+            label => trm('Artpers'),
             type => 'string',
-            width => '6*',
-            key => 'production_note',
+            width => '4*',
+            key => 'artpers_name',
             sortable => true,
         },
         {
-            label => trm('Premiere'),
+            label => trm('Location'),
             type => 'string',
-            width => '6*',
-            key => 'production_premiere_ts',
+            width => '4*',
+            key => 'event_location',
             sortable => true,
         },
+        
         {
-            label => trm('Derniere'),
+            label => trm('Reviewer'),
             type => 'string',
-            width => '6*',
-            key => 'production_derniere_ts',
+            width => '2*',
+            key => 'cbuser_name',
             sortable => true,
         },
+        (
+            map { {   %$_,
+                key => "JSON_".$_->{key}
+            } } @$extraCols,
+        ),
+        {
+            label => trm('Last Update'),
+            type => 'string',
+            width => '6*',
+            key => 'review_change_ts',
+            sortable => true,
+        }
      ]
 };
 
@@ -103,52 +113,56 @@ Only users who can write get any actions presented.
 
 has actionCfg => sub {
     my $self = shift;
- 
+    return [] if $self->user and not $self->user->may('oktadmin');
+
     return [
         {
-            label => trm('Add Production'),
-            action => 'popup',
-            addToContextMenu => false,
-            name => 'AddProductionForm',
-            key => 'add',
-            popupTitle => trm('New Production'),
-            set => {
-                height => 400,
-                width => 500
-            },
-            backend => {
-                plugin => 'ProductionForm',
-                config => {
-                    type => 'add'
-                }
-            }
-        },
-        {
-            label => trm('Edit Production'),
+            label => trm('Edit Review'),
             action => 'popup',
             key => 'edit',
-            addToContextMenu => true,
-            name => 'EditProductionForm',
-            popupTitle => trm('Edit Production'),
+            addToContextMenu => false,
+            name => 'EditReviewForm',
+            popupTitle => trm('Edit Review'),
             buttonSet => {
                 enabled => false
             },
             set => {
-                height => 300,
-                width => 500
+                height => 800,
+                width => 600
             },
             backend => {
-                plugin => 'ProductionForm',
+                plugin => 'ReviewForm',
                 config => {
                     type => 'edit'
                 }
             }
         },
         {
-            label => trm('Remove Production'),
+            label => trm('View Review'),
+            action => 'popup',
+            key => 'view',
+            addToContextMenu => false,
+            name => 'ViewReviewForm',
+            popupTitle => trm('View Review'),
+            buttonSet => {
+                enabled => false
+            },
+            set => {
+                height => 800,
+                width => 600
+            },
+            backend => {
+                plugin => 'ReviewForm',
+                config => {
+                    type => 'view'
+                }
+            }
+        },
+        {
+            label => trm('Delete Review'),
             action => 'submitVerify',
             addToContextMenu => true,
-            question => trm('Do you really want to delete the selected Production? This will only work if there are no other entries refering to that Production.'),
+            question => trm('Do you really want to delete the selected Review?'),
             key => 'delete',
             buttonSet => {
                 enabled => false
@@ -156,43 +170,24 @@ has actionCfg => sub {
             actionHandler => sub {
                 my $self = shift;
                 my $args = shift;
-                my $id = $args->{selection}{production_id};
-                die mkerror(4992,"You have to select a production member first")
+                my $id = $args->{selection}{review_id};
+                die mkerror(4992,"You have to select a review first")
                     if not $id;
                 eval {
-                    $self->db->delete('production',{production_id => $id});
+                    $self->db->delete('review',{
+                        review_id => $id,
+                        review_cbuser => $self->user->userId
+                    });
                 };
                 if ($@){
-                    $self->log->error("remove production $id: $@");
-                    die mkerror(4993,"Failed to remove production $id");
+                    $self->log->error("remove review $id: $@");
+                    die mkerror(4993,"Failed to remove review $id");
                 }
                 return {
                     action => 'reload',
                 };
             }
-        },
-        {
-            label => trm('Add Event'),
-            action => 'popup',
-            addToContextMenu => true,
-            name => 'AddEventForm',
-            key => 'addevent',
-            buttonSet => {
-                enabled => false
-            },
-            popupTitle => trm('New Event'),
-            set => {
-                height => 500,
-                width => 500
-            },
-            backend => {
-                plugin => 'EventForm',
-                config => {
-                    type => 'add'
-                }
-            }
-        },
-        
+        }
     ];
 };
 
@@ -202,7 +197,8 @@ sub db {
 
 my $keyMap = {
     production => 'production_name',
-    artpers => 'artpers_name',
+    locaction => 'event_location',
+    reviewer => 'cbuser_name'
 };
 
 sub WHERE {
@@ -224,8 +220,11 @@ sub WHERE {
                 my $lsearch = "%${search}%";
                 push @{$where->{-or}}, (
                     [
+                        event_location => { -like => $lsearch },
                         artpers_name => { -like => $lsearch },
+                        cbuser_name => { -like => $lsearch },
                         production_title => { -like => $lsearch },
+                        review_comment_json => { -like => $lsearch },
                     ]
                 )
             }
@@ -236,15 +235,23 @@ sub WHERE {
 
 my $SUB_SELECT = <<SELECT_END;
 
-SELECT 
-    production.*,
-    artpers_name
-FROM
-    production 
-JOIN artpers ON production_artpers = artpers_id
+    SELECT 
+        review_id,
+        review_change_ts,
+        production_title,
+        artpers_name,
+        event_location,
+        cbuser_id,
+        cbuser_given || ' ' || cbuser_family as cbuser_name,
+        event_date_ts,
+        review_comment_json
+    FROM review
+    JOIN event ON review_event = event_id
+    JOIN production ON event_production = production_id
+    JOIN artpers ON production_artpers = artpers_id
+    JOIN cbuser ON review_cbuser = cbuser_id
 
 SELECT_END
-
 
 sub getTableRowCount {
     my $self = shift;
@@ -257,6 +264,15 @@ sub getTableRowCount {
     SELECT COUNT(*) AS count FROM ( $SUB_SELECT )
     $where
 SQL_END
+}
+
+sub model2label ($self,$data) {
+    for my $cfg (@{$data->{cfg}}){
+        $data->{model}{$cfg->{key}} 
+            = $data->{label}{$cfg->{key}}
+                if $data->{label}{$cfg->{key}};
+        
+    }
 }
 
 sub getTableData {
@@ -284,25 +300,40 @@ SQL_END
        $args->{lastRow}-$args->{firstRow}+1,
        $args->{firstRow},
     )->hashes;
+    my $tableKeys = {
+        map {
+            $_->{key} => 1
+        } @{$self->tableCfg}
+    };
+    my $currentUser = $self->user->userId;
     for my $row (@$data) {
+        my $ok = $row->{cbuser_id} eq $currentUser;
         $row->{_actionSet} = {
             edit => {
-                enabled => true
+                enabled => $ok ? true : false,
+            },
+            view => {
+                enabled => $ok ? false : true,
             },
             delete => {
-                enabled => true,
+                enabled => $ok ? true : false,
             },
-            addevent => {
-                enabled => true,
-            }
         };
-        $row->{production_derniere_ts} = localtime($row->{production_derniere_ts})->strftime("%d.%m.%Y") if $row->{production_derniere_ts};
-        $row->{production_premiere_ts} = localtime($row->{production_premiere_ts})->strftime("%d.%m.%Y") if $row->{production_premiere_ts};
+        for my $field (keys %$row) {
+            $row->{$field} = localtime($row->{$field})
+                ->strftime("%d.%m.%Y %H:%M") 
+                    if $field =~ /_ts$/ and $row->{$field};
+            my $data = from_json($row->{review_comment_json});
+            $self->model2label($data);
+            for my $key (keys %{$data->{model}}) {
+                if ($tableKeys->{'JSON_'.$key} ) {
+                    $row->{'JSON_'.$key} = $data->{model}{$key};
+                }
+            }
+        }
     }
     return $data;
 }
-
-
 
 1;
 
@@ -310,7 +341,7 @@ __END__
 
 =head1 COPYRIGHT
 
-Copyright (c) 2020 by Tobias Oetiker. All rights reserved.
+Copyright (c) 2021 by Tobias Oetiker. All rights reserved.
 
 =head1 AUTHOR
 

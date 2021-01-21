@@ -56,6 +56,9 @@ has formCfg => sub {
             key => 'progteam_pers',
             label => trm('Person'),
             widget => 'selectBox',
+            set => {
+                required => true,
+            },
             cfg => {
                 structure => [
                     {
@@ -70,13 +73,14 @@ has formCfg => sub {
             label => trm('Start On'),
             widget => 'text',
             set => {
+                required => true,
                 placeholder => trm('dd.mm.yyyy')
             },
             validator => sub ($value,$fieldName,$form) {
                 my $t = eval { 
                     localtime->strptime($value,"%d.%m.%Y")->epoch;
                 };
-                if ($@) {
+                if ($@ or not $t) {
                     return trm('Invalid date');
                 }
                 $_[0] = $t;
@@ -94,7 +98,7 @@ has formCfg => sub {
                 my $t = eval { 
                     localtime->strptime($value,"%d.%m.%Y")->epoch;
                 };
-                if ($@) {
+                if ($@ or not $t) {
                     return trm('Invalid date');
                 }
                 $_[0] = $t;

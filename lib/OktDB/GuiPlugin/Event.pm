@@ -1,4 +1,4 @@
-package OktDB::GuiPlugin::Pers;
+package OktDB::GuiPlugin::Event;
 use Mojo::Base 'CallBackery::GuiPlugin::AbstractTable', -signatures;
 use CallBackery::Translate qw(trm);
 use CallBackery::Exception qw(mkerror);
@@ -8,17 +8,19 @@ use Text::ParseWords;
 
 =head1 NAME
 
-OktDB::GuiPlugin::Pers - Pers Table
+OktDB::GuiPlugin::OktEvent - Event Table
 
 =head1 SYNOPSIS
 
- use OktDB::GuiPlugin::Pers;
+ use OktDB::GuiPlugin::Event;
 
 =head1 DESCRIPTION
 
 The Table Gui.
 
 =cut
+
+
 
 =head1 METHODS
 
@@ -30,15 +32,11 @@ has formCfg => sub {
     my $self = shift;
     return [
         {
-            key => 'show_removed',
-            widget => 'checkBox',
-            label => trm('Show Removed Entries'),
-        },
-        {
             key => 'search',
             widget => 'text',
             set => {
                 width => 300,
+                liveUpdate => true,
                 placeholder => trm('search words ...'),
             },
         },
@@ -57,66 +55,59 @@ has tableCfg => sub {
             label => trm('Id'),
             type => 'number',
             width => '1*',
-            key => 'pers_id',
+            key => 'event_id',
             sortable => true,
             primary => true
         },
         {
-            label => trm('Given'),
+            label => trm('Date'),
             type => 'string',
             width => '6*',
-            key => 'pers_given',
+            key => 'event_date_ts',
             sortable => true,
         },
         {
-            label => trm('Family'),
+            label => trm('Production'),
             type => 'string',
             width => '6*',
-            key => 'pers_family',
+            key => 'production_title',
             sortable => true,
         },
         {
-            label => trm('eMail'),
+            label => trm('Artpers'),
             type => 'string',
-            width => '6*',
-            key => 'pers_email',
+            width => '5*',
+            key => 'artpers_name',
             sortable => true,
         },
         {
-            label => trm('Phone'),
+            label => trm('Location'),
             type => 'string',
             width => '6*',
-            key => 'pers_phone',
+            key => 'event_location',
             sortable => true,
         },
         {
-            label => trm('Mobile'),
+            label => trm('Responsible'),
             type => 'string',
             width => '6*',
-            key => 'pers_mobile',
+            key => 'progteam_name',
             sortable => true,
         },
         {
-            label => trm('Postal Address'),
+            label => trm('Tagalong'),
             type => 'string',
             width => '6*',
-            key => 'pers_postaladdress',
+            key => 'event_tagalong',
             sortable => true,
         },
         {
             label => trm('Note'),
             type => 'string',
             width => '6*',
-            key => 'pers_note',
+            key => 'event_note',
             sortable => true,
-        },
-        {
-            label => trm('End'),
-            type => 'string',
-            width => '6*',
-            key => 'pers_end_date',
-            sortable => true,
-        },
+        }
      ]
 };
 
@@ -128,52 +119,35 @@ Only users who can write get any actions presented.
 
 has actionCfg => sub {
     my $self = shift;
-    
+
     return [
+        
         {
-            label => trm('Add Person'),
-            action => 'popup',
-            addToContextMenu => false,
-            name => 'AddPersForm',
-            key => 'add',
-            popupTitle => trm('New Person'),
-            set => {
-                height => 500,
-                width => 400
-            },
-            backend => {
-                plugin => 'PersForm',
-                config => {
-                    type => 'add'
-                }
-            }
-        },
-        {
-            label => trm('Edit Person'),
+            label => trm('Edit Event'),
             action => 'popup',
             key => 'edit',
             addToContextMenu => false,
-            name => 'EditPersForm',
-            popupTitle => trm('Edit Person'),
+            name => 'EditEventForm',
+            popupTitle => trm('Edit Event'),
             buttonSet => {
                 enabled => false
             },
             set => {
                 height => 500,
-                width => 400
+                width => 500
             },
             backend => {
-                plugin => 'PersForm',
+                plugin => 'EventForm',
                 config => {
                     type => 'edit'
                 }
             }
         },
         {
-            label => trm('Delete Person'),
+            label => trm('Delete Event'),
             action => 'submitVerify',
             addToContextMenu => true,
-            question => trm('Do you really want to delete the selected Person. This will only work if there are no other entries refering to that person. Maybe edit the End Date instead.'),
+            question => trm('Do you really want to delete the selected Event?'),
             key => 'delete',
             buttonSet => {
                 enabled => false
@@ -181,21 +155,42 @@ has actionCfg => sub {
             actionHandler => sub {
                 my $self = shift;
                 my $args = shift;
-                my $id = $args->{selection}{pers_id};
-                die mkerror(4992,"You have to select a person first")
+                my $id = $args->{selection}{event_id};
+                die mkerror(4992,"You have to select a event first")
                     if not $id;
                 eval {
-                    $self->db->delete('pers',{pers_id => $id});
+                    $self->db->delete('event',{event_id => $id});
                 };
                 if ($@){
-                    $self->log->error("remove pers $id: $@");
-                    die mkerror(4993,"Failed to remove person $id");
+                    $self->log->error("remove oktevent $id: $@");
+                    die mkerror(4993,"Failed to remove event $id");
                 }
                 return {
                     action => 'reload',
                 };
             }
-        }
+        },
+        {
+            label => trm('Add Review'),
+            action => 'popup',
+            addToContextMenu => true,
+            name => 'AddReviewForm',
+            key => 'addreview',
+            popupTitle => trm('Review'),
+            buttonSet => {
+                enabled => false
+            },
+            set => {
+                height => 500,
+                width => 500
+            },
+            backend => {
+                plugin => 'ReviewForm',
+                config => {
+                    type => 'add'
+                }
+            }
+        },
     ];
 };
 
@@ -204,19 +199,18 @@ sub db {
 };
 
 my $keyMap = {
-    given => 'pers_given',
-    family => 'pers_family',
+    production => 'production_name',
+    location => 'event_location',
+    pers => 'progteam_name',
+    date => sub { 
+        \["strftime('%d.%m.%Y',event_date_ts,'unixepoch', 'localtime') = ?",shift] 
+    }
 };
 
 sub WHERE {
     my $self = shift;
     my $args = shift;
     my $where = {};
-    if (not $args->{formData}{show_removed}) {
-        push @{$where->{-or}},
-            [pers_end_ts => undef ],
-            \[ "pers_end_ts >= CAST(? AS INTEGER) ", time]
-    }
     if (my $str = $args->{formData}{search}) {
         chomp($str);
         for my $search (quotewords('\s+', 0, $str)){
@@ -230,10 +224,12 @@ sub WHERE {
             }
             else {
                 my $lsearch = "%${search}%";
-                push @{$where->{-and}}, (
-                    -or => [
-                        pers_family => { -like => $lsearch },
-                        pers_given => { -like => $lsearch },
+                push @{$where->{-or}}, (
+                    [
+                        event_location => { -like => $lsearch },
+                        artpers_name => { -like => $lsearch },
+                        progteam_name => { -like => $lsearch },
+                        production_title => { -like => $lsearch },
                     ]
                 )
             }
@@ -242,10 +238,36 @@ sub WHERE {
     return $where;
 }
 
+my $SUB_SELECT = <<SELECT_END;
+
+    SELECT 
+        event_id,
+        production_title,
+        artpers_name,
+        event_location,
+        pers_given || ' ' || pers_family as progteam_name,
+        event_tagalong,
+        event_note,
+        event_date_ts
+    FROM event
+    JOIN production ON event_production = production_id
+    JOIN artpers ON production_artpers = artpers_id
+    JOIN progteam ON event_progteam = progteam_id
+    JOIN pers ON progteam_pers = pers_id
+
+SELECT_END
+
 sub getTableRowCount {
     my $self = shift;
     my $args = shift;
-    return $self->db->select('pers',[\'COUNT(*) AS count'],$self->WHERE($args))->hash->{count};
+    my $WHERE = $self->WHERE($args);
+    my $sql = SQL::Abstract->new;
+    my $db = $self->db;
+    my ($where,@where_bind) = $sql->where($WHERE);
+    return $db->query(<<"SQL_END",@where_bind)->hash->{count};
+    SELECT COUNT(*) AS count FROM ( $SUB_SELECT )
+    $where
+SQL_END
 }
 
 sub getTableData {
@@ -264,9 +286,8 @@ sub getTableData {
     }
     my $WHERE = $self->WHERE($args);
     my ($where,@where_bind) = $sql->where($WHERE,$SORT);
-    $self->log->debug($where);
     my $data = $db->query(<<"SQL_END",
-    SELECT * FROM pers
+    SELECT * FROM ( $SUB_SELECT )
     $where
     LIMIT ? OFFSET ?
 SQL_END
@@ -279,11 +300,14 @@ SQL_END
             edit => {
                 enabled => true
             },
+            addreview => {
+                enabled => true
+            },
             delete => {
                 enabled => true,
             },
         };
-        $row->{pers_end_date} = localtime($row->{pers_end_ts})->strftime("%d.%m.%Y") if $row->{pers_end_ts};
+        $row->{event_date_ts} = localtime($row->{event_date_ts})->strftime("%d.%m.%Y %H:%M") if $row->{event_date_ts};
     }
     return $data;
 }

@@ -140,7 +140,7 @@ SQL_END
                 my $t = eval { 
                     localtime->strptime($value,"%d.%m.%Y %H:%M")->epoch;
                 };
-                if ($@) {
+                if ($@ or not $t) {
                     return trm('Invalid date');
                 }
                 $_[0] = $t;

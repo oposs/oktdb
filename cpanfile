@@ -1,4 +1,4 @@
-requires 'CallBackery', '>= 0.35.2';
+requires 'CallBackery', '>= 0.35.3';
 requires 'Mojo::SQLite';
 requires 'Mojolicious::Plugin::OpenAPI';
 requires 'Crypt::ScryptKDF';

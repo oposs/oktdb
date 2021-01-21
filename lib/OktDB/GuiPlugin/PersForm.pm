@@ -19,10 +19,6 @@ The Location Edit Form
 
 =cut
 
-has checkAccess => sub {
-    my $self = shift;
-};
-
 =head1 METHODS
 
 All the methods of L<CallBackery::GuiPlugin::AbstractForm> plus:
@@ -135,7 +131,7 @@ has formCfg => sub {
                 my $t = eval { 
                     localtime->strptime($value,"%d.%m.%Y")->epoch;;
                 };
-                if ($@) {
+                if ($@ or not $t) {
                     return trm('Invalid date');
                 }
                 $_[0] = $t;

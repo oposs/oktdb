@@ -192,10 +192,102 @@ CREATE TABLE oktevent (
 -- 2 up
 
 --sql
-ALTER TABLE production ADD  production_note TEXT;
+ALTER TABLE production ADD production_note TEXT;
 
 -- 3 up
+--sql
 
 INSERT INTO cbright (cbright_key,cbright_label)
     VALUES 
         ('oktadmin','OKT Admin');
+
+-- 4 up
+--sql
+CREATE TABLE event (
+    event_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    event_production INTEGER NOT NULL 
+        REFERENCES production(production_id),
+    event_date_ts INTEGER NOT NULL, -- event date
+    event_location TEXT NOT NULL,
+    event_progteam INTEGER NOT NULL
+        REFERENCES  progteam(progteam_id), -- prog team member
+    event_tagalong TEXT, -- who joins the excursion
+    event_note TEXT
+);
+
+--sql
+CREATE TABLE review (
+    review_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    review_cbuser INTEGER NOT NULL REFERENCES cbuser(cbuser_id),
+    review_event INTEGER NOT NULL REFERENCES event(event_id),
+    review_change_ts INTEGER NOT NULL,
+    review_comment_json TEXT -- structured review
+);
+
+--sql
+INSERT INTO cbright (cbright_key,cbright_label)
+    VALUES 
+        ('reviewcfg','Review Cfg');
+
+--sql
+CREATE TABLE oktdbcfg (
+    oktdbcfg_key TEXT NOT NULL PRIMARY KEY,
+    oktdbcfg_descr TEXT NOT NULL,
+    oktdbcfg_value TEXT NOT NULL
+);
+
+--sql
+INSERT INTO oktdbcfg VALUES
+    ('reviewFormCfg','Structure of the reviewFormCfg data', '[
+  {
+    "key": "ein_satz",
+    "label": "Ein Satz",
+    "widget": "text"
+  },
+  {
+    "key": "impression",
+    "label": "Eindruck",
+    "widget": "selectBox",
+    "cfg": {
+      "structure": [
+        {
+          "key": 10,
+          "title": "Haaaaaammmmmer"
+        },
+        {
+          "key": 9,
+          "title": "Epochal"
+        },
+        {
+          "key": 1,
+          "title": "Naja"
+        }
+      ]
+    }
+  },
+  {
+    "key": "okt_location",
+    "label": "Passend für Location",
+    "widget": "textArea"
+  }
+]');
+
+--sql
+INSERT INTO oktdbcfg VALUES
+    ('reviewTableCfg','Structure of the reviewTableCfg data', '[
+  {
+    "key": "ein_satz",
+    "label": "Ein Satz",
+    "width": "1*"
+  },
+  {
+    "key": "impression",
+    "label": "Eindruck",
+    "width": "1*"
+  },
+  {
+    "key": "okt_location",
+    "label": "Passend für Location",
+    "width": "1*"
+  }
+]');
