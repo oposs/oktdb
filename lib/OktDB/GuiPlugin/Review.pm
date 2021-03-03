@@ -92,7 +92,8 @@ has tableCfg => sub {
         },
         (
             map { {   %$_,
-                key => "JSON_".$_->{key}
+                key => "JSON_".$_->{key},
+                sortable => false,
             } } @$extraCols,
         ),
         {
@@ -113,8 +114,7 @@ Only users who can write get any actions presented.
 
 has actionCfg => sub {
     my $self = shift;
-    return [] if $self->user and not $self->user->may('oktadmin');
-
+    
     return [
         {
             label => trm('Edit Review'),

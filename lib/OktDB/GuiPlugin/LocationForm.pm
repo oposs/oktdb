@@ -51,15 +51,64 @@ has formCfg => sub {
                 readOnly => true,
             },
         } : (),
-
         {
             key => 'location_name',
             label => trm('Name'),
             widget => 'text',
-            required => true,
             set => {
                 required => true,
             },
+        },
+        {
+            key => 'location_okt',
+            label => '',
+            widget => 'checkBox',
+            set => {
+                label => trm('OKT Location'),
+            },
+        },
+        {
+            key => 'location_contactpers',
+            label => trm('Contact Person'),
+            widget => 'text',
+            
+        },
+        {
+            key => 'location_phone',
+            label => trm('Contact Phone'),
+            widget => 'text',
+            
+        },
+        {
+            key => 'location_mobile',
+            label => trm('Contact Mobile'),
+            widget => 'text',
+            
+        },
+        {
+            key => 'location_email',
+            label => trm('Contact E-Mail'),
+            widget => 'text',
+            
+        },
+        {
+            key => 'location_url',
+            label => trm('Website'),
+            widget => 'text',
+            
+        },
+        {
+            key => 'location_postaladdress',
+            label => trm('Address'),
+            widget => 'textArea',
+            set => {
+                placeholder => trm("Street No\nZIP Town")
+            }
+        },
+        {
+            key => 'location_note',
+            label => trm('Note'),
+            widget => 'textArea',
         },
     ];
 };
@@ -71,19 +120,17 @@ has actionCfg => sub {
         my $self = shift;
         my $args = shift;
         my %metaInfo;
-        if ($type eq 'add')  {
-            $metaInfo{recId} = $self->db->insert('location',{
+        my $data = {
                 map { "location_".$_ => $args->{"location_".$_} } qw(
-                    name
+                    name contactpers okt phone mobile email url postaladdress note
                 )
-            })->last_insert_id;
+            };
+        if ($type eq 'add')  {
+            $metaInfo{recId} = $self->db->insert('location',$data)->last_insert_id;
         }
         else {
-            $self->db->update('location', {
-                map { 'location_'.$_ => $args->{'location_'.$_} } qw(
-                    name
-                )
-            },{ location_id => $args->{location_id}});
+            $self->db->update('location', $data,{ 
+                location_id => $args->{location_id}});
         }
         return {
             action => 'dataSaved',

@@ -104,6 +104,14 @@ has tableCfg => sub {
             sortable => true,
         },
         {
+            label => trm('Birthdate'),
+            type => 'string',
+            width => '6*',
+            key => 'pers_birthdate_ts',
+            sortable => true,
+        },
+        
+        {
             label => trm('Note'),
             type => 'string',
             width => '6*',
@@ -114,7 +122,7 @@ has tableCfg => sub {
             label => trm('End'),
             type => 'string',
             width => '6*',
-            key => 'pers_end_date',
+            key => 'pers_end_ts',
             sortable => true,
         },
      ]
@@ -283,7 +291,10 @@ SQL_END
                 enabled => true,
             },
         };
-        $row->{pers_end_date} = localtime($row->{pers_end_ts})->strftime("%d.%m.%Y") if $row->{pers_end_ts};
+        for my $key (keys %$row) {
+            next unless $key =~ /_ts$/ and $row->{$key};
+            $row->{$key} = localtime($row->{$key})->strftime("%d.%m.%Y");
+        }
     }
     return $data;
 }

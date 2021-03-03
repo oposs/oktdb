@@ -53,22 +53,27 @@ has formCfg => sub {
             },
         } : (),
         {
+            key => 'production_artpers',
+            label => trm('ArtPers'),
+            widget => 'hiddenText',
+            set => {
+                readOnly => true
+            }
+        },
+        {
+            key => 'artpers_name',
+            label => trm('ArtPers'),
+            widget => 'text',
+            set => {
+                readOnly => true
+            }
+        },
+        {
             key => 'production_title',
             label => trm('Title'),
             widget => 'text',
         },
-        {
-            key => 'production_artpers',
-            label => trm('ArtPers'),
-            widget => 'selectBox',
-            cfg => {
-                structure => [
-                    { key => undef, title => trm("Select ArtPers") },
-                    @{$db->select(
-                    'artpers',[\"artpers_id AS key",\"artpers_name AS title"],undef,[qw(artpers_name)]
-                )->hashes->to_array}]
-            }
-        },
+        
         {
             key => 'production_premiere_ts',
             label => trm('Premiere'),
@@ -169,13 +174,21 @@ has grammar => sub {
 sub getAllFieldValues {
     my $self = shift;
     my $args = shift;
+    my $db = $self->db;
+    if ($self->config->{type} eq 'add') {
+        my $pid = $args->{selection}{artpers_id} 
+            or die mkerror(3872,"expected artpers_id");
+        return $db->select('artpers','artpers_name,artpers_id as production_artpers', {
+            artpers_id => $pid
+        })->hash;
+    }
     return {} if $self->config->{type} ne 'edit';
     my $id = $args->{selection}{production_id};
     return {} unless $id;
 
-    my $db = $self->db;
-    my $data = $db->select('production','*',
+    my $data = $db->select(['production' => [ 'artpers', artpers_id => 'production_artpers']],['production.*','artpers_name'],
         ,{production_id => $id})->hash;
+
     $data->{production_premiere_ts} = localtime
         ->strptime($data->{production_premiere_ts},"%s")
         ->strftime("%d.%m.%Y") 

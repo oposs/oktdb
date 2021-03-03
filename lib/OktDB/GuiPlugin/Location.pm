@@ -42,10 +42,66 @@ has tableCfg => sub {
             primary => true
         },
         {
-            label => trm('Location Name'),
+            label => trm('Name'),
             type => 'string',
             width => '6*',
             key => 'location_name',
+            sortable => true,
+        },
+        {
+            label => trm('OKT'),
+            type => 'string',
+            width => '2*',
+            key => 'location_okt',
+            sortable => true,
+        },
+        {
+            label => trm('Contact Person'),
+            type => 'string',
+            width => '6*',
+            key => 'location_contactperson',
+            sortable => true,
+        },
+        {
+            label => trm('Phone'),
+            type => 'string',
+            width => '6*',
+            key => 'location_phone',
+            sortable => true,
+        },
+        {
+            label => trm('Mobile'),
+            type => 'string',
+            width => '6*',
+            key => 'location_mobile',
+            sortable => true,
+        },
+        {
+            label => trm('E-Mail'),
+            type => 'string',
+            width => '6*',
+            key => 'location_email',
+            sortable => true,
+        },
+        {
+            label => trm('Web'),
+            type => 'string',
+            width => '6*',
+            key => 'location_url',
+            sortable => true,
+        },
+        {
+            label => trm('Address'),
+            type => 'string',
+            width => '6*',
+            key => 'location_postaladdress',
+            sortable => true,
+        },
+        {
+            label => trm('Note'),
+            type => 'string',
+            width => '6*',
+            key => 'location_note',
             sortable => true,
         },
      ]
@@ -69,7 +125,7 @@ has actionCfg => sub {
             popupTitle => trm('New Location'),
             key => 'add',
             set => {
-                height => 200,
+                height => 550,
                 width => 500
             },
             backend => {
@@ -90,7 +146,7 @@ has actionCfg => sub {
                 enabled => false
             },
             set => {
-                height => 200,
+                height => 550,
                 width => 500
             },
             backend => {
@@ -143,24 +199,24 @@ sub getTableRowCount {
 sub getTableData {
     my $self = shift;
     my $args = shift;
-    my $SORT = '';
+    my %SORT;
     my $db = $self->db;
     my $dbh = $db->dbh;
     if ( $args->{sortColumn} ){
-        $SORT = 'ORDER BY '.$dbh->quote_identifier($args->{sortColumn}).(
+        %SORT = (
+            order_by => {
             $args->{sortDesc} 
-            ? ' DESC' 
-            : ' ASC' 
+                ? '-desc' : 'asc',
+            $args->{sortColumn}
+            }
         );
     }
-    my $data = $db->query(<<"SQL_END",
-    SELECT * FROM location
-    $SORT
-    LIMIT ? OFFSET ?
-SQL_END
-       $args->{lastRow}-$args->{firstRow}+1,
-       $args->{firstRow},
-    )->hashes;
+    my $data = $db->select('location','*',undef,{
+        %SORT,
+        limit => $args->{lastRow}-$args->{firstRow}+1,
+        offset => $args->{firstRow}
+    })->hashes;
+
     for my $row (@$data) {
         $row->{_actionSet} = {
             edit => {

@@ -2,7 +2,8 @@ package OktDB::GuiPlugin::ArtPersForm;
 use Mojo::Base 'CallBackery::GuiPlugin::AbstractForm', -signatures;
 use CallBackery::Translate qw(trm);
 use CallBackery::Exception qw(mkerror);
-use Mojo::JSON qw(true false);
+use Mojo::Util qw(dumper);
+use Mojo::JSON qw(true false to_json from_json);
 use Time::Piece;
 
 =head1 NAME
@@ -41,7 +42,28 @@ Returns a Configuration Structure for the Location Entry Form.
 has formCfg => sub {
     my $self = shift;
     my $db = $self->db;
-
+    my $args = $self->args;
+    my @apFitList;
+#    my $activeFit
+#    if (%$args) {
+#       my $activeFit = decode_json($args->{artpers_apfit_json});
+    my $apfitLabel = trm('Eignung');
+    $db->select(
+        'apfit','*',{
+            apfit_active => 1
+        },{
+            order_by => 'apfit_name'
+        })->hashes->each(sub {
+            push @apFitList, {
+                key => 'artpers_apfit_'.$_->{apfit_id},
+                label => $apfitLabel,
+                widget => 'checkBox',
+                set => {
+                    label => $_->{apfit_name}
+                }
+            };
+            $apfitLabel = '';
+        });
     return [
         $self->config->{type} eq 'edit' ? {
             key => 'artpers_id',
@@ -177,6 +199,20 @@ SQL_END
             }
         },
         {
+            key => 'artpers_apprio',
+            label => trm('Priority'),
+            widget => 'selectBox',
+            cfg => {
+                structure => [
+                    {
+                        key => undef, title => trm('No Priority Set')
+                    },@{$db->select(
+                    'apprio',[\"apprio_id AS key", \"apprio_name AS title"],undef,[{-desc => 'apprio_active'}, 'apprio_name']
+                )->hashes->to_array}]
+            }
+        },
+        @apFitList,
+        {
             key => 'artpers_note',
             label => trm('Note'),
             widget => 'textArea',
@@ -236,6 +272,13 @@ has actionCfg => sub {
             } qw(name agency agency_pers progteam email web mobile
                 postaladdress requirements pt_okt ep_okt note end_ts start_ts)
         };
+        my $apfit = {};
+        for my $key (%$args) {
+            next unless $key =~ m/artpers_apfit_(\d+)/ and $args->{$key};
+            $apfit->{$1} = 1;
+        }
+        $fieldMap->{artpers_apfit_json} = to_json($apfit);
+        $self->log->debug("Storing ".dumper $args);
         if ($type eq 'add')  {
             $metaInfo{recId} = $self->db->insert('artpers',$fieldMap)->last_insert_id;
         }
@@ -289,6 +332,11 @@ sub getAllFieldValues {
         my $v = $data->{$k};
         $data->{$k} = localtime($v)->strftime("%d.%m.%Y") 
                 if $v;
+    }
+    my $apfit = from_json($data->{artpers_apfit_json}||'{}');
+    for my $key (sort keys %$apfit) {
+        $data->{'artpers_apfit_'.$key} = true
+            if $apfit->{$key};
     }
     return $data;
 }

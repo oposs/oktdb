@@ -48,7 +48,8 @@ has formValidator => sub ($self) {
                     "enum" =>  [
                         "text",
                         "textArea",
-                        "selectBox"
+                        "selectBox",
+                        "checkBox"
                     ]
                 },
                 "label" =>  {
@@ -135,7 +136,7 @@ has formCfg => sub {
                     Load(encode('utf-8',$value));
                 };
                 if ($@) {
-                    return trm("Invalid YAML Syntax");
+                    return trm("Invalid YAML Syntax: %1",$@);
                 }
                 if (my @errors = $self->formValidator->validate($data)){
                     return join( "; ", @errors);

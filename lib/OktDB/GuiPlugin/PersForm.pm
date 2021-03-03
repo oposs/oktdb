@@ -112,6 +112,24 @@ has formCfg => sub {
                 placeholder => "Maria Muster\nBeispielstrass 42\n3432 Example"
             }
         },
+                {
+            key => 'pers_birthdate_ts',
+            label => trm('Birthdate'),
+            widget => 'text',
+            set => {
+                placeholder => trm('dd.mm.yyyy')
+            },
+            validator => sub ($value,$fieldName,$form) {
+                my $t = eval { 
+                    localtime->strptime($value,"%d.%m.%Y")->epoch;;
+                };
+                if ($@ or not $t) {
+                    return trm('Invalid date');
+                }
+                $_[0] = $t;
+                return "";
+            },
+        },
         {
             key => 'pers_note',
             label => trm('Note'),
@@ -152,7 +170,7 @@ has actionCfg => sub {
         my $fieldMap = { map { 
             "pers_".$_ => $args->{"pers_".$_} 
          } qw(given family email mobile phone
-         postaladdress note end_ts)
+         postaladdress note birthdate_ts end_ts)
         };
         if ($type eq 'add')  {
             $metaInfo{recId} = $self->db->insert('pers',$fieldMap)->last_insert_id;
@@ -202,10 +220,10 @@ sub getAllFieldValues {
     my $db = $self->db;
     my $data = $db->select('pers','*',
         ,{pers_id => $id})->hash;
-    $data->{pers_end_ts} = localtime
-        ->strptime($data->{pers_end_ts},"%s")
-        ->strftime("%d.%m.%Y") 
-        if $data->{pers_end_ts};
+    for my $key (keys %$data) {
+        next unless $key =~ /_ts$/ and $data->{$key};
+        $data->{$key} = localtime($data->{$key})->strftime("%d.%m.%Y");
+    }
     return $data;
 }
 

@@ -2,7 +2,7 @@ package OktDB::GuiPlugin::ArtPers;
 use Mojo::Base 'CallBackery::GuiPlugin::AbstractTable', -signatures;
 use CallBackery::Translate qw(trm);
 use CallBackery::Exception qw(mkerror);
-use Mojo::JSON qw(true false);
+use Mojo::JSON qw(true false from_json);
 use Time::Piece;
 use Text::ParseWords;
 
@@ -107,6 +107,13 @@ has tableCfg => sub {
             sortable => true,
         },
         {
+            label => trm('Eignung'),
+            type => 'string',
+            width => '6*',
+            key => 'apfit',
+            sortable => false,
+        },
+        {
             label => trm('Postal Address'),
             type => 'string',
             width => '6*',
@@ -177,7 +184,7 @@ has actionCfg => sub {
             key => 'add',
             popupTitle => trm('New ArtPerson'),
             set => {
-                height => 750,
+                height => 830,
                 width => 400
             },
             backend => {
@@ -199,7 +206,7 @@ has actionCfg => sub {
                 enabled => false
             },
             set => {
-                height => 750,
+                height => 830,
                 width => 400
             },
             backend => {
@@ -255,6 +262,27 @@ has actionCfg => sub {
                 plugin => 'ArtPersMember',
                 config => {
                     mode => 'filtered'
+                }
+            }
+        },
+        {
+            label => trm('Add Production'),
+            action => 'popup',
+            addToContextMenu => false,
+            name => 'AddProductionForm',
+            key => 'addprod',
+            buttonSet => {
+                enabled => false
+            },
+            popupTitle => trm('New Production'),
+            set => {
+                height => 400,
+                width => 500
+            },
+            backend => {
+                plugin => 'ProductionForm',
+                config => {
+                    type => 'add'
                 }
             }
         },
@@ -333,6 +361,7 @@ sub getTableData {
             : ' ASC' 
         );
     }
+
     my $WHERE = $self->WHERE($args);
     my ($where,@where_bind) = $sql->where($WHERE,$SORT);
     my $data = $db->query(<<"SQL_END",
@@ -344,7 +373,19 @@ SQL_END
        $args->{lastRow}-$args->{firstRow}+1,
        $args->{firstRow},
     )->hashes;
+    my %apfit;
+    $db->select(
+        'apfit','*',{
+            apfit_active => 1
+        },{
+            order_by => 'apfit_name'
+        })->hashes->each(sub {
+            $apfit{$_->{apfit_id}} = $_->{apfit_name};
+        });
     for my $row (@$data) {
+        $row->{apfit} = join ", ", (sort map { $apfit{$_} } 
+            keys from_json($row->{artpers_apfit_json}||'{}')->%*);
+
         $row->{_actionSet} = {
             edit => {
                 enabled => true
@@ -355,6 +396,9 @@ SQL_END
             members => {
                 enabled => true,
             },
+            addprod => {
+                enabled => true,
+            }
         };
     }
     return $data;

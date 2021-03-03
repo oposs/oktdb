@@ -105,24 +105,7 @@ has actionCfg => sub {
     my $self = shift;
  
     return [
-        {
-            label => trm('Add Production'),
-            action => 'popup',
-            addToContextMenu => false,
-            name => 'AddProductionForm',
-            key => 'add',
-            popupTitle => trm('New Production'),
-            set => {
-                height => 400,
-                width => 500
-            },
-            backend => {
-                plugin => 'ProductionForm',
-                config => {
-                    type => 'add'
-                }
-            }
-        },
+       
         {
             label => trm('Edit Production'),
             action => 'popup',

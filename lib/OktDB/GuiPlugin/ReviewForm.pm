@@ -85,16 +85,19 @@ has formCfg => sub {
         $cfg{key} = 'JSON_'.$cfgIn->{key};
         if ($cfg{widget} eq 'selectBox') {
             $cfg{set} = {
+                %{$cfg{set}||{}},
                 %enabled
             }
         }
         else {
             $cfg{set} = {
+                %{$cfg{set}||{}},
                 %readOnly
             };
         }
         push @extraCfg, \%cfg;
     }
+    $self->log->debug(dumper \@extraCfg);
     return [
         $self->config->{type} ne 'add' ? {
             key => 'review_id',
@@ -156,7 +159,7 @@ has actionCfg => sub {
         
         my $fieldMap = { ( map {
             "review_".$_ => $args->{"review_".$_} 
-            } qw(event note) ),
+            } qw(event) ),
             review_comment_json => to_json({
                 cfg => $reviewFormCfg,
                 model => \%data,

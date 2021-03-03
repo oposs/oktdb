@@ -1,3 +1,19 @@
+0.4.0 2021-03-03 17:06:50 +0100 Tobias Oetiker <tobi@oetiker.ch>
+
+ - rueckmeldungen 5 and 6 implemented
+
+0.3.2 2021-01-27 09:57:28 +0100 Tobias Oetiker <tobi@oetiker.ch>
+
+ - custom columns in reviews can not be sorted
+
+0.3.1 2021-01-26 11:56:02 +0100 Tobias Oetiker <tobi@oetiker.ch>
+
+ - fix gui insert ... no note!
+
+0.3.0 2021-01-21 15:51:57 +0100 Tobias Oetiker <tobi@oetiker.ch>
+
+ - add event and review tables
+
 0.2.1 2021-01-11 17:41:07 +0100 Tobias Oetiker <tobi@oetiker.ch>
 
  - add oktadmin right

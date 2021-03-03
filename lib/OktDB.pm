@@ -4,6 +4,7 @@ use Mojo::Base 'CallBackery', -signatures;
 use CallBackery::Model::ConfigJsonSchema;
 use Mojo::Util qw(dumper);
 use Digest::SHA;
+use SQL::Abstract::Pg;
 
 =head1 NAME
 
@@ -45,6 +46,9 @@ has config => sub ($self) {
 
 has database => sub ($self) {
     my $database = $self->SUPER::database();
+    $database->sql->abstract(
+        SQL::Abstract::Pg->new(name_sep => '.', quote_char => '"')
+    );
     $database->sql->migrations
         ->name('OktDB')
         ->from_data(__PACKAGE__,'appdb.sql')
@@ -221,7 +225,7 @@ CREATE TABLE review (
     review_cbuser INTEGER NOT NULL REFERENCES cbuser(cbuser_id),
     review_event INTEGER NOT NULL REFERENCES event(event_id),
     review_change_ts INTEGER NOT NULL,
-    review_comment_json TEXT -- structured review
+    review_comment_json TEXT CHECK(json_valid(review_comment_json)) -- structured review
 );
 
 --sql
@@ -291,3 +295,80 @@ INSERT INTO oktdbcfg VALUES
     "width": "1*"
   }
 ]');
+
+-- 5 up
+
+--sql
+
+ALTER TABLE pers ADD pers_birthdate_ts TEXT;
+
+--sql
+CREATE TABLE apfit (
+    apfit_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    apfit_name TEXT,
+    apfit_active BOOLEAN
+);
+
+--sql
+CREATE TABLE apprio (
+    apprio_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    apprio_name TEXT,
+    apprio_active BOOLEAN
+);
+
+--sql
+ALTER TABLE artpers ADD artpers_apfit_json TEXT CHECK(json_valid(artpers_apfit_json));
+--sql
+ALTER TABLE artpers ADD artpers_apprio INTEGER REFERENCES apprio(apprio_id);
+
+--sql
+ALTER TABLE location ADD location_contactpers TEXT;
+ALTER TABLE location ADD location_okt BOOLEAN DEFAULT TRUE;
+ALTER TABLE location ADD location_phone TEXT;
+ALTER TABLE location ADD location_mobile TEXT;
+ALTER TABLE location ADD location_email TEXT;
+ALTER TABLE location ADD location_url TEXT;
+ALTER TABLE location ADD location_postaladdress TEXT;
+ALTER TABLE location ADD location_note TEXT;
+
+
+CREATE TABLE review_new (
+    review_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    review_cbuser INTEGER NOT NULL REFERENCES cbuser(cbuser_id),
+    review_event INTEGER NOT NULL REFERENCES event(event_id),
+    review_change_ts INTEGER NOT NULL,
+    review_comment_json TEXT CHECK(json_valid(review_comment_json)) -- structured review
+);
+
+INSERT INTO review_new SELECT * FROM review;
+
+
+--sql
+--sql
+
+CREATE TABLE event_new (
+    event_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    event_production INTEGER NOT NULL REFERENCES production(production_id),
+    event_date_ts INTEGER NOT NULL, -- event date
+    event_location INTEGER REFERENCES location(location_id), -- where will it happen
+    event_progteam INTEGER NOT NULL REFERENCES progteam(progteam_id), -- prog team member
+    event_tagalong TEXT, -- who joins the excursion
+    event_note TEXT
+);
+
+INSERT INTO event_new(
+    event_id,event_production,event_date_ts,event_progteam,event_tagalong,event_note) SELECT 
+    event_id,event_production,event_date_ts,event_progteam,event_tagalong,event_note FROM event;
+
+-- migrations happen inside a transaction ... and foreign_keys can not
+-- be changed inside a transaction ... so we have todo something dangerous
+-- https://www.sqlite.org/pragma.html#pragma_foreign_keys
+
+COMMIT;
+PRAGMA foreign_keys=off;
+DROP TABLE review;
+ALTER TABLE review_new RENAME TO review;
+DROP TABLE event;
+ALTER TABLE event_new RENAME TO event;
+PRAGMA foreign_keys=on;
+BEGIN;

@@ -1,5 +1,6 @@
 requires 'CallBackery', '>= 0.35.3';
 requires 'Mojo::SQLite';
+requires 'SQL::Abstract::Pg';
 requires 'Mojolicious::Plugin::OpenAPI';
 requires 'Crypt::ScryptKDF';
 requires 'YAML::XS';

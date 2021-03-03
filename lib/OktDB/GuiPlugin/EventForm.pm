@@ -71,10 +71,18 @@ has formCfg => sub {
         {
             key => 'event_location',
             label => trm('Location'),
-            set => {
-                required => true,
-            },
-            widget => 'text',
+            widget => 'selectBox',
+            cfg => {
+                structure => [
+                    { key => undef, title => trm('Select Location') },
+                    @{$db->select('location',[
+                        [location_id => 'key'],
+                        [\"SUBSTR(location_name || COALESCE('; ' || location_postaladdress,''),0,20)" => 'title']
+                    ],undef,{
+                        order_by => 'location_name'
+                    })->hashes->to_array}
+                ]
+            }
         },
         {
             key => 'event_date_ts',
