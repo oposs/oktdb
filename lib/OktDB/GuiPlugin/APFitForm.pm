@@ -1,5 +1,5 @@
 package OktDB::GuiPlugin::APFitForm;
-use Mojo::Base 'CallBackery::GuiPlugin::AbstractForm';
+use Mojo::Base 'CallBackery::GuiPlugin::AbstractForm', -signatures;
 use CallBackery::Translate qw(trm);
 use CallBackery::Exception qw(mkerror);
 use Mojo::JSON qw(true false);
@@ -28,6 +28,7 @@ All the methods of L<CallBackery::GuiPlugin::AbstractForm> plus:
 sub db {
     shift->user->mojoSqlDb;
 }
+
 has checkAccess => sub ($self) {
     return $self->user->may('reviewcfg');
 };

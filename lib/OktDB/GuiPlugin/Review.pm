@@ -79,7 +79,7 @@ has tableCfg => sub {
             label => trm('Location'),
             type => 'string',
             width => '4*',
-            key => 'event_location',
+            key => 'location_name',
             sortable => true,
         },
         
@@ -240,13 +240,14 @@ my $SUB_SELECT = <<SELECT_END;
         review_change_ts,
         production_title,
         artpers_name,
-        event_location,
+        location_name,
         cbuser_id,
         cbuser_given || ' ' || cbuser_family as cbuser_name,
         event_date_ts,
         review_comment_json
     FROM review
     JOIN event ON review_event = event_id
+    LEFT JOIN location ON event_location = location_id
     JOIN production ON event_production = production_id
     JOIN artpers ON production_artpers = artpers_id
     JOIN cbuser ON review_cbuser = cbuser_id

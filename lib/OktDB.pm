@@ -339,11 +339,10 @@ CREATE TABLE review_new (
     review_change_ts INTEGER NOT NULL,
     review_comment_json TEXT CHECK(json_valid(review_comment_json)) -- structured review
 );
-
+--sql
 INSERT INTO review_new SELECT * FROM review;
 
 
---sql
 --sql
 
 CREATE TABLE event_new (
@@ -355,7 +354,7 @@ CREATE TABLE event_new (
     event_tagalong TEXT, -- who joins the excursion
     event_note TEXT
 );
-
+--sql
 INSERT INTO event_new(
     event_id,event_production,event_date_ts,event_progteam,event_tagalong,event_note) SELECT 
     event_id,event_production,event_date_ts,event_progteam,event_tagalong,event_note FROM event;

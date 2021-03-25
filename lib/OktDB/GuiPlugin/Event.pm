@@ -84,7 +84,7 @@ has tableCfg => sub {
             label => trm('Location'),
             type => 'string',
             width => '6*',
-            key => 'event_location',
+            key => 'location_name',
             sortable => true,
         },
         {
@@ -244,13 +244,14 @@ my $SUB_SELECT = <<SELECT_END;
         event_id,
         production_title,
         artpers_name,
-        event_location,
+        location_name,
         pers_given || ' ' || pers_family as progteam_name,
         event_tagalong,
         event_note,
         event_date_ts
     FROM event
     JOIN production ON event_production = production_id
+    LEFT JOIN location ON event_location = location_id
     JOIN artpers ON production_artpers = artpers_id
     JOIN progteam ON event_progteam = progteam_id
     JOIN pers ON progteam_pers = pers_id

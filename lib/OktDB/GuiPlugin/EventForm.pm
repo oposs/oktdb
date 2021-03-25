@@ -77,7 +77,7 @@ has formCfg => sub {
                     { key => undef, title => trm('Select Location') },
                     @{$db->select('location',[
                         [location_id => 'key'],
-                        [\"SUBSTR(location_name || COALESCE('; ' || location_postaladdress,''),0,20)" => 'title']
+                        [\"SUBSTR(location_name || COALESCE('; ' || location_postaladdress,''),0,60)" => 'title']
                     ],undef,{
                         order_by => 'location_name'
                     })->hashes->to_array}

@@ -50,10 +50,10 @@ DISTRIBUTIONS
       Term::ReadKey 0
       strict 0
       warnings 0
-  CallBackery-0.35.6
-    pathname: O/OE/OETIKER/CallBackery-0.35.6.tar.gz
+  CallBackery-0.35.10
+    pathname: O/OE/OETIKER/CallBackery-0.35.10.tar.gz
     provides:
-      CallBackery 0.035006
+      CallBackery 0.035010
       CallBackery::Config undef
       CallBackery::Controller::RpcService undef
       CallBackery::Database undef
@@ -76,8 +76,8 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       JSON::Validator 0
       Locale::PO 0.27
-      Mojolicious 8.26
-      Mojolicious::Plugin::Qooxdoo v1.0.9
+      Mojolicious 9.12
+      Mojolicious::Plugin::Qooxdoo v1.0.11
       Text::CSV 0
       YAML::XS 0
       perl 5.022000
@@ -761,8 +761,8 @@ DISTRIBUTIONS
       URI::db 0.15
       URI::file 4.21
       perl 5.010001
-  Mojolicious-9.02
-    pathname: S/SR/SRI/Mojolicious-9.02.tar.gz
+  Mojolicious-9.14
+    pathname: S/SR/SRI/Mojolicious-9.14.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -830,7 +830,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 9.02
+      Mojolicious 9.14
       Mojolicious::Command undef
       Mojolicious::Command::Author::cpanify undef
       Mojolicious::Command::Author::generate undef
@@ -891,11 +891,11 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       JSON::Validator 4.13
       Mojolicious 9.00
-  Mojolicious-Plugin-Qooxdoo-1.0.10
-    pathname: O/OE/OETIKER/Mojolicious-Plugin-Qooxdoo-1.0.10.tar.gz
+  Mojolicious-Plugin-Qooxdoo-1.0.11
+    pathname: O/OE/OETIKER/Mojolicious-Plugin-Qooxdoo-1.0.11.tar.gz
     provides:
-      Mojolicious::Plugin::Qooxdoo 1.000010
-      Mojolicious::Plugin::Qooxdoo::JsonRpcController 1.000009
+      Mojolicious::Plugin::Qooxdoo 1.000011
+      Mojolicious::Plugin::Qooxdoo::JsonRpcController 1.000011
     requirements:
       CPAN::Uploader 0
       ExtUtils::MakeMaker 0

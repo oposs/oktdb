@@ -116,8 +116,24 @@ has formCfg => sub {
             },
         },
         {
-            key => 'event_info',
-            label => trm('Event'),
+            key => 'production_title',
+            label => trm('Production'),
+            widget => 'text',
+            set => {
+                readOnly => true,
+            },
+        },
+        {
+            key => 'location_name',
+            label => trm('Location'),
+            widget => 'text',
+            set => {
+                readOnly => true,
+            },
+        },
+        {
+            key => 'event_date',
+            label => trm('Event Date'),
             widget => 'text',
             set => {
                 readOnly => true,
@@ -220,7 +236,8 @@ sub getAllFieldValues {
         my $pid = $args->{selection}{event_id} 
             or die mkerror(3872,"expected event_id");
 
-        my $data =  $db->select('event',"event_location || ', ' || strftime('%d.%m.%Y %H:%M',event_date_ts,'unixepoch') AS event_info,event_id as review_event", {
+        my $data =  $db->select(\'event join production on event_production = production_id left join location on event_location = location_id',
+            ["production_title","location_name",\"strftime('%d.%m.%Y %H:%M',event_date_ts,'unixepoch') AS event_date",\"event_id as review_event"], {
             event_id => $pid
         })->hash;
         return $data;
@@ -228,7 +245,8 @@ sub getAllFieldValues {
     my $id = $args->{selection}{review_id};
     return {} unless $id;
 
-    my $data = $db->select(\"review join event on review_event = event_id",[\'review.*',\"event_location || ', ' || strftime('%d.%m.%Y %H:%M',event_date_ts,'unixepoch') AS event_info "],{
+    my $data = $db->select(\"review join event on review_event = event_id join production on event_production = production_id left join location on event_location = location_id",
+        [\'review.*',"production_title","location_name",\"strftime('%d.%m.%Y %H:%M',event_date_ts,'unixepoch') AS event_date"],{
         review_id => $id
     })->hash;
 

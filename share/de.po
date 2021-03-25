@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the oktdb package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: oktdb 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-03 17:07+0100\n"
+"POT-Creation-Date: 2021-03-25 16:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,11 +39,11 @@ msgstr ""
 msgid "Data Decoding Problem %1"
 msgstr ""
 
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractCardlist.pm:81
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractCardlist.pm:82
 msgid "cardCfg must be defined in child plugin class"
 msgstr ""
 
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractForm.pm:130
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractForm.pm:137
 msgid "sorry, don't know the field you are talking about"
 msgstr ""
 
@@ -116,7 +115,7 @@ msgid "Create Admin Account"
 msgstr ""
 
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:204
-#: lib/OktDB/GuiPlugin/APFitForm.pm:104 lib/OktDB/GuiPlugin/APPrioForm.pm:106
+#: lib/OktDB/GuiPlugin/APFitForm.pm:105 lib/OktDB/GuiPlugin/APPrioForm.pm:106
 #: lib/OktDB/GuiPlugin/AgencyForm.pm:177 lib/OktDB/GuiPlugin/ArtPersForm.pm:297
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:152
 #: lib/OktDB/GuiPlugin/EventForm.pm:169 lib/OktDB/GuiPlugin/LocationForm.pm:144
@@ -125,7 +124,7 @@ msgstr ""
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:151
 #: lib/OktDB/GuiPlugin/ProgTeamForm.pm:138
 #: lib/OktDB/GuiPlugin/ReviewConfig.pm:194
-#: lib/OktDB/GuiPlugin/ReviewForm.pm:191
+#: lib/OktDB/GuiPlugin/ReviewForm.pm:207
 msgid "Save Changes"
 msgstr ""
 
@@ -172,7 +171,7 @@ msgstr ""
 msgid "Failed to send mail to %1"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/APFit.pm:41 lib/OktDB/GuiPlugin/APFitForm.pm:51
+#: lib/OktDB/GuiPlugin/APFit.pm:41 lib/OktDB/GuiPlugin/APFitForm.pm:52
 #: lib/OktDB/GuiPlugin/APPrio.pm:40 lib/OktDB/GuiPlugin/APPrioForm.pm:52
 #: lib/OktDB/GuiPlugin/Agency.pm:52 lib/OktDB/GuiPlugin/AgencyForm.pm:49
 #: lib/OktDB/GuiPlugin/ArtPers.pm:53 lib/OktDB/GuiPlugin/ArtPersForm.pm:70
@@ -190,19 +189,19 @@ msgstr ""
 msgid "Id"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/APFit.pm:49 lib/OktDB/GuiPlugin/APFitForm.pm:60
+#: lib/OktDB/GuiPlugin/APFit.pm:49 lib/OktDB/GuiPlugin/APFitForm.pm:61
 #: lib/OktDB/GuiPlugin/APPrioForm.pm:61 lib/OktDB/GuiPlugin/Agency.pm:60
 #: lib/OktDB/GuiPlugin/ArtPers.pm:61 lib/OktDB/GuiPlugin/ArtPersForm.pm:79
 #: lib/OktDB/GuiPlugin/Location.pm:45 lib/OktDB/GuiPlugin/LocationForm.pm:56
 msgid "Name"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/APFit.pm:56 lib/OktDB/GuiPlugin/APFitForm.pm:68
+#: lib/OktDB/GuiPlugin/APFit.pm:56 lib/OktDB/GuiPlugin/APFitForm.pm:69
 #: lib/OktDB/GuiPlugin/APPrioForm.pm:70
 msgid "Active"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/APFit.pm:76 lib/OktDB/GuiPlugin/APFitForm.pm:105
+#: lib/OktDB/GuiPlugin/APFit.pm:76 lib/OktDB/GuiPlugin/APFitForm.pm:106
 msgid "Add APFit"
 msgstr ""
 
@@ -224,7 +223,7 @@ msgid ""
 "there are no ArtPers linked to it."
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/APFitForm.pm:71
+#: lib/OktDB/GuiPlugin/APFitForm.pm:72
 msgid "This fit can be added"
 msgstr ""
 
@@ -554,7 +553,7 @@ msgstr ""
 
 #: lib/OktDB/GuiPlugin/Event.pm:70 lib/OktDB/GuiPlugin/EventForm.pm:64
 #: lib/OktDB/GuiPlugin/OktEvent.pm:70 lib/OktDB/GuiPlugin/OktEventForm.pm:75
-#: lib/OktDB/GuiPlugin/Review.pm:65
+#: lib/OktDB/GuiPlugin/Review.pm:65 lib/OktDB/GuiPlugin/ReviewForm.pm:120
 msgid "Production"
 msgstr ""
 
@@ -564,7 +563,7 @@ msgstr ""
 
 #: lib/OktDB/GuiPlugin/Event.pm:84 lib/OktDB/GuiPlugin/EventForm.pm:73
 #: lib/OktDB/GuiPlugin/OktEvent.pm:91 lib/OktDB/GuiPlugin/OktEventForm.pm:99
-#: lib/OktDB/GuiPlugin/Review.pm:79
+#: lib/OktDB/GuiPlugin/Review.pm:79 lib/OktDB/GuiPlugin/ReviewForm.pm:128
 msgid "Location"
 msgstr ""
 
@@ -588,13 +587,13 @@ msgstr ""
 msgid "Do you really want to delete the selected Event?"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Event.pm:174 lib/OktDB/GuiPlugin/ReviewForm.pm:192
+#: lib/OktDB/GuiPlugin/Event.pm:174 lib/OktDB/GuiPlugin/ReviewForm.pm:208
 msgid "Add Review"
-msgstr ""
+msgstr "Add Visionierung"
 
 #: lib/OktDB/GuiPlugin/Event.pm:179
 msgid "Review"
-msgstr ""
+msgstr "Visionierung"
 
 #: lib/OktDB/GuiPlugin/EventForm.pm:77 lib/OktDB/GuiPlugin/OktEventForm.pm:104
 msgid "Select Location"
@@ -891,7 +890,7 @@ msgstr ""
 
 #: lib/OktDB/GuiPlugin/Review.pm:87
 msgid "Reviewer"
-msgstr "Reviewer"
+msgstr "Author"
 
 #: lib/OktDB/GuiPlugin/Review.pm:100
 msgid "Last Update"
@@ -899,15 +898,15 @@ msgstr ""
 
 #: lib/OktDB/GuiPlugin/Review.pm:120 lib/OktDB/GuiPlugin/Review.pm:125
 msgid "Edit Review"
-msgstr ""
+msgstr "Edit"
 
 #: lib/OktDB/GuiPlugin/Review.pm:141 lib/OktDB/GuiPlugin/Review.pm:146
 msgid "View Review"
-msgstr ""
+msgstr "View"
 
 #: lib/OktDB/GuiPlugin/Review.pm:162
 msgid "Delete Review"
-msgstr ""
+msgstr "Delete"
 
 #: lib/OktDB/GuiPlugin/Review.pm:165
 msgid "Do you really want to delete the selected Review?"
@@ -937,6 +936,10 @@ msgstr ""
 msgid "Updated"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/ReviewForm.pm:112 lib/OktDB/GuiPlugin/ReviewForm.pm:120
+#: lib/OktDB/GuiPlugin/ReviewForm.pm:112
 msgid "Event"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/ReviewForm.pm:136
+msgid "Event Date"
 msgstr ""
