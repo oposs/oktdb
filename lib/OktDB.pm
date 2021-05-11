@@ -371,3 +371,9 @@ DROP TABLE event;
 ALTER TABLE event_new RENAME TO event;
 PRAGMA foreign_keys=on;
 BEGIN;
+
+-- 6 up
+-- sql
+
+ALTER TABLE artpers ADD artpers_socialmedia_json TEXT 
+    CHECK(json_valid(artpers_socialmedia_json));

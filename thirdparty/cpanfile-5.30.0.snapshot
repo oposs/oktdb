@@ -50,10 +50,10 @@ DISTRIBUTIONS
       Term::ReadKey 0
       strict 0
       warnings 0
-  CallBackery-0.35.10
-    pathname: O/OE/OETIKER/CallBackery-0.35.10.tar.gz
+  CallBackery-0.36.8
+    pathname: O/OE/OETIKER/CallBackery-0.36.8.tar.gz
     provides:
-      CallBackery 0.035010
+      CallBackery 0.036008
       CallBackery::Config undef
       CallBackery::Controller::RpcService undef
       CallBackery::Database undef
@@ -581,10 +581,10 @@ DISTRIBUTIONS
       Mozilla::CA 0
       Net::SSLeay 1.46
       Scalar::Util 0
-  JSON-Validator-4.14
-    pathname: J/JH/JHTHORSEN/JSON-Validator-4.14.tar.gz
+  JSON-Validator-4.17
+    pathname: J/JH/JHTHORSEN/JSON-Validator-4.17.tar.gz
     provides:
-      JSON::Validator 4.14
+      JSON::Validator 4.17
       JSON::Validator::Error undef
       JSON::Validator::Formats undef
       JSON::Validator::Joi undef
@@ -761,8 +761,8 @@ DISTRIBUTIONS
       URI::db 0.15
       URI::file 4.21
       perl 5.010001
-  Mojolicious-9.14
-    pathname: S/SR/SRI/Mojolicious-9.14.tar.gz
+  Mojolicious-9.17
+    pathname: S/SR/SRI/Mojolicious-9.17.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -830,7 +830,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 9.14
+      Mojolicious 9.17
       Mojolicious::Command undef
       Mojolicious::Command::Author::cpanify undef
       Mojolicious::Command::Author::generate undef
@@ -879,17 +879,17 @@ DISTRIBUTIONS
       IO::Socket::IP 0.37
       Sub::Util 1.41
       perl 5.016
-  Mojolicious-Plugin-OpenAPI-4.00
-    pathname: J/JH/JHTHORSEN/Mojolicious-Plugin-OpenAPI-4.00.tar.gz
+  Mojolicious-Plugin-OpenAPI-4.03
+    pathname: J/JH/JHTHORSEN/Mojolicious-Plugin-OpenAPI-4.03.tar.gz
     provides:
-      Mojolicious::Plugin::OpenAPI 4.00
+      Mojolicious::Plugin::OpenAPI 4.03
       Mojolicious::Plugin::OpenAPI::Cors undef
       Mojolicious::Plugin::OpenAPI::Parameters undef
       Mojolicious::Plugin::OpenAPI::Security undef
       Mojolicious::Plugin::OpenAPI::SpecRenderer undef
     requirements:
       ExtUtils::MakeMaker 0
-      JSON::Validator 4.13
+      JSON::Validator 4.17
       Mojolicious 9.00
   Mojolicious-Plugin-Qooxdoo-1.0.11
     pathname: O/OE/OETIKER/Mojolicious-Plugin-Qooxdoo-1.0.11.tar.gz

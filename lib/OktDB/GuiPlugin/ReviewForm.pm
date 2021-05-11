@@ -83,7 +83,7 @@ has formCfg => sub {
     for my $cfgIn (@{$self->reviewFormCfg}) {
         my %cfg = %$cfgIn;
         $cfg{key} = 'JSON_'.$cfgIn->{key};
-        if ($cfg{widget} eq 'selectBox') {
+        if ($cfg{widget} eq 'selectBox' or $cfg{widget} eq 'checkBox') {
             $cfg{set} = {
                 %{$cfg{set}||{}},
                 %enabled
@@ -237,7 +237,7 @@ sub getAllFieldValues {
             or die mkerror(3872,"expected event_id");
 
         my $data =  $db->select(\'event join production on event_production = production_id left join location on event_location = location_id',
-            ["production_title","location_name",\"strftime('%d.%m.%Y %H:%M',event_date_ts,'unixepoch') AS event_date",\"event_id as review_event"], {
+            ["production_title","location_name",\"strftime('%d.%m.%Y %H:%M',event_date_ts,'unixepoch','localtime') AS event_date",\"event_id as review_event"], {
             event_id => $pid
         })->hash;
         return $data;
@@ -246,7 +246,7 @@ sub getAllFieldValues {
     return {} unless $id;
 
     my $data = $db->select(\"review join event on review_event = event_id join production on event_production = production_id left join location on event_location = location_id",
-        [\'review.*',"production_title","location_name",\"strftime('%d.%m.%Y %H:%M',event_date_ts,'unixepoch') AS event_date"],{
+        [\'review.*',"production_title","location_name",\"strftime('%d.%m.%Y %H:%M',event_date_ts,'unixepoch','localtime') AS event_date"],{
         review_id => $id
     })->hash;
 

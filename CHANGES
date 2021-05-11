@@ -1,3 +1,28 @@
+0.4.3 2021-05-11 09:54:13 +0200 Tobias Oetiker <tobi@oetiker.ch>
+
+ - fix such felder event, visionierung
+ - zeit anzeige bei add visionierung in localtime und nicht utc
+ - prioroty in art pers liste anzeigen
+ - web adresse beim editiren von artpers
+ - keine email beim ausweaehlen von artpers
+ - social media feld bei artpers (link open in tabelle is pending) 
+
+0.4.2 2021-05-11 09:53:59 +0200 Tobias Oetiker <tobi@oetiker.ch>
+
+ -
+
+0.4.2 2021-05-03 10:45:55 +0200 Tobias Oetiker <tobi@oetiker.ch>
+
+ -
+
+0.4.2 2021-05-03 10:24:45 +0200 Tobias Oetiker <tobi@oetiker.ch>
+
+ - update callbackery dependency
+
+0.4.1 2021-04-13 11:24:50 +0200 Tobias Oetiker <tobi@oetiker.ch>
+
+ -
+
 0.4.1 2021-03-25 17:45:24 +0100 Tobias Oetiker <tobi@oetiker.ch>
 
  - location fixes

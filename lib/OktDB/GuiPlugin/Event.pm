@@ -200,7 +200,7 @@ sub db {
 
 my $keyMap = {
     production => 'production_name',
-    location => 'event_location',
+    location => 'location_name',
     pers => 'progteam_name',
     date => sub { 
         \["strftime('%d.%m.%Y',event_date_ts,'unixepoch', 'localtime') = ?",shift] 
@@ -226,7 +226,7 @@ sub WHERE {
                 my $lsearch = "%${search}%";
                 push @{$where->{-or}}, (
                     [
-                        event_location => { -like => $lsearch },
+                        location_name => { -like => $lsearch },
                         artpers_name => { -like => $lsearch },
                         progteam_name => { -like => $lsearch },
                         production_title => { -like => $lsearch },

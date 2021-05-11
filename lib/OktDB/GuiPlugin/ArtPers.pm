@@ -86,6 +86,13 @@ has tableCfg => sub {
             sortable => true,
         },
         {
+            label => trm('Priority'),
+            type => 'string',
+            width => '6*',
+            key => 'apprio_name',
+            sortable => true,
+        },
+        {
             label => trm('eMail'),
             type => 'string',
             width => '6*',
@@ -328,6 +335,7 @@ my $SUB_SELECT = <<"SELECT_END";
     LEFT JOIN pers AS pp ON progteam_pers = pp.pers_id
     LEFT JOIN okt AS pt ON artpers_pt_okt = pt.okt_id
     LEFT JOIN okt AS ep ON artpers_ep_okt = ep.okt_id
+    LEFT JOIN apprio ON artpers_apprio = apprio_id
     LEFT JOIN agency ON artpers_agency = agency_id
     LEFT JOIN pers AS ap ON artpers_agency_pers = ap.pers_id
 SELECT_END

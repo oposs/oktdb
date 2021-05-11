@@ -207,7 +207,6 @@ sub getTableData {
             artpers_name,
             pers_given
             || ' ' || pers_family
-            || COALESCE(', '||pers_email,'')
             AS pers_name,
             artpersmember_start_ts,
             artpersmember_end_ts

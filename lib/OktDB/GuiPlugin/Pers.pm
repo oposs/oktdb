@@ -146,7 +146,7 @@ has actionCfg => sub {
             key => 'add',
             popupTitle => trm('New Person'),
             set => {
-                height => 500,
+                height => 600,
                 width => 400
             },
             backend => {
@@ -167,7 +167,7 @@ has actionCfg => sub {
                 enabled => false
             },
             set => {
-                height => 500,
+                height => 600,
                 width => 400
             },
             backend => {

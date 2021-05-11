@@ -197,7 +197,7 @@ sub db {
 
 my $keyMap = {
     production => 'production_name',
-    locaction => 'event_location',
+    locaction => 'location_name',
     reviewer => 'cbuser_name'
 };
 
@@ -220,7 +220,7 @@ sub WHERE {
                 my $lsearch = "%${search}%";
                 push @{$where->{-or}}, (
                     [
-                        event_location => { -like => $lsearch },
+                        location_name => { -like => $lsearch },
                         artpers_name => { -like => $lsearch },
                         cbuser_name => { -like => $lsearch },
                         production_title => { -like => $lsearch },
