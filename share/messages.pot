@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oktdb 0.4.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-14 13:40+0200\n"
+"POT-Creation-Date: 2021-07-14 17:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -206,8 +206,8 @@ msgstr ""
 #: lib/OktDB/GuiPlugin/EventForm.pm:137 lib/OktDB/GuiPlugin/Pers.pm:115
 #: lib/OktDB/GuiPlugin/AgencyForm.pm:123 lib/OktDB/GuiPlugin/PersForm.pm:135
 #: lib/OktDB/GuiPlugin/Agency.pm:102 lib/OktDB/GuiPlugin/OktEvent.pm:112
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:74
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:104
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:74
 msgid "Note"
 msgstr ""
 
@@ -808,14 +808,14 @@ msgid "Add Agency"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/PersForm.pm:57
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:53
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:85
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:53
 msgid "Given Name"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/PersForm.pm:65
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:60
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:94
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:60
 msgid "Family Name"
 msgstr ""
 
@@ -877,27 +877,51 @@ msgstr ""
 msgid "Wrong password!"
 msgstr ""
 
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractForm.pm:139
-msgid "sorry, don't know the field you are talking about"
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:42
+msgid "Error"
 msgstr ""
 
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:38
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:44
+msgid "No user selected."
+msgstr ""
+
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:50
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:38
 msgid "UserId"
 msgstr ""
 
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:46
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:59
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:46
 msgid "Username"
+msgstr ""
+
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:68
+msgid "Password"
+msgstr ""
+
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:76
+msgid "Password Again"
+msgstr ""
+
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:152
+msgid "You can only edit your own stuff unless you have admin permissions."
+msgstr ""
+
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:156
+msgid "The password instances did not match."
+msgstr ""
+
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:202
+msgid "Create Admin Account"
+msgstr ""
+
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:205
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:92
+msgid "Add User"
 msgstr ""
 
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:67
 msgid "Rights"
-msgstr ""
-
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:92
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:205
-msgid "Add User"
 msgstr ""
 
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:96
@@ -930,38 +954,14 @@ msgstr ""
 msgid "Faild to remove user %1"
 msgstr ""
 
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:42
-msgid "Error"
-msgstr ""
-
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:44
-msgid "No user selected."
-msgstr ""
-
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:68
-msgid "Password"
-msgstr ""
-
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:76
-msgid "Password Again"
-msgstr ""
-
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:152
-msgid "You can only edit your own stuff unless you have admin permissions."
-msgstr ""
-
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:156
-msgid "The password instances did not match."
-msgstr ""
-
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:202
-msgid "Create Admin Account"
-msgstr ""
-
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractCardlist.pm:82
-msgid "cardCfg must be defined in child plugin class"
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractForm.pm:139
+msgid "sorry, don't know the field you are talking about"
 msgstr ""
 
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractTable.pm:130
 msgid "Export %1"
+msgstr ""
+
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractCardlist.pm:82
+msgid "cardCfg must be defined in child plugin class"
 msgstr ""

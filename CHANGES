@@ -1,5 +1,6 @@
 0.4.4 2021-07-14 13:26:37 +0200 Tobias Oetiker <tobi@oetiker.ch>
 
+ - add okt edition to preis
  - fix socialmedia_json name
  - update to latest callbackery and mojolicious
 

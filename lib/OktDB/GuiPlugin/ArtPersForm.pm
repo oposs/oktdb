@@ -263,7 +263,7 @@ SQL_END
                 structure => [ {
                         key => undef, title => trm('Kein Kabarettpreis'),
                     },@{$db->select(
-                    'okt',[\"okt_id AS key", \"strftime('%Y',okt_start_ts,'unixepoch') AS title"],undef,[qw(okt_start_ts)]
+                    'okt',[\"okt_id AS key", \"strftime('%Y',okt_start_ts,'unixepoch') || ' - ' || okt_edition AS title"],undef,[qw(okt_start_ts)]
                 )->hashes->to_array}]
             }
         },
@@ -279,7 +279,7 @@ SQL_END
                     {
                         key => undef, title => trm('Kein Ehrenpreis')
                     },@{$db->select(
-                    'okt',[\"okt_id AS key", \"strftime('%Y',okt_start_ts,'unixepoch') AS title"],undef,[qw(okt_start_ts)]
+                    'okt',[\"okt_id AS key", \"strftime('%Y',okt_start_ts,'unixepoch') || ' - ' || okt_edition AS title"],undef,[qw(okt_start_ts)]
                 )->hashes->to_array}]
             }
         },
@@ -366,7 +366,7 @@ has actionCfg => sub {
             $apfit->{$1} = 1;
         }
         $fieldMap->{artpers_apfit_json} = to_json($apfit);
-        $fieldMap->{artpers_socialmedia_json} //= '{}';
+        $fieldMap->{artpers_socialmedia_json} ||= '{}';
         if ($type eq 'add')  {
             $metaInfo{recId} = $self->db->insert('artpers',$fieldMap)->last_insert_id;
         }
