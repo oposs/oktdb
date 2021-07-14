@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oktdb 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-14 13:26+0200\n"
+"POT-Creation-Date: 2021-07-14 13:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,7 +118,7 @@ msgstr ""
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/UserForm.pm:204
 #: lib/OktDB/GuiPlugin/APFitForm.pm:105 lib/OktDB/GuiPlugin/APPrioForm.pm:106
 #: lib/OktDB/GuiPlugin/AgencyForm.pm:177 lib/OktDB/GuiPlugin/ArtPersForm.pm:385
-#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:152
+#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:155
 #: lib/OktDB/GuiPlugin/EventForm.pm:175 lib/OktDB/GuiPlugin/LocationForm.pm:144
 #: lib/OktDB/GuiPlugin/OktEventForm.pm:215 lib/OktDB/GuiPlugin/OktForm.pm:134
 #: lib/OktDB/GuiPlugin/PersForm.pm:190
@@ -301,7 +301,7 @@ msgstr ""
 
 #: lib/OktDB/GuiPlugin/Agency.pm:109 lib/OktDB/GuiPlugin/ArtPers.pm:166
 #: lib/OktDB/GuiPlugin/ArtPersMember.pm:83
-#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:106 lib/OktDB/GuiPlugin/Okt.pm:60
+#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:109 lib/OktDB/GuiPlugin/Okt.pm:60
 #: lib/OktDB/GuiPlugin/Pers.pm:122 lib/OktDB/GuiPlugin/ProgTeam.pm:69
 msgid "End"
 msgstr ""
@@ -363,8 +363,8 @@ msgstr ""
 
 #: lib/OktDB/GuiPlugin/AgencyForm.pm:134 lib/OktDB/GuiPlugin/ArtPersForm.pm:316
 #: lib/OktDB/GuiPlugin/ArtPersForm.pm:334
-#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:91
-#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:109
+#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:94
+#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:112
 #: lib/OktDB/GuiPlugin/OktForm.pm:73 lib/OktDB/GuiPlugin/OktForm.pm:91
 #: lib/OktDB/GuiPlugin/PersForm.pm:120 lib/OktDB/GuiPlugin/PersForm.pm:146
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:82
@@ -376,8 +376,8 @@ msgstr ""
 
 #: lib/OktDB/GuiPlugin/AgencyForm.pm:141 lib/OktDB/GuiPlugin/ArtPersForm.pm:323
 #: lib/OktDB/GuiPlugin/ArtPersForm.pm:341
-#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:98
-#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:116
+#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:101
+#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:119
 #: lib/OktDB/GuiPlugin/EventForm.pm:103 lib/OktDB/GuiPlugin/OktEventForm.pm:153
 #: lib/OktDB/GuiPlugin/OktEventForm.pm:171 lib/OktDB/GuiPlugin/OktForm.pm:80
 #: lib/OktDB/GuiPlugin/OktForm.pm:98 lib/OktDB/GuiPlugin/PersForm.pm:127
@@ -421,7 +421,7 @@ msgid "Ehrenpreis"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/ArtPers.pm:159 lib/OktDB/GuiPlugin/ArtPersMember.pm:76
-#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:88 lib/OktDB/GuiPlugin/Okt.pm:53
+#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:91 lib/OktDB/GuiPlugin/Okt.pm:53
 #: lib/OktDB/GuiPlugin/OktEvent.pm:98 lib/OktDB/GuiPlugin/OktEventForm.pm:143
 #: lib/OktDB/GuiPlugin/ProgTeam.pm:62
 msgid "Start"
@@ -536,7 +536,7 @@ msgid "Pers"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/ArtPersMember.pm:103
-#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:153
+#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:156
 msgid "Add ArtPersMember"
 msgstr ""
 
@@ -564,7 +564,7 @@ msgstr ""
 msgid "Person"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:80
+#: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:83
 #: lib/OktDB/GuiPlugin/ProgTeamForm.pm:68
 msgid "Select Person"
 msgstr ""

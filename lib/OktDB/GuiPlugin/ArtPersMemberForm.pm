@@ -75,6 +75,9 @@ has formCfg => sub {
             key => 'artpersmember_pers',
             label => trm('Person'),
             widget => 'selectBox',
+            set => {
+                incrementalSearch => true
+            },
             cfg => {
                 structure => [ 
                     { key => undef, title => trm('Select Person')},
