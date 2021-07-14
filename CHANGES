@@ -1,3 +1,8 @@
+0.4.4 2021-07-14 13:26:37 +0200 Tobias Oetiker <tobi@oetiker.ch>
+
+ - fix socialmedia_json name
+ - update to latest callbackery and mojolicious
+
 0.4.3 2021-05-11 09:54:13 +0200 Tobias Oetiker <tobi@oetiker.ch>
 
  - fix such felder event, visionierung

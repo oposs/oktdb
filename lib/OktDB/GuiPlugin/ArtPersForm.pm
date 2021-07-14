@@ -4,6 +4,7 @@ use CallBackery::Translate qw(trm);
 use CallBackery::Exception qw(mkerror);
 use Mojo::Util qw(dumper);
 use Mojo::JSON qw(true false to_json from_json);
+use JSON::Validator;
 use Time::Piece;
 use YAML::XS;
 use Encode;
@@ -120,6 +121,9 @@ has formCfg => sub {
             key => 'artpers_agency',
             label => trm('Agency'),
             widget => 'selectBox',
+            set => {
+                incrementalSearch => true
+            },
             cfg => {
                 structure => [
                     { key => undef, title => trm('Select Agency')},
@@ -132,6 +136,9 @@ has formCfg => sub {
             key => 'artpers_agency_pers',
             label => trm('Agency Contact'),
             widget => 'selectBox',
+            set => {
+                incrementalSearch => true
+            },
             cfg => {
                 structure => [ 
                     { key => undef, title => trm('Select Agency Contact')},
@@ -144,6 +151,9 @@ has formCfg => sub {
             key => 'artpers_progteam',
             label => trm('ProgTeam Contact'),
             widget => 'selectBox',
+            set => {
+                incrementalSearch => true
+            },
             cfg => {
                 structure => [ {
                    key => undef, title => trm('Select OKT Person') 
@@ -246,6 +256,9 @@ SQL_END
             key => 'artpers_pt_okt',
             label => trm('Kabarettpreis'),
             widget => 'selectBox',
+            set => {
+                incrementalSearch => true
+            },
             cfg => {
                 structure => [ {
                         key => undef, title => trm('Kein Kabarettpreis'),
@@ -258,6 +271,9 @@ SQL_END
             key => 'artpers_ep_okt',
             label => trm('Ehrenpreis'),
             widget => 'selectBox',
+            set => {
+                incrementalSearch => true
+            },
             cfg => {
                 structure => [
                     {
@@ -271,6 +287,9 @@ SQL_END
             key => 'artpers_apprio',
             label => trm('Priority'),
             widget => 'selectBox',
+            set => {
+                incrementalSearch => true
+            },
             cfg => {
                 structure => [
                     {
@@ -339,7 +358,7 @@ has actionCfg => sub {
         my $fieldMap = { map { 
                 "artpers_".$_ => $args->{"artpers_".$_} 
             } qw(name agency agency_pers progteam email web mobile
-                postaladdress socialmedia requirements pt_okt ep_okt note end_ts start_ts)
+                postaladdress socialmedia_json requirements pt_okt ep_okt note end_ts start_ts)
         };
         my $apfit = {};
         for my $key (%$args) {
@@ -347,6 +366,7 @@ has actionCfg => sub {
             $apfit->{$1} = 1;
         }
         $fieldMap->{artpers_apfit_json} = to_json($apfit);
+        $fieldMap->{artpers_socialmedia_json} //= '{}';
         if ($type eq 'add')  {
             $metaInfo{recId} = $self->db->insert('artpers',$fieldMap)->last_insert_id;
         }

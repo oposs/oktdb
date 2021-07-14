@@ -61,6 +61,9 @@ has formCfg => sub {
             key => 'oktevent_okt',
             label => trm('Kabarettage'),
             widget => 'selectBox',
+            set => {
+                incrementalSearch => true
+            },
             cfg => {
                 structure => [
                     { key => undef, title => trm('Select Kabarett-Tage') },
@@ -74,6 +77,9 @@ has formCfg => sub {
             key => 'oktevent_production',
             label => trm('Production'),
             widget => 'selectBox',
+            set => {
+                incrementalSearch => true
+            },
             cfg => {
                 structure => [
                     { key => undef, title => trm('Select Production') },
@@ -98,6 +104,9 @@ SQL_END
             key => 'oktevent_location',
             label => trm('Location'),
             widget => 'selectBox',
+            set => {
+                incrementalSearch => true
+            },
             cfg => {
                 structure => [
                     {

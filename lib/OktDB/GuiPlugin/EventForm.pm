@@ -72,6 +72,9 @@ has formCfg => sub {
             key => 'event_location',
             label => trm('Location'),
             widget => 'selectBox',
+            set => {
+                incrementalSearch => true
+            },
             cfg => {
                 structure => [
                     { key => undef, title => trm('Select Location') },
@@ -107,6 +110,9 @@ has formCfg => sub {
             key => 'event_progteam',
             label => trm('Leader'),
             widget => 'selectBox',
+            set => {
+                incrementalSearch => true
+            },
             set => {
                 required => true,
             },

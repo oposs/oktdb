@@ -50,10 +50,10 @@ DISTRIBUTIONS
       Term::ReadKey 0
       strict 0
       warnings 0
-  CallBackery-0.36.8
-    pathname: O/OE/OETIKER/CallBackery-0.36.8.tar.gz
+  CallBackery-0.38.9
+    pathname: O/OE/OETIKER/CallBackery-0.38.9.tar.gz
     provides:
-      CallBackery 0.036008
+      CallBackery 0.038009
       CallBackery::Config undef
       CallBackery::Controller::RpcService undef
       CallBackery::Database undef
@@ -74,10 +74,12 @@ DISTRIBUTIONS
       Config::Grammar 1.13
       Excel::Writer::XLSX 0
       ExtUtils::MakeMaker 0
+      Future::AsyncAwait 0.45
       JSON::Validator 0
       Locale::PO 0.27
       Mojolicious 9.12
-      Mojolicious::Plugin::Qooxdoo v1.0.11
+      Mojolicious::Plugin::Qooxdoo v1.0.13
+      Syntax::Keyword::Try 0
       Text::CSV 0
       YAML::XS 0
       perl 5.022000
@@ -409,6 +411,37 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
+  Future-0.47
+    pathname: P/PE/PEVANS/Future-0.47.tar.gz
+    provides:
+      Future 0.47
+      Future::Exception 0.47
+      Future::Mutex 0.47
+      Future::Queue 0.47
+      Future::Utils 0.47
+      Test::Future 0.47
+      Test::Future::Deferred 0.47
+    requirements:
+      Carp 1.25
+      Module::Build 0.4004
+      Test::Builder::Module 0
+      Time::HiRes 0
+      perl 5.010
+  Future-AsyncAwait-0.52
+    pathname: P/PE/PEVANS/Future-AsyncAwait-0.52.tar.gz
+    provides:
+      Future::AsyncAwait 0.52
+      Future::AsyncAwait::Awaitable 0.52
+      Test::Future::AsyncAwait::Awaitable 0.52
+    requirements:
+      ExtUtils::CBuilder 0
+      Future 0.43
+      Module::Build 0.4004
+      XS::Parse::Keyword 0.05
+      XS::Parse::Keyword::Builder 0.05
+      XS::Parse::Sublike 0.10
+      XS::Parse::Sublike::Builder 0.10
+      perl 5.016
   Getopt-Long-Descriptive-0.105
     pathname: R/RJ/RJBS/Getopt-Long-Descriptive-0.105.tar.gz
     provides:
@@ -761,8 +794,8 @@ DISTRIBUTIONS
       URI::db 0.15
       URI::file 4.21
       perl 5.010001
-  Mojolicious-9.17
-    pathname: S/SR/SRI/Mojolicious-9.17.tar.gz
+  Mojolicious-9.19
+    pathname: S/SR/SRI/Mojolicious-9.19.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -830,7 +863,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 9.17
+      Mojolicious 9.19
       Mojolicious::Command undef
       Mojolicious::Command::Author::cpanify undef
       Mojolicious::Command::Author::generate undef
@@ -891,11 +924,11 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       JSON::Validator 4.17
       Mojolicious 9.00
-  Mojolicious-Plugin-Qooxdoo-1.0.11
-    pathname: O/OE/OETIKER/Mojolicious-Plugin-Qooxdoo-1.0.11.tar.gz
+  Mojolicious-Plugin-Qooxdoo-1.0.13
+    pathname: O/OE/OETIKER/Mojolicious-Plugin-Qooxdoo-1.0.13.tar.gz
     provides:
-      Mojolicious::Plugin::Qooxdoo 1.000011
-      Mojolicious::Plugin::Qooxdoo::JsonRpcController 1.000011
+      Mojolicious::Plugin::Qooxdoo 1.000013
+      Mojolicious::Plugin::Qooxdoo::JsonRpcController 1.000013
     requirements:
       CPAN::Uploader 0
       ExtUtils::MakeMaker 0
@@ -1075,6 +1108,17 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Scalar::Util 0
       perl 5.006
+  Syntax-Keyword-Try-0.25
+    pathname: P/PE/PEVANS/Syntax-Keyword-Try-0.25.tar.gz
+    provides:
+      Syntax::Keyword::Try 0.25
+      Syntax::Keyword::Try::Deparse 0.25
+    requirements:
+      ExtUtils::CBuilder 0
+      Module::Build 0.4004
+      XS::Parse::Keyword 0.06
+      XS::Parse::Keyword::Builder 0.06
+      perl 5.014
   TermReadKey-2.38
     pathname: J/JS/JSTOWE/TermReadKey-2.38.tar.gz
     provides:
@@ -1353,6 +1397,24 @@ DISTRIBUTIONS
       Fcntl 0
       URI 1.10
       perl 5.008001
+  XS-Parse-Keyword-0.08
+    pathname: P/PE/PEVANS/XS-Parse-Keyword-0.08.tar.gz
+    provides:
+      XS::Parse::Keyword 0.08
+      XS::Parse::Keyword::Builder 0.08
+    requirements:
+      ExtUtils::CBuilder 0
+      Module::Build 0.4004
+      perl 5.014
+  XS-Parse-Sublike-0.12
+    pathname: P/PE/PEVANS/XS-Parse-Sublike-0.12.tar.gz
+    provides:
+      XS::Parse::Sublike 0.12
+      XS::Parse::Sublike::Builder 0.12
+    requirements:
+      ExtUtils::CBuilder 0
+      Module::Build 0.4004
+      perl 5.016
   YAML-LibYAML-0.82
     pathname: T/TI/TINITA/YAML-LibYAML-0.82.tar.gz
     provides:

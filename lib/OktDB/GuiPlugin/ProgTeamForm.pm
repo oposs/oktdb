@@ -57,6 +57,9 @@ has formCfg => sub {
             label => trm('Person'),
             widget => 'selectBox',
             set => {
+                incrementalSearch => true
+            },
+            set => {
                 required => true,
             },
             cfg => {
