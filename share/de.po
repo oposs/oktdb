@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oktdb 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-14 13:40+0200\n"
+"POT-Creation-Date: 2021-08-04 16:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,21 +20,21 @@ msgstr ""
 msgid "Wrong password!"
 msgstr ""
 
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Controller/RpcService.pm:422
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Controller/RpcService.pm:423
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Controller/RpcService.pm:500
 msgid "Access Denied"
 msgstr ""
 
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Controller/RpcService.pm:427
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Controller/RpcService.pm:428
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Controller/RpcService.pm:507
 msgid "Plugin Name missing"
 msgstr ""
 
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Controller/RpcService.pm:433
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Controller/RpcService.pm:434
 msgid "Upload Missing"
 msgstr ""
 
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Controller/RpcService.pm:442
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Controller/RpcService.pm:443
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Controller/RpcService.pm:517
 msgid "Data Decoding Problem %1"
 msgstr ""

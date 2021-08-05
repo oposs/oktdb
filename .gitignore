@@ -39,3 +39,4 @@ etc/*secret
 /configure
 *~
 /.vscode/perl-lang/
+.pls_cache
