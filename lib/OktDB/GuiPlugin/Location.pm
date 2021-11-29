@@ -59,7 +59,7 @@ has tableCfg => sub {
             label => trm('Contact Person'),
             type => 'string',
             width => '6*',
-            key => 'location_contactperson',
+            key => 'location_contactpers',
             sortable => true,
         },
         {
