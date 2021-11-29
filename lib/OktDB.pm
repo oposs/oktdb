@@ -355,6 +355,7 @@ CREATE TABLE event_new (
     event_note TEXT
 );
 --sql
+
 INSERT INTO event_new(
     event_id,event_production,event_date_ts,event_progteam,event_tagalong,event_note) SELECT 
     event_id,event_production,event_date_ts,event_progteam,event_tagalong,event_note FROM event;
@@ -373,7 +374,37 @@ PRAGMA foreign_keys=on;
 BEGIN;
 
 -- 6 up
--- sql
+--sql
 
 ALTER TABLE artpers ADD artpers_socialmedia_json TEXT 
     CHECK(json_valid(artpers_socialmedia_json));
+
+-- 7 up
+--sql
+
+
+-- make the programteam reference non mandatory
+CREATE TABLE event_new (
+    event_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    event_production INTEGER NOT NULL REFERENCES production(production_id),
+    event_date_ts INTEGER NOT NULL, -- event date
+    event_location INTEGER REFERENCES location(location_id), -- where will it happen
+    event_progteam INTEGER REFERENCES progteam(progteam_id), -- prog team member
+    event_tagalong TEXT, -- who joins the excursion
+    event_note TEXT
+);
+--sql
+
+
+-- migrations happen inside a transaction ... and foreign_keys can not
+-- be changed inside a transaction ... so we have todo something dangerous
+-- https://www.sqlite.org/pragma.html#pragma_foreign_keys
+
+COMMIT;
+PRAGMA foreign_keys=off;
+INSERT INTO event_new SELECT * FROM event;
+DROP TABLE event;
+ALTER TABLE event_new RENAME TO event;
+PRAGMA foreign_keys=on;
+BEGIN;
+

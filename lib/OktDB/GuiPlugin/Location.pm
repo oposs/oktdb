@@ -199,14 +199,18 @@ sub getTableRowCount {
 sub getTableData {
     my $self = shift;
     my $args = shift;
-    my %SORT;
+    my %SORT = (
+        order_by => {
+            '-desc' => 'location_id'
+        }
+    );
     my $db = $self->db;
     my $dbh = $db->dbh;
     if ( $args->{sortColumn} ){
         %SORT = (
             order_by => {
             $args->{sortDesc} 
-                ? '-desc' : 'asc',
+                ? '-desc' : '-asc',
             $args->{sortColumn}
             }
         );

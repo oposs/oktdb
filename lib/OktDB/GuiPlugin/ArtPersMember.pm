@@ -190,7 +190,7 @@ sub getTableData {
         $self->config->{mode} eq 'filtered'
         ? 'WHERE artpersmember_artpers = '.int($args->{parentFormData}{selection}{artpers_id}) : '';
 
-    my $SORT = '';
+    my $SORT = 'ORDER BY artpersmember_id DESC';
     my $db = $self->db;
     my $dbh = $db->dbh;
     if ( $args->{sortColumn} ){

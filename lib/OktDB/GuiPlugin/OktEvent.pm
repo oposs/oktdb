@@ -279,7 +279,7 @@ SQL_END
 sub getTableData {
     my $self = shift;
     my $args = shift;
-    my $SORT = '';
+    my $SORT = 'oktevent_id DESC';
     my $db = $self->db;
     my $dbh = $db->dbh;
     my $sql = SQL::Abstract->new;

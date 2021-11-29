@@ -1,0 +1,207 @@
+% layout 'default';
+% title 'Bestellung';
+% use List::Util 'shuffle';
+ <div class="container">
+ <br/>
+ <br/>
+ <div id="pics" class="z-depth-3">
+  %# <a id="order-button" class="waves-effect waves-light btn" href="#order-start">Jetzt Bestellen</a>
+%#<iframe
+src="https://www.youtube-nocookie.com/embed/_dWufvuVoLM?playsinline=1&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+ </div>
+ </div>
+</div>
+<div class="container">
+  <div class="row">
+  <div class="col s12">
+      <br/>
+
+      <form id="orderform">
+      <a name="order-start"></a>
+      <p class="flow-text">
+      Mit dem Kauf des Oltner Kalenders 2022 unterstützen Sie die kulturelle Vielfalt in der Region Olten.
+      Wählen Sie, welche Organisationen vom Gewinn aus ihrem Beitrag profitieren
+      sollen.
+      </p>
+
+      <div id="project-list" class="row">
+      % for my $org (shuffle @$ORGANISATIONS) {
+        <div class="col s12 l6">
+            <div class="card horizontal ">
+              <div class="card-image">
+                <img src="<%= url_for("logos/" . ($org->{logo} // 'logo.png')) %>" />
+              </div>
+              <div class="card-stacked">
+                <div class="card-content">
+                    <input
+                        type="checkbox"
+                        value="checked"
+                        class="project filled-in"
+                        id="check_<%= $org->{key} %>" />
+                    <label for="check_<%= $org->{key} %>" class="black-text">
+                        <span class="card-title"><%= $org->{name} %></span>
+                    </label>
+                    <p><%= $org->{motto} %></p>
+                </div>
+              </div>
+            </div>
+        </div>
+      % }
+      </div>
+
+
+      <h2>Kalender bestellen</h2>
+      <p class="flow-text">
+Wer hier bestellt, entscheidet mit wie wir den diesjährigen Gewinn verteilen.Bestellen Sie Ihre Exemplar online über dieses Webformular (Zahlung per Kreditkarte). Die Auslieferung erfolgt Anfang Dezember.
+</p>
+
+%# <p class="flow-text"><i>Sie können sich Ihren Kalender auch direkt bei der <a href="https://g.page/buchhandlung-klosterplatz?share" target="_new">Buchhandlung Klosterplatz</a> oder bei <a target="_new" href="https://g.page/schreiberolten?share">Schreiber Kirchgasse</a>
+%# im Laden reservieren lassen. Da haben Sie jedoch keinen Einfluss auf die Geldverteilung.</i></p>
+
+      <div class="row"><div class="col s12"><div class="card"><div class="card-content row">
+            <div class="input-field col s2">
+              <input id="calendars" type="number" value="1" class="validate" />
+              <label for="order_count">Anzahl</label>
+            </div>
+            <div class="input-field fake-field col s8">
+              Oltner Kalender 2022, Format A3+, 26 Bilder
+            </div>
+            <div class="input-field fake-field col s2 right-align">
+              <span class="cost_calendar"></span> CHF
+            </div>
+      </div></div></div></div>
+
+      <h2>Lieferadresse</h2>
+      <div class="row"><div class="col s12"><div class="card"><div class="card-content">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="addr_first_name" type="text" class="validate" >
+          <label for="addr_first_name">Vorname</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="addr_last_name" type="text" class="validate" >
+          <label for="addr_last_name">Nachname</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="addr_company" type="text" class="validate optional">
+          <label for="addr_company">Firma</label>
+        </div>
+      </div>
+      <div class="row">
+          <div class="input-field col s9">
+            <input id="addr_street" type="text" class="validate">
+            <label for="addr_street">Strasse</label>
+          </div>
+          <div class="input-field col s3">
+            <input id="addr_nr" type="text" class="validate">
+            <label for="addr_nr">Hausnummer</label>
+          </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s4">
+          <input id="addr_zip" type="number" class="validate">
+          <label for="addr_zip">PLZ</label>
+        </div>
+        <div class="input-field col s8">
+          <input id="addr_town" type="text" class="validate">
+          <label for="addr_town">Ort</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="addr_country" type="text" class="validate" value="Schweiz">
+          <label for="addr_country">Land</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="addr_email" type="email" class="validate">
+          <label for="addr_email">eMail Adresse</label>
+        </div>
+      </div>
+      </div></div></div></div>
+      <h2>Zustellung</h2>
+      <p class="flow-text">
+      Der Kalender kann 
+    entweder in der Buchhandlung Klosterplatz oder 
+      in der Buchhandlung Schreiber
+      Kirchgasse abgeholt werden.
+ , oder per Post geliefert werden. Bestellungen für Adressen in der Region Olten werden von <a href="https://collectors-olten.ch" target="_new">Collectors</a> ausgeliefert.</p>
+      <div class="row"><div class="col s12"><div class="card"><div class="card-content row">
+          <div class="input-field col s10">
+              <select id="delivery">
+                <option value="" disabled selected>Wählen Sie die Zustellungsart und Verpackung</option>
+                <option value="klp">Abholen Buchhandlung Klosterplatz</option>
+                <option value="klp_tt">Abholen Buchhandlung Klosterplatz + Tragtasche</option>
+                <option value="klp_gp">Abholen Buchhandlung Klosterplatz + Geschenkverpackung</option>
+                <option value="bhs">Abholen Schreiber Kirchgasse</option>
+%#              <option value="bhs_tt">Abholen Schreiber Kirchgasse + Tragtasche</option>
+%#              <option value="bhs_gp">Abholen Schreiber Kirchgasse + Geschenkverpackung</option>
+                <option value="ship">Zustellung per Post / Collectors</option>
+              </select>
+              <label for="delivery">Zustellung</label>
+          </div>
+          <div class="input-field fake-field col s2 right-align">
+              <span class="cost_porto"></span> CHF
+          </div>
+      </div></div></div></div>
+      <div class="row">
+          <div class="col s12 right-align">
+              Total:&nbsp;&nbsp;<b><span class="cost_total"></span> CHF</b>
+          </div>
+      </div>
+      <div>
+% if ($shopmode) {
+         <a id="shoporder_btn" class="waves-effect waves-light btn right" href="#!">Bestellen</a>
+% }
+% else {
+          <a id="payform_btn" class="waves-effect waves-light btn right" href="#!">Kasse</a>
+% }
+      </div>
+
+%= $shopmode ? '' : include 'includes/stripe';
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- POPUPS -->
+
+<div id="errorpop" class="modal">
+  <div class="modal-content">
+  </div>
+  <div class="modal-footer">
+    <a id="error_ok" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
+  </div>
+</div>
+
+<div id="thankyoupop" class="modal">
+  <div class="modal-content">
+      <h4>Danke für Ihre Bestellung</h4>
+      <p class="flow-text">Der Kalender ging Mitte November in Produktion. Wir rechnen damit,
+      Anfang Dezember mit der Auslieferung beginnen zu können.
+      Sobald Ihr Kalender bereit ist, werden wir Sie per eMail kontaktieren.</p>
+  </div>
+  <div class="modal-footer">
+    <a href="/" class="waves-effect waves-green btn-flat">Ok</a>
+  </div>
+</div>
+
+<div id="busypop" class="valign-wrapper">
+  <div class="preloader-wrapper big active valign">
+    <div class="spinner-layer spinner-red">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+     </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="<%= url_for 'js/start.js' %>"></script>

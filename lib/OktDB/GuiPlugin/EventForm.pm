@@ -113,9 +113,6 @@ has formCfg => sub {
             set => {
                 incrementalSearch => true
             },
-            set => {
-                required => true,
-            },
             cfg => {
                 structure => [
                     { key => undef, title => trm('Select Leader') },

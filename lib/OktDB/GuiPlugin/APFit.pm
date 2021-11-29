@@ -158,11 +158,15 @@ sub getTableRowCount {
 sub getTableData {
     my $self = shift;
     my $args = shift;
-    my @SORT;
+    my %SORT = (
+        order_by => {
+            '-desc' => 'apfit_id'
+        }
+    );
     my $db = $self->db;
     my $dbh = $db->dbh;
     if ( $args->{sortColumn} ){
-        @SORT = (
+        %SORT = (
             order_by => { 
                 $args->{sortDesc} 
                 ? ' -desc' 
@@ -174,7 +178,7 @@ sub getTableData {
     my $data = $db->select('apfit','*',undef,{
         limit => $args->{lastRow}-$args->{firstRow}+1,
         offset => $args->{firstRow},
-        @SORT
+        %SORT
     })->hashes;
     for my $row (@$data) {
         $row->{_actionSet} = {

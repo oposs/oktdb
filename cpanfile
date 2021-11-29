@@ -1,7 +1,7 @@
-requires 'CallBackery', '>= 0.38.15';
-requires 'Mojo::SQLite';
+requires 'CallBackery', '>= 0.39.7';
+requires 'Mojo::SQLite', '>= 3.008';
 requires 'SQL::Abstract::Pg';
-requires 'Mojolicious', '>=9.19';
+requires 'Mojolicious', '>=9.22';
 requires 'Mojolicious::Plugin::OpenAPI';
 requires 'Crypt::ScryptKDF';
 requires 'YAML::XS';

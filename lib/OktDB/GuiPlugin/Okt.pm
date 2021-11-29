@@ -159,7 +159,7 @@ sub getTableRowCount {
 sub getTableData {
     my $self = shift;
     my $args = shift;
-    my $SORT = '';
+    my $SORT = 'ORDER BY okt_id DESC';
     my $db = $self->db;
     my $dbh = $db->dbh;
     if ( $args->{sortColumn} ){
