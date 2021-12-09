@@ -142,7 +142,6 @@ has actionCfg => sub {
             label => trm('Add Person'),
             action => 'popup',
             addToContextMenu => false,
-            name => 'AddPersForm',
             key => 'add',
             popupTitle => trm('New Person'),
             set => {
@@ -161,7 +160,6 @@ has actionCfg => sub {
             action => 'popup',
             key => 'edit',
             addToContextMenu => false,
-            name => 'EditPersForm',
             popupTitle => trm('Edit Person'),
             buttonSet => {
                 enabled => false
@@ -272,7 +270,7 @@ sub getTableData {
     }
     my $WHERE = $self->WHERE($args);
     my ($where,@where_bind) = $sql->where($WHERE,$SORT);
-    $self->log->debug($where);
+    #$self->log->debug($where);
     my $data = $db->query(<<"SQL_END",
     SELECT * FROM pers
     $where

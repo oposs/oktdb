@@ -133,7 +133,6 @@ has actionCfg => sub {
             label => trm('Add OktEvent'),
             action => 'popup',
             addToContextMenu => false,
-            name => 'AddOktEventForm',
             key => 'add',
             popupTitle => trm('New OktEvent'),
             set => {
@@ -152,7 +151,6 @@ has actionCfg => sub {
             action => 'popup',
             key => 'edit',
             addToContextMenu => false,
-            name => 'EditOktEventForm',
             popupTitle => trm('Edit OktEvent'),
             buttonSet => {
                 enabled => false
@@ -194,7 +192,10 @@ has actionCfg => sub {
                     action => 'reload',
                 };
             }
-        }
+        },
+         $self->makeExportAction(
+             filename => localtime->strftime('oktevent-%Y-%m-%d-%H-%M-%S.xlsx')
+         ),
     ];
 };
 

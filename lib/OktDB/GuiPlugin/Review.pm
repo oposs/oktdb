@@ -121,7 +121,6 @@ has actionCfg => sub {
             action => 'popup',
             key => 'edit',
             addToContextMenu => false,
-            name => 'EditReviewForm',
             popupTitle => trm('Edit Review'),
             buttonSet => {
                 enabled => false
@@ -142,7 +141,6 @@ has actionCfg => sub {
             action => 'popup',
             key => 'view',
             addToContextMenu => false,
-            name => 'ViewReviewForm',
             popupTitle => trm('View Review'),
             buttonSet => {
                 enabled => false
@@ -187,7 +185,30 @@ has actionCfg => sub {
                     action => 'reload',
                 };
             }
-        }
+        },
+        {
+            label => trm('Add Review'),
+            action => 'popup',
+            addToContextMenu => true,
+            key => 'addreview',
+            popupTitle => trm('Review'),
+            buttonSet => {
+                enabled => false
+            },
+            set => {
+                height => 500,
+                width => 500
+            },
+            backend => {
+                plugin => 'ReviewForm',
+                config => {
+                    type => 'add'
+                }
+            }
+        },
+         $self->makeExportAction(
+             filename => localtime->strftime('review-%Y-%m-%d-%H-%M-%S.xlsx')
+         ),
     ];
 };
 
@@ -237,6 +258,7 @@ my $SUB_SELECT = <<SELECT_END;
 
     SELECT 
         review_id,
+        event_id,
         review_change_ts,
         production_title,
         artpers_name,
@@ -318,6 +340,9 @@ SQL_END
             },
             delete => {
                 enabled => $ok ? true : false,
+            },
+            addreview =>{
+                enabled => $row->{cbuser_id} ne $currentUser ? true : false,
             },
         };
         for my $field (keys %$row) {

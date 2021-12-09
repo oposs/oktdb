@@ -81,7 +81,6 @@ has actionCfg => sub {
             label => trm('Add Okt'),
             action => 'popup',
             addToContextMenu => false,
-            name => 'AddOktForm',
             key => 'add',
             popupTitle => trm('New Okt'),
             set => {
@@ -100,7 +99,6 @@ has actionCfg => sub {
             action => 'popup',
             key => 'edit',
             addToContextMenu => false,
-            name => 'EditOktForm',
             popupTitle => trm('Edit Okt'),
             buttonSet => {
                 enabled => false
@@ -142,7 +140,10 @@ has actionCfg => sub {
                     action => 'reload',
                 };
             }
-        }
+        },
+         $self->makeExportAction(
+             filename => localtime->strftime('okt-%Y-%m-%d-%H-%M-%S.xlsx')
+         ),
     ];
 };
 

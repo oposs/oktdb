@@ -1,4 +1,4 @@
-requires 'CallBackery', '>= 0.39.7';
+requires 'CallBackery', '>= 0.40.4';
 requires 'Mojo::SQLite', '>= 3.008';
 requires 'SQL::Abstract::Pg';
 requires 'Mojolicious', '>=9.22';

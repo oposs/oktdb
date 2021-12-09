@@ -1,3 +1,9 @@
+0.6.0 2021-12-09 16:25:04 +0100 Tobias Oetiker <tobi@oetiker.ch>
+
+ - add visionierung button bei visionierung
+ - export artpers, production, event, visionierung, okt, oktevents
+
+
 0.5.0 2021-11-29 16:19:41 +0100 Tobias Oetiker <tobi@oetiker.ch>
  - leader option with events
  - order location by name

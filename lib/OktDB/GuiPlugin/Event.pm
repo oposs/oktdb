@@ -127,7 +127,6 @@ has actionCfg => sub {
             action => 'popup',
             key => 'edit',
             addToContextMenu => false,
-            name => 'EditEventForm',
             popupTitle => trm('Edit Event'),
             buttonSet => {
                 enabled => false
@@ -174,7 +173,6 @@ has actionCfg => sub {
             label => trm('Add Review'),
             action => 'popup',
             addToContextMenu => true,
-            name => 'AddReviewForm',
             key => 'addreview',
             popupTitle => trm('Review'),
             buttonSet => {
@@ -191,6 +189,9 @@ has actionCfg => sub {
                 }
             }
         },
+        $self->makeExportAction(
+            filename => localtime->strftime('event-%Y-%m-%d-%H-%M-%S.xlsx')
+        )
     ];
 };
 

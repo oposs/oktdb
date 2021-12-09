@@ -111,7 +111,6 @@ has actionCfg => sub {
             action => 'popup',
             key => 'edit',
             addToContextMenu => true,
-            name => 'EditProductionForm',
             popupTitle => trm('Edit Production'),
             buttonSet => {
                 enabled => false
@@ -158,7 +157,6 @@ has actionCfg => sub {
             label => trm('Add Event'),
             action => 'popup',
             addToContextMenu => true,
-            name => 'AddEventForm',
             key => 'addevent',
             buttonSet => {
                 enabled => false
@@ -175,7 +173,9 @@ has actionCfg => sub {
                 }
             }
         },
-        
+         $self->makeExportAction(
+             filename => localtime->strftime('production-%Y-%m-%d-%H-%M-%S.xlsx')
+         ),
     ];
 };
 

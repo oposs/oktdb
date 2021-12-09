@@ -187,7 +187,6 @@ has actionCfg => sub {
             label => trm('Add ArtPerson'),
             action => 'popup',
             addToContextMenu => false,
-            name => 'AddArtPersForm',
             key => 'add',
             popupTitle => trm('New ArtPerson'),
             set => {
@@ -207,7 +206,6 @@ has actionCfg => sub {
             key => 'edit',
             defaultAction => true,
             addToContextMenu => true,
-            name => 'EditArtPersForm',
             popupTitle => trm('Edit ArtPerson'),
             buttonSet => {
                 enabled => false
@@ -256,7 +254,6 @@ has actionCfg => sub {
             key => 'members',
             defaultAction => false,
             addToContextMenu => true,
-            name => 'EditArtPersMembers',
             popupTitle => trm('ArtPerson Members'),
             buttonSet => {
                 enabled => false
@@ -276,7 +273,6 @@ has actionCfg => sub {
             label => trm('Add Production'),
             action => 'popup',
             addToContextMenu => false,
-            name => 'AddProductionForm',
             key => 'addprod',
             buttonSet => {
                 enabled => false
@@ -292,7 +288,10 @@ has actionCfg => sub {
                     type => 'add'
                 }
             }
-        },
+        }, 
+        $self->makeExportAction(
+            filename => localtime->strftime('artpers-%Y-%m-%d-%H-%M-%S.xlsx')
+        ),
     ];
 };
 

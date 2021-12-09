@@ -50,15 +50,16 @@ DISTRIBUTIONS
       Term::ReadKey 0
       strict 0
       warnings 0
-  CallBackery-0.39.7
-    pathname: O/OE/OETIKER/CallBackery-0.39.7.tar.gz
+  CallBackery-0.40.4
+    pathname: O/OE/OETIKER/CallBackery-0.40.4.tar.gz
     provides:
-      CallBackery 0.039007
+      CallBackery 0.040004
       CallBackery::Config undef
       CallBackery::Controller::RpcService undef
       CallBackery::Database undef
       CallBackery::Exception undef
       CallBackery::GuiPlugin::Abstract undef
+      CallBackery::GuiPlugin::AbstractAction undef
       CallBackery::GuiPlugin::AbstractCardlist undef
       CallBackery::GuiPlugin::AbstractForm undef
       CallBackery::GuiPlugin::AbstractHtml undef
@@ -74,15 +75,15 @@ DISTRIBUTIONS
       Config::Grammar 1.13
       Excel::Writer::XLSX 0
       ExtUtils::MakeMaker 0
-      Future::AsyncAwait 0.45
-      JSON::Validator 0
+      Future::AsyncAwait 0.54
+      JSON::Validator 5.03
       Locale::PO 0.27
       Mojolicious 9.12
       Mojolicious::Plugin::Qooxdoo v1.0.13
-      Syntax::Keyword::Try 0
+      Syntax::Keyword::Try 0.26
       Text::CSV 0
       XS::Parse::Keyword 0.21
-      YAML::XS 0
+      YAML::XS 0.83
       perl 5.022000
   Class-Method-Modifiers-2.13
     pathname: E/ET/ETHER/Class-Method-Modifiers-2.13.tar.gz
@@ -437,18 +438,18 @@ DISTRIBUTIONS
       Test::Builder::Module 0
       Time::HiRes 0
       perl 5.010
-  Future-AsyncAwait-0.52
-    pathname: P/PE/PEVANS/Future-AsyncAwait-0.52.tar.gz
+  Future-AsyncAwait-0.54
+    pathname: P/PE/PEVANS/Future-AsyncAwait-0.54.tar.gz
     provides:
-      Future::AsyncAwait 0.52
-      Future::AsyncAwait::Awaitable 0.52
-      Test::Future::AsyncAwait::Awaitable 0.52
+      Future::AsyncAwait 0.54
+      Future::AsyncAwait::Awaitable 0.54
+      Test::Future::AsyncAwait::Awaitable 0.54
     requirements:
       ExtUtils::CBuilder 0
       Future 0.43
       Module::Build 0.4004
-      XS::Parse::Keyword 0.05
-      XS::Parse::Keyword::Builder 0.05
+      XS::Parse::Keyword 0.13
+      XS::Parse::Keyword::Builder 0.13
       XS::Parse::Sublike 0.10
       XS::Parse::Sublike::Builder 0.10
       perl 5.016
@@ -607,14 +608,13 @@ DISTRIBUTIONS
       Mozilla::CA 0
       Net::SSLeay 1.46
       Scalar::Util 0
-  JSON-Validator-4.21
-    pathname: J/JH/JHTHORSEN/JSON-Validator-4.21.tar.gz
+  JSON-Validator-5.03
+    pathname: J/JH/JHTHORSEN/JSON-Validator-5.03.tar.gz
     provides:
-      JSON::Validator 4.21
+      JSON::Validator 5.03
       JSON::Validator::Error undef
       JSON::Validator::Formats undef
       JSON::Validator::Joi undef
-      JSON::Validator::Ref undef
       JSON::Validator::Schema undef
       JSON::Validator::Schema::Draft201909 undef
       JSON::Validator::Schema::Draft4 undef
@@ -623,6 +623,7 @@ DISTRIBUTIONS
       JSON::Validator::Schema::OpenAPIv2 undef
       JSON::Validator::Schema::OpenAPIv3 undef
       JSON::Validator::Store undef
+      JSON::Validator::URI undef
       JSON::Validator::Util undef
     requirements:
       ExtUtils::MakeMaker 0
@@ -1101,11 +1102,11 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Scalar::Util 0
       perl 5.006
-  Syntax-Keyword-Try-0.25
-    pathname: P/PE/PEVANS/Syntax-Keyword-Try-0.25.tar.gz
+  Syntax-Keyword-Try-0.26
+    pathname: P/PE/PEVANS/Syntax-Keyword-Try-0.26.tar.gz
     provides:
-      Syntax::Keyword::Try 0.25
-      Syntax::Keyword::Try::Deparse 0.25
+      Syntax::Keyword::Try 0.26
+      Syntax::Keyword::Try::Deparse 0.26
     requirements:
       ExtUtils::CBuilder 0
       Module::Build 0.4004
