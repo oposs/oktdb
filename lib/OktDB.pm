@@ -64,16 +64,17 @@ has mailTransport => sub ($self) {
     return;
 };
 
+
 sub startup ($self) {
     $self->database;
-    $self->SUPER::startup;
+    return $self->SUPER::startup;
 }
 
 1;
 
 =head1 COPYRIGHT
 
-Copyright (c) 2020 by Tobias Oetiker. All rights reserved.
+Copyright (c) 2022 by Tobias Oetiker. All rights reserved.
 
 =head1 AUTHOR
 

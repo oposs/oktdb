@@ -1,0 +1,109 @@
+% use Mojo::Util qw(dumper);
+% use Time::Piece;
+\documentclass[10pt]{article}
+\usepackage[a4paper,hmargin={2.5cm,2cm},vmargin={1cm,2cm}]{geometry}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multicol}
+\setmainfont{OpenSans}[
+    Path = <%= $tmpl %>/opensans/static/OpenSans/,
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic]
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+\setlength{\extrarowheight}{1ex}
+\pagestyle{empty}
+\begin{document}
+\begin{flushright}
+\includegraphics[width=7cm]{<%= $tmpl %>/logo-black.pdf}
+\end{flushright}
+ArtPerson Report\\ 
+\rule{\textwidth}{0.5pt}
+
+\section*{<%= $artPers->{'artpers_name'} %>}
+
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+% if ($artPers->{'artpers_email'}) {
+E-Mail: & <%= $artPers->{'artpers_email'} %> \\ 
+% }
+% my @members;
+% for my $member (@$members) {
+%   push @members, 
+%      '\mbox{'.$member->{'pers_given'}. ' '. $member->{'pers_family'}.'}';
+% }
+% if (@members) {
+Mitglieder: & <%= join(', ', @members) %> \\ 
+% }
+Programmteam: & <%= $artPers->{'artpers_progteam_name'} // '---' %> \\ 
+% if ($artPers->{'artpers_apefit'}) {
+Eignung: & <%= $artPers->{'artpers_apefit'} %> \\ 
+% }
+% my $preis = join (', ',
+%    ($artPers->{'artpers_ep_year'} 
+%    ? 'Ehrenpreis '. $artPers->{'artpers_ep_year'} : ()),
+%    ($artPers->{'artpers_pt_year'} 
+%    ? 'Cornischon '. $artPers->{'artpers_pt_year'} : ())); 
+% if ($preis) {
+Preis: & <%= $preis %> \\ 
+% }
+% if ($artPers->{artpers_start}) {
+Gegründert: & <%= $artPers->{artpers_start} %>\\ 
+% }
+% if ($artPers->{artpers_end}) {
+Aufgelöst: & <%= $artPers->{artpers_end} %>\\ 
+% }
+% if ($artPers->{artpers_note}) {
+Bemerkung: & <%= $artPers->{'artpers_note'}%>\\ 
+% }
+\end{tabularx}
+
+% if (@$productions) {
+
+    % for my $p (@$productions) {
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\multicolumn{2}{@{}l@{}}{\large Produktion: \bfseries <%= $p->{'production_title'} %>} \\ 
+        % if ($p->{'production_premiere'}) {
+Premiere: & <%= $p->{'production_premiere'} %> \\ 
+        % } 
+        % if ($p->{'production_derniere'}) {
+Dernière: & <%= $p->{'production_derniere'} %> \\ 
+        % }
+        % if ($p->{'production_note'}) {
+Bemerkung: & <%= $p->{'production_note'} %> \\ 
+        % }
+\end{tabularx}
+
+        % if ($p->{events}) {
+            % for my $e (@{$p->{events}}) {
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\multicolumn{2}{@{}l@{}}{Event: \bfseries <%= $e->{'location_name'} %>} \\ 
+Datum: & <%= $e->{'event_date'} // 'Kein Datum' %> \\ 
+Ort: & <%= $e->{'location_name'} // 'Keine Location' %> \\ 
+                % if ($e->{'event_note'}) {
+Note: & <%= $e->{'event_note'}%> \\ 
+                % }
+\end{tabularx}
+\begin{multicols}{2}
+                % if ($e->{'reviews'}) {
+                    % for my $r ($e->{'reviews'}->@*) {
+{\bfseries <%= $r->{'cbuser_given'}.' '.$r->{cbuser_family} %>} \\[0.8ex] 
+                        % for my $c ($r->{'review_comment'}->@*) {
+\textit{<%= $c->[0] %>:} <%= $c->[1] %> \\[0.6ex] 
+                        % }
+
+                    % }
+                % }
+\end{multicols}
+            % }
+        % }
+    % }
+% }
+
+\vspace{2ex}
+\begin{flushright}
+%= localtime->strftime('%d.%m.%Y, %H:%M');
+\end{flushright}
+\end{document}

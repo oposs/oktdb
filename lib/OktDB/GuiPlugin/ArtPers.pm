@@ -5,6 +5,7 @@ use CallBackery::Exception qw(mkerror);
 use Mojo::JSON qw(true false from_json);
 use Time::Piece;
 use Text::ParseWords;
+use OktDB::Model::ArtPersReport;
 
 =head1 NAME
 
@@ -292,11 +293,36 @@ has actionCfg => sub {
         $self->makeExportAction(
             filename => localtime->strftime('artpers-%Y-%m-%d-%H-%M-%S.xlsx')
         ),
+        {
+            label => trm('Report'),
+            action => 'download',
+            addToContextMenu => true,
+            key => 'report',
+            buttonSet => {
+                enabled => false
+            },
+            actionHandler => sub {
+                my $self = shift;
+                my $args = shift;
+                my $id = $args->{selection}{artpers_id};                
+                my $rep = OktDB::Model::ArtPersReport->new(   
+                    app => $self->app,
+                    log => $self->log,
+                    db => $self->db,
+                );
+                return {
+                    asset    => $rep->getArtPersReportPdf($id),
+                    type     => 'applicaton/pdf',
+                    filename => 'gugus.pdf',
+                }
+            }
+        },,
+
     ];
 };
 
 sub db {
-    shift->user->mojoSqlDb;
+    return shift->user->mojoSqlDb;
 };
 
 sub WHERE {
@@ -405,7 +431,10 @@ SQL_END
             },
             addprod => {
                 enabled => true,
-            }
+            },
+            report => {
+                enabled => true,
+            },
         };
     }
     return $data;

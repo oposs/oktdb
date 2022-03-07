@@ -7,7 +7,7 @@ SUBDIRS = bin lib thirdparty etc frontend
 BIN = bin/$(MJ_SCRIPT).pl
 
 PUB := $(shell find -L public -type d \( -name ".??*" -o -name transpiled \) -prune -o -not -name "*db.json" -a -not -name "*.map" -a -not -name "*~" -a -not -name transpiled -a -not -name "*.tmp"  -a -type f -print )
-TEMPL := $(shell test -d templates && find -L templates -type f -name "*.ep")
+TEMPL := $(shell test -d templates && find -L templates -type f )
 SHARE := $(shell test -d share && find -L share -type d -name ".??*" -prune -o -not -name ".*" -a -not -name "*~" -a -not -name "*.tmp"  -a -type f -print)
 
 PERLTESTS := $(shell find t -name "*.t" -o -name "*.yaml")

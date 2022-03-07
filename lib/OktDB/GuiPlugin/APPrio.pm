@@ -30,7 +30,7 @@ All the methods of L<CallBackery::GuiPlugin::AbstractTable> plus:
 
 =cut
 has checkAccess => sub ($self) {
-    return $self->user->may('reviewcfg');
+    return ($self->SUPER::checkAccess and $self->user->may('reviewcfg'));
 };
 
 has tableCfg => sub {
