@@ -9,4 +9,4 @@ cat CHANGES >> CHANGES.new && mv CHANGES.new CHANGES
 $EDITOR CHANGES
 ./bootstrap
 make dist
-cat oktdb-$V.tar.gz | ssh freddie 'tar zxf -;cd oktdb-'$V';./configure --prefix=$HOME/opt/oktdb;make install;$HOME/start-oktdb.sh'
+cat oktdb-$V.tar.gz | ssh kabarett@freddielx 'tar zxf -;cd oktdb-'$V';./configure --prefix=$HOME/opt/oktdb;make install;$HOME/start-oktdb.sh'

@@ -310,10 +310,12 @@ has actionCfg => sub {
                     log => $self->log,
                     db => $self->db,
                 );
+                my $name = lc $id.'-'.$args->{selection}{artpers_name};
+                $name =~ s/[^_0-9a-z]+/-/g;
                 return {
                     asset    => $rep->getArtPersReportPdf($id),
                     type     => 'applicaton/pdf',
-                    filename => 'gugus.pdf',
+                    filename => $name.'.pdf',
                 }
             }
         },,

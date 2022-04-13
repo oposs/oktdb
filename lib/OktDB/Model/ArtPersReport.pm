@@ -47,7 +47,11 @@ sub getData ($self,$api) {
         => [ 'pers', 'pers_id','artpersmember_pers']
     ],undef,{ 
         artpersmember_artpers => $api 
-    })->hashes->to_array;
+    })->hashes->map(sub($ap) {
+        $ap->{artpersmember_start} = localtime($ap->{artpersmember_start_ts})->strftime('%d.%m.%Y') if $ap->{artpersmember_start_ts};
+        $ap->{artpersmember_end} = localtime($ap->{artpersmember_end_ts})->strftime('%d.%m.%Y') if $ap->{artpersmember_end_ts};
+        return $ap;
+    })->to_array;
 
     my $prods = $self->getProductions($api);
 
@@ -56,7 +60,7 @@ sub getData ($self,$api) {
         members => $members,
         productions => $prods,
     };
-    $self->latexEncode($ret);
+    $ret = $self->latexEncode($ret);
     $self->log->debug(dumper $ret);
     return $ret;
 }
@@ -64,34 +68,47 @@ sub getData ($self,$api) {
 sub latexEncode ($self,$ret) {
     if (ref $ret eq 'ARRAY') {
         for my $i (@$ret) {
-            $self->latexEncode($i);
+            $i = $self->latexEncode($i);
         }
     }
     elsif (ref $ret eq 'HASH') {
         for my $k (keys %$ret) {
-            $self->latexEncode($ret->{$k});
+            $ret->{$k} = $self->latexEncode($ret->{$k});
         }
     }
     # some action at a distance
-    $_[1] = latex_encode($ret);
+    return (defined $ret ? latex_encode($ret) : undef);
 }
 
 sub getProductions ($self,$api) {
     my $db = $self->db;
-    my $productions = $db->select(['production'
-        => [ -left => 'oktevent', 'oktevent_production', 'production_id'],
-        => [ -left => 'okt', 'okt_id', 'oktevent.oktevent_okt'],
-    ],undef,{ 
+    my $productions = $db->select('production',undef,{ 
         production_artpers => $api 
+    },{
+        order_by => 'production_premiere_ts'
     })->hashes->map(sub ($el) {
-        $el->{production_premiere} = localtime(delete $el->{production_premiere_ts})->strftime('%d.%m.%Y');
-        $el->{production_derniere} = localtime(delete $el->{production_derniere_ts})->strftime('%d.%m.%Y');
+        $el->{production_premiere} = localtime(delete $el->{production_premiere_ts})->strftime('%d.%m.%Y')
+            if $el->{production_premiere_ts};
+        $el->{production_derniere} = localtime(delete $el->{production_derniere_ts})->strftime('%d.%m.%Y')
+            if $el->{production_derniere_ts};
+        $el->{oktevents} = $db->select([oktevent => 
+                [okt => 'okt_id', 'oktevent_okt'],
+                [ -left => 'location', 'location_id', 'oktevent_location'],
+            ],undef,{ 
+                oktevent_production => $el->{production_id} 
+            },{
+                order_by => 'oktevent_start_ts'
+            })->hashes->map(sub ($ev) {
+                $ev->{oktevent_start} = localtime(delete $ev->{oktevent_start_ts})->strftime('%d.%m.%Y %H:%M')
+                    if $ev->{oktevent_start_ts};
+                return $ev;
+            })->to_array;
         $el->{events} = $db->select(['event'
             => [ -left => 'location', 'location_id', 'event_location'],
         ],undef,{ 
             event_production => $el->{production_id}
         })->hashes->map(sub ($ev) {
-            $ev->{event_date} = localtime(delete $ev->{event_date_ts})->strftime('%d.%m.%Y');
+            $ev->{event_date} = localtime(delete $ev->{event_date_ts})->strftime('%d.%m.%Y') if $ev->{event_date_ts};
             $ev->{reviews} = $db->select(['review'
                 => [ -left => 'cbuser', 'cbuser_id', 'review.review_cbuser']
             ],undef,{
@@ -104,6 +121,7 @@ sub getProductions ($self,$api) {
         })->to_array;
         return $el;
     })->to_array;
+    #$self->log->debug(dumper $productions);
     return $productions
 }
 

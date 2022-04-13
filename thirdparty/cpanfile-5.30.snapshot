@@ -57,10 +57,10 @@ DISTRIBUTIONS
       perl 5.012
       strict 0
       warnings 0
-  CallBackery-0.41.4
-    pathname: O/OE/OETIKER/CallBackery-0.41.4.tar.gz
+  CallBackery-0.41.6
+    pathname: O/OE/OETIKER/CallBackery-0.41.6.tar.gz
     provides:
-      CallBackery 0.041004
+      CallBackery 0.041006
       CallBackery::Config undef
       CallBackery::Controller::RpcService undef
       CallBackery::Database undef
