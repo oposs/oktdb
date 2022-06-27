@@ -2,7 +2,7 @@ package OktDB::Model::ArtPersReport;
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 use LaTeX::Driver;
 use Time::Piece;
-use Mojo::Util qw(dumper encode);
+use Mojo::Util qw(dumper encode slugify);
 use Mojo::JSON qw(from_json);
 use LaTeX::Encode ':all';
 has template => sub ($self) {
@@ -17,11 +17,11 @@ has 'db';
 
 
 # This action will render a template
-sub getArtPersReportPdf ($self,$api) {
+sub getReportPdf ($self,$api) {
     my $asset = Mojo::Asset::Memory->new;
     my $pdf;
     my $tex = encode('UTF-8',$self->template->render_file(
-        $self->app->home->child('templates','art-pers-report.tex.ep'),
+        $self->app->home->child('templates',slugify(ref $self).'.tex.ep'),
         {
             tmpl => $self->app->home->child('templates'),
             %{$self->getData($api)}
@@ -39,32 +39,6 @@ sub getArtPersReportPdf ($self,$api) {
     return $asset;
 }
 
-sub getData ($self,$api) {
-    my $db = $self->db;
-    my $artPers = $self->getArtPers($api);
-
-    my $members = $db->select(['artpersmember' 
-        => [ 'pers', 'pers_id','artpersmember_pers']
-    ],undef,{ 
-        artpersmember_artpers => $api 
-    })->hashes->map(sub($ap) {
-        $ap->{artpersmember_start} = localtime($ap->{artpersmember_start_ts})->strftime('%d.%m.%Y') if $ap->{artpersmember_start_ts};
-        $ap->{artpersmember_end} = localtime($ap->{artpersmember_end_ts})->strftime('%d.%m.%Y') if $ap->{artpersmember_end_ts};
-        return $ap;
-    })->to_array;
-
-    my $prods = $self->getProductions($api);
-
-    my $ret = {
-        artPers => $artPers,
-        members => $members,
-        productions => $prods,
-    };
-    $ret = $self->latexEncode($ret);
-    $self->log->debug(dumper $ret);
-    return $ret;
-}
-
 sub latexEncode ($self,$ret) {
     if (ref $ret eq 'ARRAY') {
         for my $i (@$ret) {
@@ -78,6 +52,32 @@ sub latexEncode ($self,$ret) {
     }
     # some action at a distance
     return (defined $ret ? latex_encode($ret) : undef);
+}
+
+
+sub getData ($self,$api) {
+   
+    my $ret = {
+        artPers => $self->getArtPers($api),
+        members => $self->getApMembers($api),
+        productions => $self->getProductions($api),
+    };
+    $ret = $self->latexEncode($ret);
+    #$self->log->debug(dumper $ret);
+    return $ret;
+}
+
+sub getApMembers ($self,$api) {
+     my $db = $self->db;
+    return $db->select(['artpersmember' 
+        => [ 'pers', 'pers_id','artpersmember_pers']
+    ],undef,{ 
+        artpersmember_artpers => $api 
+    })->hashes->map(sub($ap) {
+        $ap->{artpersmember_start} = localtime($ap->{artpersmember_start_ts})->strftime('%d.%m.%Y') if $ap->{artpersmember_start_ts};
+        $ap->{artpersmember_end} = localtime($ap->{artpersmember_end_ts})->strftime('%d.%m.%Y') if $ap->{artpersmember_end_ts};
+        return $ap;
+    })->to_array;
 }
 
 sub getProductions ($self,$api) {

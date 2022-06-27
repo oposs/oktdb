@@ -20,22 +20,32 @@
 \begin{flushright}
 \includegraphics[width=7cm]{<%= $tmpl %>/logo-black.pdf}
 \end{flushright}
-ArtPerson Report\\ 
+Person Report\\ 
 \rule{\textwidth}{0.5pt}
 
-\section*{<%= $artPers->{'artpers_name'} %>}
+\section*{<%= $pers->{pers_given}.' '.$pers->{pers_family} %>}
 
-\begin{tabularx}{\textwidth}{@{}lX@{}}
-% if ($artPers->{'artpers_email'}) {
-E-Mail: & <%= $artPers->{'artpers_email'} %> \\ 
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X@{}}
+% if ($pers->{'pers_email'}) {
+E-Mail: & <%= $pers->{'pers_email'} %> \\ 
 % }
+% if ($pers->{'pers_mobile'}) {
+Mobile: & <%= $pers->{'pers_mobile'} %> \\ 
+% }
+\end{tabularx}
+
+% for my $ap (@$artPers) {
+%   my $artPers = $ap->{artPers};
+ \subsection*{<%= $ap->{artPers}{artpers_name}.' ('.($ap->{start} ||'').'--'.($ap->{end}||'').')' %>}
+    \begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X@{}}
 % my @members;
-% for my $member (@$members) {
+% for my $member (@{$ap->{members}}) {
+%   next if $member->{'pers_id'} == $pers->{'pers_id'};
 %   push @members, 
-%      '\mbox{'.$member->{'pers_given'}. ' '. $member->{'pers_family'}.'}';
+%      '\mbox{'.$member->{'pers_given'}.' '. $member->{'pers_family'}.'}';
 % }
 % if (@members) {
-Mitglieder: & <%= join(', ', @members) %> \\ 
+Zusammen mit: & <%= join(', ', @members) %> \\ 
 % }
 Programmteam: & <%= $artPers->{'artpers_progteam_name'} // '---' %> \\ 
 % if ($artPers->{'artpers_apefit'}) {
@@ -59,11 +69,11 @@ Aufgelöst: & <%= $artPers->{artpers_end} %>\\
 Bemerkung: & <%= $artPers->{'artpers_note'}%>\\ 
 % }
 \end{tabularx}
-
+% my $productions = $ap->{productions};
 % if (@$productions) {
 
     % for my $p (@$productions) {
-\begin{tabularx}{\textwidth}{@{}lX@{}}
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X@{}}
 \multicolumn{2}{@{}l@{}}{\large Produktion: \bfseries <%= $p->{'production_title'} %>} \\ 
         % if ($p->{'production_premiere'}) {
 Premiere: & <%= $p->{'production_premiere'} %> \\ 
@@ -90,7 +100,7 @@ OKT: \textbf{<%= $e->{'okt_edition'} %>}\\
         % } # if oktevents
         % if ($p->{events}) {
             % for my $e (@{$p->{events}}) {
-\begin{tabularx}{\textwidth}{@{}X@{}}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X@{}}
 EVT: \textbf{<%= $e->{'location_name'} %>}, <%= $e->{'event_date'} // 'Kein Datum' %>\\ 
                 % if ($e->{'event_note'}) {
 \emph{<%= $e->{'event_note'}%>} \\ 
@@ -114,6 +124,8 @@ EVT: \textbf{<%= $e->{'location_name'} %>}, <%= $e->{'event_date'} // 'Kein Datu
 % }
 
 \vspace{2ex}
+% }
+
 \begin{flushright}
 %= localtime->strftime('%d.%m.%Y, %H:%M');
 \end{flushright}

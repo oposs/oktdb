@@ -304,8 +304,8 @@ has actionCfg => sub {
             actionHandler => sub {
                 my $self = shift;
                 my $args = shift;
-                my $id = $args->{selection}{artpers_id};                
-                my $rep = OktDB::Model::ArtPersReport->new(   
+                my $id = $args->{selection}{artpers_id};
+                my $rep = OktDB::Model::ArtPersReport->new(
                     app => $self->app,
                     log => $self->log,
                     db => $self->db,
@@ -313,12 +313,12 @@ has actionCfg => sub {
                 my $name = lc $id.'-'.$args->{selection}{artpers_name};
                 $name =~ s/[^_0-9a-z]+/-/g;
                 return {
-                    asset    => $rep->getArtPersReportPdf($id),
+                    asset    => $rep->getReportPdf($id),
                     type     => 'applicaton/pdf',
                     filename => $name.'.pdf',
                 }
             }
-        },,
+        },
 
     ];
 };

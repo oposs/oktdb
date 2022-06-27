@@ -5,6 +5,7 @@ use CallBackery::Exception qw(mkerror);
 use Mojo::JSON qw(true false);
 use Time::Piece;
 use Text::ParseWords;
+use OktDB::Model::PersReport;
 
 =head1 NAME
 
@@ -201,7 +202,33 @@ has actionCfg => sub {
                     action => 'reload',
                 };
             }
-        }
+        },
+        {
+            label => trm('Report'),
+            action => 'download',
+            addToContextMenu => true,
+            key => 'report',
+            buttonSet => {
+                enabled => false
+            },
+            actionHandler => sub {
+                my $self = shift;
+                my $args = shift;
+                my $id = $args->{selection}{pers_id};
+                my $rep = OktDB::Model::PersReport->new(
+                    app => $self->app,
+                    log => $self->log,
+                    db => $self->db,
+                );
+                my $name = lc $id.'-'.$args->{selection}{pers_family};
+                $name =~ s/[^_0-9a-z]+/-/g;
+                return {
+                    asset    => $rep->getReportPdf($id),
+                    type     => 'applicaton/pdf',
+                    filename => $name.'.pdf',
+                }
+            }
+        },
     ];
 };
 
@@ -286,6 +313,9 @@ SQL_END
                 enabled => true
             },
             delete => {
+                enabled => true,
+            },
+            report => {
                 enabled => true,
             },
         };
