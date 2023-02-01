@@ -21,7 +21,7 @@ The Location Edit Form
 
 has checkAccess => sub {
     my $self = shift;
-    return $self->user->may('oktadmin') or $self->user->may('finance');
+    return ($self->user->may('oktadmin') or $self->user->may('finance'));
 };
 
 

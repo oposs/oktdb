@@ -85,7 +85,7 @@ sub getProductions ($self,$api) {
     my $productions = $db->select('production',undef,{ 
         production_artpers => $api 
     },{
-        order_by => 'production_premiere_ts'
+        order_by => { -desc => 'production_premiere_ts' }
     })->hashes->map(sub ($el) {
         $el->{production_premiere} = localtime(delete $el->{production_premiere_ts})->strftime('%d.%m.%Y')
             if $el->{production_premiere_ts};
@@ -97,7 +97,7 @@ sub getProductions ($self,$api) {
             ],undef,{ 
                 oktevent_production => $el->{production_id} 
             },{
-                order_by => 'oktevent_start_ts'
+                order_by => { -desc => 'oktevent_start_ts' }
             })->hashes->map(sub ($ev) {
                 $ev->{oktevent_start} = localtime(delete $ev->{oktevent_start_ts})->strftime('%d.%m.%Y %H:%M')
                     if $ev->{oktevent_start_ts};
@@ -107,6 +107,8 @@ sub getProductions ($self,$api) {
             => [ -left => 'location', 'location_id', 'event_location'],
         ],undef,{ 
             event_production => $el->{production_id}
+        }, {
+            order_by => { -desc => 'event_date_ts' }
         })->hashes->map(sub ($ev) {
             $ev->{event_date} = localtime(delete $ev->{event_date_ts})->strftime('%d.%m.%Y') if $ev->{event_date_ts};
             $ev->{reviews} = $db->select(['review'

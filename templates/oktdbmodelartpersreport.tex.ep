@@ -5,7 +5,6 @@
 \usepackage{fontspec}
 \usepackage{graphicx}
 \usepackage{tabularx}
-\usepackage{multicol}
 \setmainfont{OpenSans}[
     Path = <%= $tmpl %>/opensans/static/OpenSans/,
     Extension = .ttf,
@@ -13,8 +12,8 @@
     BoldFont = *-Bold,
     ItalicFont = *-Italic]
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{2ex}
-\setlength{\extrarowheight}{1ex}
+\setlength{\parskip}{1.5ex}
+\setlength{\extrarowheight}{0.7ex}
 \pagestyle{empty}
 \begin{document}
 \begin{flushright}
@@ -80,7 +79,7 @@ Bemerkung: & <%= $p->{'production_note'} %> \\
             % for my $e (@{$p->{oktevents}}) {
 \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X@{}}
 OKT: \textbf{<%= $e->{'okt_edition'} %>}\\ 
-<%= $e->{'oktevent_start'} %><%= $e->{'location_name'} ? ', '.$e->{'location_name'} : '' %>\\ 
+<%= $e->{'oktevent_start'} %><%= $e->{'location_name'} ? ', '.$e->{'location_name'} : '' %><%= $e->{'oktevent_type'} ? ' (' . $e->{oktevent_type} . ')' :'' %>\\ 
                 % if ($e->{'oktevent_note'}) {
 \emph{<%= $e->{'oktevent_note'}%>}\\ 
                 % }
@@ -96,7 +95,6 @@ EVT: \textbf{<%= $e->{'location_name'} %>}, <%= $e->{'event_date'} // 'Kein Datu
 \emph{<%= $e->{'event_note'}%>} \\ 
                 % }
 \end{tabularx}
-\begin{multicols}{2}
                 % if ($e->{'reviews'}) {
                     % for my $r ($e->{'reviews'}->@*) {
 {\bfseries <%= $r->{'cbuser_given'}.' '.$r->{cbuser_family} %>} \\[0.8ex] 
@@ -106,7 +104,6 @@ EVT: \textbf{<%= $e->{'location_name'} %>}, <%= $e->{'event_date'} // 'Kein Datu
 
                     % }
                 % }
-\end{multicols}
             % }
         % } # if events
     % }

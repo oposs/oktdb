@@ -196,6 +196,33 @@ has actionCfg => sub {
          $self->makeExportAction(
              filename => localtime->strftime('oktevent-%Y-%m-%d-%H-%M-%S.xlsx')
          ),
+        {
+            label => trm('Report'),
+            action => 'download',
+            addToContextMenu => true,
+            key => 'report',
+            buttonSet => {
+                enabled => false
+            },
+            actionHandler => sub {
+                my $self = shift;
+                my $args = shift;
+                my $id = $args->{selection}{artpers_id};
+                my $rep = OktDB::Model::ArtPersReport->new(
+                    app => $self->app,
+                    log => $self->log,
+                    db => $self->db,
+                );
+                my $name = lc $id.'-'.$args->{selection}{artpers_name};
+                $name =~ s/[^_0-9a-z]+/-/g;
+                return {
+                    asset    => $rep->getReportPdf($id),
+                    type     => 'applicaton/pdf',
+                    filename => $name.'.pdf',
+                }
+            }
+        },
+
     ];
 };
 
@@ -251,6 +278,7 @@ my $SUB_SELECT = <<SELECT_END;
         okt_edition,
         production_title,
         artpers_name,
+        artpers_id,
         oktevent_type,
         location_name,
         oktevent_start_ts, 
@@ -310,6 +338,9 @@ SQL_END
             delete => {
                 enabled => true,
             },
+            report => {
+                enabled => true,
+            }
         };
         $row->{oktevent_start_ts} = localtime($row->{oktevent_start_ts})->strftime("%d.%m.%Y %H:%M") if $row->{oktevent_start_ts};
         $row->{oktevent_duration_s} = gmtime($row->{oktevent_duration_s})->strftime("%H:%M") if $row->{oktevent_duration_s};

@@ -209,6 +209,33 @@ has actionCfg => sub {
          $self->makeExportAction(
              filename => localtime->strftime('review-%Y-%m-%d-%H-%M-%S.xlsx')
          ),
+         {
+            label => trm('Report'),
+            action => 'download',
+            addToContextMenu => true,
+            key => 'report',
+            buttonSet => {
+                enabled => false
+            },
+            actionHandler => sub {
+                my $self = shift;
+                my $args = shift;
+                my $id = $args->{selection}{artpers_id};
+                my $rep = OktDB::Model::ArtPersReport->new(
+                    app => $self->app,
+                    log => $self->log,
+                    db => $self->db,
+                );
+                my $name = lc $id.'-'.$args->{selection}{artpers_name};
+                $name =~ s/[^_0-9a-z]+/-/g;
+                return {
+                    asset    => $rep->getReportPdf($id),
+                    type     => 'applicaton/pdf',
+                    filename => $name.'.pdf',
+                }
+            }
+        },
+
     ];
 };
 
@@ -260,6 +287,7 @@ my $SUB_SELECT = <<SELECT_END;
         review_id,
         event_id,
         review_change_ts,
+        artpers_id,
         production_title,
         artpers_name,
         location_name,
@@ -344,6 +372,9 @@ SQL_END
             addreview =>{
                 enabled => $row->{cbuser_id} ne $currentUser ? true : false,
             },
+            report => {
+                enabled => true,
+            }
         };
         for my $field (keys %$row) {
             $row->{$field} = localtime($row->{$field})
