@@ -4,7 +4,6 @@
  - add event type to okt events in report
  - add report button to Event, OktEvent and Visionierungs Tabs
 
-
 0.8.2 2023-02-01 11:41:43 +0100 Tobias Oetiker <tobi@oetiker.ch>
 
  - add finance right
