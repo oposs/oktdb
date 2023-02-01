@@ -21,7 +21,7 @@ The Location Edit Form
 
 has checkAccess => sub {
     my $self = shift;
-    return $self->user->may('oktadmin');
+    return $self->user->may('oktadmin') or $self->user->may('finance');
 };
 
 
@@ -179,7 +179,7 @@ SQL_END
             label => trm('Note'),
             widget => 'textArea',
             set => {
-                placeholder => 'Anything noteworthy on that okteventon.'
+                placeholder => 'Anything noteworthy on that oktevent.'
             }
         }
     ];

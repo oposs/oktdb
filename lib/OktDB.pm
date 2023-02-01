@@ -409,3 +409,9 @@ ALTER TABLE event_new RENAME TO event;
 PRAGMA foreign_keys=on;
 BEGIN;
 
+-- 8 up
+
+--sql
+INSERT INTO cbright (cbright_key,cbright_label)
+    VALUES 
+        ('finance','Access Finance Data');

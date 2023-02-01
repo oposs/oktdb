@@ -126,7 +126,7 @@ Only users who can write get any actions presented.
 
 has actionCfg => sub {
     my $self = shift;
-    return [] if $self->user and not $self->user->may('oktadmin');
+    return [] if $self->user and not ( $self->user->may('oktadmin') or $self->user->may('finance') );
 
     return [
         {
