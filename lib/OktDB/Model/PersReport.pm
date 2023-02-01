@@ -10,6 +10,8 @@ sub getData ($self,$pid) {
 
     my $ap_array = $db->select('artpersmember', undef,{ 
         artpersmember_pers => $pid 
+    },{
+        order_by => { -desc => 'artpersmember_start_ts' }
     })->hashes->map(sub($ap) {
         $ap->{start} = localtime($ap->{artpersmember_start_ts})->strftime('%d.%m.%Y') if $ap->{artpersmember_start_ts};
         $ap->{end} = localtime($ap->{artpersmember_end_ts})->strftime('%d.%m.%Y') if $ap->{artpersmember_end_ts};

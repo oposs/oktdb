@@ -1,3 +1,14 @@
+0.8.3 2023-02-01 15:50:37 +0100 Tobias Oetiker <tobi@oetiker.ch>
+
+ - reverese sort Reports
+ - add event type to okt events in report
+ - add report button to Event, OktEvent and Visionierungs Tabs
+
+
+0.8.2 2023-02-01 11:41:43 +0100 Tobias Oetiker <tobi@oetiker.ch>
+
+ - add finance right
+
 0.8.1 2022-11-02 15:20:03 +0100 Tobias Oetiker <tobi@oetiker.ch>
 
  - do not search for prog team name
