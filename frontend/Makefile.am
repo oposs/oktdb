@@ -26,7 +26,7 @@ clean: node_modules
 
 ../public/.built: $(EXTRA_DIST) Makefile.in $(CBFILES)
 	$(MAKE) node_modules
-	CALLBACKERY_QX=$(CALLBACKERY_QX) $(NPX) qx compile --target=build --feedback=false
+	CALLBACKERY_QX=$(CALLBACKERY_QX) $(NPX) qx compile --target=build --warn-as-error
 	mkdir -p ../public/$(QX_CLASS)
 	cp -p compiled/build/$(QX_CLASS)/*.js ../public/$(QX_CLASS)
 	cp -p compiled/build/index.html ../public
@@ -34,7 +34,7 @@ clean: node_modules
 	touch $@
 
 compiled/source/.built: $(EXTRA_DIST) Makefile.in $(CBFILES)
-	CALLBACKERY_QX=$(CALLBACKERY_QX) $(NPX) qx compile --feedback=false
+	CALLBACKERY_QX=$(CALLBACKERY_QX) $(NPX) qx compile --warn-as-error
 	touch $@
 
 node_modules/.installed package-lock.json: package.json

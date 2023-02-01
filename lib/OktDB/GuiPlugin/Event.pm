@@ -229,7 +229,6 @@ sub WHERE {
                     [
                         location_name => { -like => $lsearch },
                         artpers_name => { -like => $lsearch },
-                        progteam_name => { -like => $lsearch },
                         production_title => { -like => $lsearch },
                     ]
                 )

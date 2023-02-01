@@ -1,3 +1,7 @@
+0.8.1 2022-11-02 15:20:03 +0100 Tobias Oetiker <tobi@oetiker.ch>
+
+ - do not search for prog team name
+
 0.8.0 2022-06-24 11:03:15 +0200 Tobias Oetiker <tobi@oetiker.ch>
 
  - add person report

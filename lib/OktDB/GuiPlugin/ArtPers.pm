@@ -339,8 +339,6 @@ sub WHERE {
             push @{$where->{-and}}, (
                 [
                     artpers_name => { -like => $lsearch },
-                    artpers_progteam_name =>  { -like => $lsearch },
-                    artpers_agency_pers_name =>  { -like => $lsearch },
                 ]
             )
         }
