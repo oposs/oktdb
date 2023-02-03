@@ -126,10 +126,10 @@ Only users who can write get any actions presented.
 
 has actionCfg => sub {
     my $self = shift;
-    return [] if $self->user and not ( $self->user->may('oktadmin') or $self->user->may('finance') );
-
-    return [
-        {
+    my @actions;
+    
+    push @actions, 
+        ( {
             label => trm('Add OktEvent'),
             action => 'popup',
             addToContextMenu => false,
@@ -150,7 +150,7 @@ has actionCfg => sub {
             label => trm('Edit OktEvent'),
             action => 'popup',
             key => 'edit',
-            addToContextMenu => false,
+            addToContextMenu => true,
             popupTitle => trm('Edit OktEvent'),
             buttonSet => {
                 enabled => false
@@ -195,8 +195,31 @@ has actionCfg => sub {
         },
          $self->makeExportAction(
              filename => localtime->strftime('oktevent-%Y-%m-%d-%H-%M-%S.xlsx')
-         ),
-        {
+        ) ) if not $self->user or $self->user->may('oktadmin');
+
+        push @actions, {
+            label => trm('View OktEvent'),
+            action => 'popup',
+            key => 'view',
+            addToContextMenu => false,
+            popupTitle => trm('View OktEvent'),
+            buttonSet => {
+                enabled => false
+            },
+            set => {
+                height => 500,
+                width => 500
+            },
+            backend => {
+                plugin => 'OktEventForm',
+                config => {
+                    type => 'view'
+                }
+            }
+        } if not $self->user or $self->user->may('finance');
+    
+
+        push @actions,{
             label => trm('Report'),
             action => 'download',
             addToContextMenu => true,
@@ -221,9 +244,9 @@ has actionCfg => sub {
                     filename => $name.'.pdf',
                 }
             }
-        },
+        };
 
-    ];
+    return \@actions;
 };
 
 sub db {
@@ -332,12 +355,17 @@ SQL_END
     )->hashes;
     for my $row (@$data) {
         $row->{_actionSet} = {
-            edit => {
+            $self->user->may('finance') ? (view => {
                 enabled => true
-            },
-            delete => {
-                enabled => true,
-            },
+            }):(),
+            $self->user->may('oktadmin') ? (
+                edit => {
+                    enabled => true
+                },
+                delete => {
+                    enabled => true
+                },
+            ):(),
             report => {
                 enabled => true,
             }

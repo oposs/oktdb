@@ -47,7 +47,16 @@ Returns a Configuration Structure for the Location Entry Form.
 has formCfg => sub {
     my $self = shift;
     my $db = $self->db;
-
+    my %readOnly = ( readOnly => false );
+    my %enabled = (
+        enabled => true,
+    );
+    if ($self->config->{type} eq 'view') {
+        %readOnly = ( readOnly => true );
+        %enabled = (
+            enabled => false,
+        );
+    }
     return [
         $self->config->{type} eq 'edit' ? {
             key => 'oktevent_id',
@@ -62,7 +71,8 @@ has formCfg => sub {
             label => trm('Kabarettage'),
             widget => 'selectBox',
             set => {
-                incrementalSearch => true
+                incrementalSearch => true,
+                %enabled,
             },
             cfg => {
                 structure => [
@@ -78,7 +88,8 @@ has formCfg => sub {
             label => trm('Production'),
             widget => 'selectBox',
             set => {
-                incrementalSearch => true
+                incrementalSearch => true,
+                %enabled,
             },
             cfg => {
                 structure => [
@@ -99,13 +110,17 @@ SQL_END
             key => 'oktevent_type',
             label => trm('Type'),
             widget => 'text',
+            set => {
+                %readOnly,
+            }
         },
         {
             key => 'oktevent_location',
             label => trm('Location'),
             widget => 'selectBox',
             set => {
-                incrementalSearch => true
+                incrementalSearch => true,
+                %enabled,
             },
             cfg => {
                 structure => [
@@ -120,6 +135,9 @@ SQL_END
             key => 'oktevent_honorarium',
             label => trm('Honorarium'),
             widget => 'text',
+            set => {
+                %readOnly,
+            },
             validator => sub ($value,$fieldName,$form) {
                 if ($value ne 0+$value) {
                     return trm("Expected a numeric value");
@@ -131,6 +149,9 @@ SQL_END
             key => 'oktevent_expense',
             label => trm('Expense'),
             widget => 'text',
+            set => {
+                %readOnly,
+            },
             validator => sub ($value,$fieldName,$form) {
                 if ($value ne 0+$value) {
                     return trm("Expected a numeric value");
@@ -143,7 +164,8 @@ SQL_END
             label => trm('Start'),
             widget => 'text',
             set => {
-                placeholder => trm('dd.mm.yyyy hh:mm')
+                placeholder => trm('dd.mm.yyyy hh:mm'),
+                %readOnly
             },
             validator => sub ($value,$fieldName,$form) {
                 my $t = eval { 
@@ -161,7 +183,8 @@ SQL_END
             label => trm('Duration'),
             widget => 'text',
             set => {
-                placeholder => trm('hh:mm')
+                placeholder => trm('hh:mm'),
+                %readOnly
             },
             validator => sub ($value,$fieldName,$form) {
                 my $t = eval { 
@@ -179,6 +202,7 @@ SQL_END
             label => trm('Note'),
             widget => 'textArea',
             set => {
+                %readOnly,
                 placeholder => 'Anything noteworthy on that oktevent.'
             }
         }
@@ -188,7 +212,7 @@ SQL_END
 has actionCfg => sub {
     my $self = shift;
     my $type = $self->config->{type} // 'add';
-    
+    return [] if $type eq 'view' or $self->user and not $self->user->may('oktadmin');
     my $handler = sub {
         my $self = shift;
         my $args = shift;
@@ -197,11 +221,16 @@ has actionCfg => sub {
             "oktevent_".$_ => $args->{"oktevent_".$_} 
             } qw(okt production type location expense honorarium start_ts duration_s note)
         };
-        if ($type eq 'add')  {
-            $metaInfo{recId} = $self->db->insert('oktevent',$fieldMap)->last_insert_id;
+        if ($self->user->may('oktadmin')) {
+            if ($type eq 'add')  {
+                $metaInfo{recId} = $self->db->insert('oktevent',$fieldMap)->last_insert_id;
+            }
+            else {
+                $self->db->update('oktevent', $fieldMap,{ oktevent_id => $args->{oktevent_id}});
+            }
         }
         else {
-            $self->db->update('oktevent', $fieldMap,{ oktevent_id => $args->{oktevent_id}});
+            die mkerror(49994,"You are not allowed to edit oktevents.")
         }
         return {
             action => 'dataSaved',
@@ -238,7 +267,7 @@ has grammar => sub {
 sub getAllFieldValues {
     my $self = shift;
     my $args = shift;
-    return {} if $self->config->{type} ne 'edit';
+    return {} if $self->config->{type} eq 'add';
     my $id = $args->{selection}{oktevent_id};
     return {} unless $id;
 
