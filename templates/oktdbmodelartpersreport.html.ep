@@ -1,0 +1,212 @@
+% use Mojo::Util qw(dumper);
+% use Time::Piece;
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <title><%= lc($artPers->{artpers_id} . '-' . $artPers->{artpers_name}) %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personen">
+    <meta name="author" content="OKTDB">
+    <link rel="stylesheet" href="/bulma/css/bulma.css">
+    <style>
+     .columns > .column:first-child {
+       font-weight: 600;
+       padding-bottom: 0;
+       margin-bottom: -1.5ex;
+     }
+    </style>
+  </head>
+  <body>
+  <section class="hero is-link">
+  <div class="hero-body">
+  <div class="container">
+    <h2 class="title is-1"><%= $artPers->{artpers_name} %></h2>
+    <p class="subtitle is-3">OKT Art Person Report</p>
+</div>
+</div>
+</section>
+
+<div class="container content">
+<section class="box mt-4">
+% my @members;
+% for my $member ($members->@*) {
+%   push @members,
+%      '<span class="member">'.$member->{'pers_given'}.' '. $member->{'pers_family'}.'</span>';
+% }
+% if (@members) {
+  <div class="columns">
+    <div class="column is-2">Mitglieder</div>
+    <div class="column"><%= join(', ', @members) %></div>
+  </div>
+% }
+% if ($artPers->{'artpers_progteam_name'}) {
+  <div class="columns">
+    <div class="column is-2">Programmteam</div>
+    <div class="column"><%= $artPers->{'artpers_progteam_name'} %></div>
+  </div>
+% }
+% if ($artPers->{'artpers_apefit'}) {
+  <div class="columns">
+    <div class="column is-2">Eignung</div>
+    <div class="column"><%= $artPers->{'artpers_apefit'} %></div>
+  </div>
+% }
+% my $preis = join (', ',
+%    ($artPers->{'artpers_ep_year'} 
+%    ? 'Ehrenpreis '. $artPers->{'artpers_ep_year'} : ()),
+%    ($artPers->{'artpers_pt_year'} 
+%    ? 'Cornichon '. $artPers->{'artpers_pt_year'} : ())); 
+
+% if ($preis) {
+  <div class="columns">
+    <div class="column is-2">Preis</div>
+    <div class="column"><%= $preis %></div>
+  </div>
+% }
+% if ($artPers->{artpers_start}) {
+  <div class="columns">
+    <div class="column is-2">Gegründet</div>
+    <div class="column"><%= $artPers->{artpers_start} %></div>
+  </div>
+% }
+% if ($artPers->{artpers_end}) {
+  <div class="columns">
+    <div class="column is-2">Aufgelöst</div>
+    <div class="column"><%= $artPers->{artpers_end} %></div>
+  </div>
+% }
+% if ($artPers->{artpers_note}) {
+  <div class="columns">
+    <div class="column is-2">Bemerkung</div>
+    <div class="column"><%= $artPers->{'artpers_note'} %></div>
+  </div>
+% }
+</section>
+</div>
+% if ($productions) {
+    % for my $p ($productions->@*) {
+    <section class="hero is-warning is-small">
+  <div class="hero-body">
+  <div class="container">
+    <h2 class="title is-4"><%= $p->{'production_title'} %></h3>
+    <p class="subtitle is-5">Produktion</p>
+ </div>
+ </div>
+ </section>
+ <div class="container content">
+    <section class="box mt-4">
+        % if ($p->{'production_premiere'}) {
+            <div class="columns">
+        <div class="column is-2">Premiere</div>
+        <div class="column"><%= $p->{'production_premiere'} %></div>
+        </div>
+        % } 
+        % if ($p->{'production_derniere'}) {
+        <div class="columns">
+        <div class="column is-2">Dernière</div>
+        <div class="column"><%= $p->{'production_derniere'} %></div>
+        </div>
+        % }
+        % if ($p->{'production_note'}) {
+        <div class="columns">
+        <div class="column is-2">Bemerkung</div>
+        <div class="column"><%= $p->{'production_note'} %></div>
+        </div>
+        % }
+    </section>
+</div>
+    % if ($p->{oktevents}) {
+        % for my $e (@{$p->{oktevents}}) {
+            <section class="hero is-small">
+            <div class="hero-body">
+            <div class="container">
+            <h4 class="title is-4">
+                <%= $e->{'okt_edition'} %> <%= $e->{'oktevent_type'} ? ' – ' . $e->{oktevent_type} : '' %>
+            </h4>
+            <p class="subtitle is-5">OKT Event</p>
+            </div>
+            </div>
+            </section>
+            <div class="container content">
+            <section class="box mt-4">
+            <div class="columns">
+            <div class="column is-2">Termin</div>
+            <div class="column"><%= $e->{'oktevent_start'} // '?' %></div>
+            </div>
+            <div class="columns">
+            <div class="column is-2">Location</div>
+            <div class="column"><%= $e->{'location_name'} ? $e->{'location_name'} : '?' %></div>
+            </section>
+
+            % if ($e->{'oktevent_note'}) {
+                <section class="box">
+                <%= $e->{'oktevent_note'}%>
+                </section>
+            % }
+            </div>
+        % }
+    % }
+    % if ($p->{events}) {
+        % for my $e (@{$p->{events}}) {
+                        <section class="hero is-small">
+  <div class="hero-body">
+  <div class="container">
+
+            <h4 class="title is-4">
+            <%= $e->{'location_name'} %>
+            </h4>
+            <p class="subtitle is-5">Visionierung</p>
+            </div>
+            </div>
+            </section>
+<div class="container content">
+            <section class="box mt-4">
+                <div class="columns">
+                    <div class="column is-2">Termin</div>
+                    <div class="column"><%= $e->{'event_date'} // '?' %></div>
+                </div>
+            </section>
+            % if ($e->{'event_note'}) {
+                <div class="box">
+                <%= $e->{'event_note'}%>
+                </div>
+            % }
+            % if ($e->{'reviews'}) {
+                % for my $r ($e->{'reviews'}->@*) {
+                <div class="card">
+                    <div class="card-content">
+                        <h5 class="title is-4"><%= $r->{cbuser_given}.' '.$r->{cbuser_family} %></h5>
+                        <div class="block">
+                            % for my $c ($r->{'review_comment'}->@*) {
+                            <div class="columns">
+                                <div class="column is-2"><%= $c->[0] %></div>
+                                <div class="column"><%= $c->[1] %></div>
+                            </div>
+                            % }
+                        </div>
+                    </div>  
+                </div>
+                % }
+            % }
+            </div>
+        % }
+    % }
+    </div>
+
+% }
+
+% }
+
+<div class="footer">
+    <div class="container">
+        <div class="content">
+            <p>
+            Datenstand
+            %= localtime->strftime('%d.%m.%Y, %H:%M');
+            </p>
+            </div>
+            </div>
+            </div>
+    </body>
+</html>

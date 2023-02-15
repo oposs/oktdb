@@ -15,6 +15,21 @@ has 'app';
 has 'log';
 has 'db';
 
+# This action will render a template
+sub getReportHtml ($self,$api) {
+    my $asset = Mojo::Asset::Memory->new;
+    my $pdf;
+    my $html = encode('UTF-8',$self->template->render_file(
+        $self->app->home->child('templates',slugify(ref $self).'.html.ep'),
+        {
+            tmpl => $self->app->home->child('templates'),
+            %{$self->getData($api)}
+        }
+    ));
+    $asset->add_chunk($html);
+    return $asset;
+}
+
 
 # This action will render a template
 sub getReportPdf ($self,$api) {
@@ -62,7 +77,7 @@ sub getData ($self,$api) {
         members => $self->getApMembers($api),
         productions => $self->getProductions($api),
     };
-    $ret = $self->latexEncode($ret);
+    #$ret = $self->latexEncode($ret);
     #$self->log->debug(dumper $ret);
     return $ret;
 }

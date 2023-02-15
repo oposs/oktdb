@@ -28,6 +28,7 @@ nytprof.out
 *.bs
 /_eumm/
 public/
+!public/bulma
 conftools/
 /config.*
 etc/*.cfg

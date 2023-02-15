@@ -27,7 +27,7 @@ sub getData ($self,$pid) {
         pers => $pers,
         artPers => $ap_array,
     };
-    $ret = $self->latexEncode($ret);
+    #$ret = $self->latexEncode($ret);
     #$self->log->debug(dumper $ret);
     return $ret;
 }

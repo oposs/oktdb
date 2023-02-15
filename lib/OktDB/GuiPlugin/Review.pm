@@ -211,7 +211,7 @@ has actionCfg => sub {
          ),
          {
             label => trm('Report'),
-            action => 'download',
+            action => 'display',
             addToContextMenu => true,
             key => 'report',
             buttonSet => {
@@ -229,9 +229,9 @@ has actionCfg => sub {
                 my $name = lc $id.'-'.$args->{selection}{artpers_name};
                 $name =~ s/[^_0-9a-z]+/-/g;
                 return {
-                    asset    => $rep->getReportPdf($id),
-                    type     => 'applicaton/pdf',
-                    filename => $name.'.pdf',
+                    asset    => $rep->getReportHtml($id),
+                    type     => 'text/html',
+                    filename => $name.'.html',
                 }
             }
         },
