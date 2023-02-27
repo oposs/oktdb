@@ -133,7 +133,7 @@ SQL_END
         },
         {
             key => 'oktevent_honorarium',
-            label => trm('Honorarium'),
+            label => trm('Honorarium CHF'),
             widget => 'text',
             set => {
                 %readOnly,
@@ -147,7 +147,7 @@ SQL_END
         },
         {
             key => 'oktevent_expense',
-            label => trm('Expense'),
+            label => trm('Expense CHF'),
             widget => 'text',
             set => {
                 %readOnly,
@@ -158,6 +158,15 @@ SQL_END
                 }
                 return "";
             }
+        },
+        {
+            key => 'oktevent_expense_note',
+            label => trm('Expense Note'),
+            widget => 'textArea',
+            set => {
+                %readOnly,
+                placeholder => 'Textual Expense description.'
+            },
         },
         {
             key => 'oktevent_start_ts',
@@ -219,7 +228,7 @@ has actionCfg => sub {
         my %metaInfo;
         my $fieldMap = { map { 
             "oktevent_".$_ => $args->{"oktevent_".$_} 
-            } qw(okt production type location expense honorarium start_ts duration_s note)
+            } qw(okt production type location expense expense_note honorarium start_ts duration_s note)
         };
         if ($self->user->may('oktadmin')) {
             if ($type eq 'add')  {

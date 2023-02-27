@@ -136,7 +136,7 @@ has actionCfg => sub {
             key => 'add',
             popupTitle => trm('New OktEvent'),
             set => {
-                height => 500,
+                height => 700,
                 width => 500
             },
             backend => {
@@ -156,7 +156,7 @@ has actionCfg => sub {
                 enabled => false
             },
             set => {
-                height => 500,
+                height => 700,
                 width => 500
             },
             backend => {
@@ -207,7 +207,7 @@ has actionCfg => sub {
                 enabled => false
             },
             set => {
-                height => 500,
+                height => 700,
                 width => 500
             },
             backend => {

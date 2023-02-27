@@ -415,3 +415,8 @@ BEGIN;
 INSERT INTO cbright (cbright_key,cbright_label)
     VALUES 
         ('finance','Access Finance Data');
+
+-- 9 up
+
+--sql
+ALTER TABLE oktevent ADD oktevent_expense_note TEXT;
