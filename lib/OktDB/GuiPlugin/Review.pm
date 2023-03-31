@@ -32,6 +32,7 @@ has formCfg => sub {
         {
             key => 'search',
             widget => 'text',
+            reloadOnFormReset => false,
             set => {
                 width => 300,
                 liveUpdate => true,
@@ -392,6 +393,9 @@ SQL_END
     return $data;
 }
 
+sub getAllFieldValues ($self,$args,$extra,$locale){
+    return {};
+}
 1;
 
 __END__

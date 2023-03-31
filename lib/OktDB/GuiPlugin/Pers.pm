@@ -3,6 +3,7 @@ use Mojo::Base 'CallBackery::GuiPlugin::AbstractTable', -signatures;
 use CallBackery::Translate qw(trm);
 use CallBackery::Exception qw(mkerror);
 use Mojo::JSON qw(true false);
+use Mojo::Util qw(dumper);
 use Time::Piece;
 use Text::ParseWords;
 use OktDB::Model::PersReport;
@@ -33,13 +34,16 @@ has formCfg => sub {
         {
             key => 'show_removed',
             widget => 'checkBox',
+            reloadOnFormReset => false,
             label => trm('Show Removed Entries'),
         },
         {
             key => 'search',
             widget => 'text',
+            reloadOnFormReset => false,
             set => {
                 width => 300,
+                liveUpdate => true,
                 placeholder => trm('search words ...'),
             },
         },
@@ -327,6 +331,9 @@ SQL_END
     return $data;
 }
 
+sub getAllFieldValues ($self,$args,$extra,$locale){
+    return {};
+}
 1;
 
 __END__

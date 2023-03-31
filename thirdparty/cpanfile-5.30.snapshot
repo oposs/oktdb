@@ -57,10 +57,10 @@ DISTRIBUTIONS
       perl 5.012000
       strict 0
       warnings 0
-  CallBackery-0.43.0
-    pathname: O/OE/OETIKER/CallBackery-0.43.0.tar.gz
+  CallBackery-0.45.0
+    pathname: O/OE/OETIKER/CallBackery-0.45.0.tar.gz
     provides:
-      CallBackery 0.043000
+      CallBackery 0.045000
       CallBackery::Config undef
       CallBackery::Controller::RpcService undef
       CallBackery::Database undef
@@ -86,8 +86,9 @@ DISTRIBUTIONS
       JSON::Validator 5.03
       Locale::PO 0.27
       Mojolicious 9.12
-      Mojolicious::Plugin::Qooxdoo v1.0.13
+      Mojolicious::Plugin::Qooxdoo v1.0.14
       Syntax::Keyword::Try 0.25
+      Test::Fatal 0
       Text::CSV 0
       XS::Parse::Keyword 0.21
       YAML::XS 0.83
@@ -1215,11 +1216,11 @@ DISTRIBUTIONS
       JSON::Validator 5.13
       Mojolicious 9.00
       perl 5.016
-  Mojolicious-Plugin-Qooxdoo-1.0.13
-    pathname: O/OE/OETIKER/Mojolicious-Plugin-Qooxdoo-1.0.13.tar.gz
+  Mojolicious-Plugin-Qooxdoo-1.0.14
+    pathname: O/OE/OETIKER/Mojolicious-Plugin-Qooxdoo-1.0.14.tar.gz
     provides:
-      Mojolicious::Plugin::Qooxdoo 1.000013
-      Mojolicious::Plugin::Qooxdoo::JsonRpcController 1.000013
+      Mojolicious::Plugin::Qooxdoo 1.000014
+      Mojolicious::Plugin::Qooxdoo::JsonRpcController 1.000014
     requirements:
       CPAN::Uploader 0
       ExtUtils::MakeMaker 0
@@ -2218,6 +2219,18 @@ DISTRIBUTIONS
       Test::Builder 0
       Test::More 0.96
       perl 5.012
+  Test-Fatal-0.017
+    pathname: R/RJ/RJBS/Test-Fatal-0.017.tar.gz
+    provides:
+      Test::Fatal 0.017
+    requirements:
+      Carp 0
+      Exporter 5.57
+      ExtUtils::MakeMaker 6.78
+      Test::Builder 0
+      Try::Tiny 0.07
+      strict 0
+      warnings 0
   Text-CSV-2.02
     pathname: I/IS/ISHIGAKI/Text-CSV-2.02.tar.gz
     provides:

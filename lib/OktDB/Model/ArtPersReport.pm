@@ -116,6 +116,8 @@ sub getProductions ($self,$api) {
             })->hashes->map(sub ($ev) {
                 $ev->{oktevent_start} = localtime(delete $ev->{oktevent_start_ts})->strftime('%d.%m.%Y %H:%M')
                     if $ev->{oktevent_start_ts};
+                $ev->{oktevent_start} .= gmtime(delete $ev->{oktevent_duration_s})->strftime(' (%H:%M)')
+                    if $ev->{oktevent_duration_s} and $ev->{oktevent_start};    
                 return $ev;
             })->to_array;
         $el->{events} = $db->select(['event'

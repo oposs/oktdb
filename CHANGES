@@ -1,20 +1,4 @@
-0.10.0 2023-02-27 13:23:21 +0100 Tobias Oetiker <tobi@oetiker.ch>
-
- - add new form field oktevnt_expense_note
-
-0.9.1 2023-02-15 09:22:29 +0100 Tobias Oetiker <tobi@oetiker.ch>
-
- - upgrade all
-
-0.9.0 2023-02-15 09:04:56 +0100 Tobias Oetiker <tobi@oetiker.ch>
-
- - switch to new html reports
-
-0.8.4 2023-02-03 12:07:23 +0100 Tobias Oetiker <tobi@oetiker.ch>
-
- - restrict finance view
-
-0.8.3 2023-02-01 15:50:37 +0100 Tobias Oetiker <tobi@oetiker.ch>
+0.11.0 2023-03-31 16:19:57 +0200 Tobias Oetiker <tobi@oetiker.ch>
 
  - reverese sort Reports
  - add event type to okt events in report

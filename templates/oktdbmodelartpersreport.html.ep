@@ -21,8 +21,8 @@
   <section class="hero is-link">
   <div class="hero-body">
   <div class="container">
-    <h2 class="title is-1"><%= $artPers->{artpers_name} %></h2>
     <p class="subtitle is-3">OKT Art Person Report</p>
+    <h2 class="title is-1"><%= $artPers->{artpers_name} %></h2>
 </div>
 </div>
 </section>
@@ -64,18 +64,18 @@
     <div class="column"><%= $preis %></div>
   </div>
 % }
-% if ($artPers->{artpers_start}) {
-  <div class="columns">
-    <div class="column is-2">Gegründet</div>
-    <div class="column"><%= $artPers->{artpers_start} %></div>
-  </div>
-% }
-% if ($artPers->{artpers_end}) {
-  <div class="columns">
-    <div class="column is-2">Aufgelöst</div>
-    <div class="column"><%= $artPers->{artpers_end} %></div>
-  </div>
-% }
+%# % if ($artPers->{artpers_start}) {
+%#   <div class="columns">
+%#     <div class="column is-2">Gegründet</div>
+%#     <div class="column"><%= $artPers->{artpers_start} %></div>
+%#   </div>
+%# % }
+%# % if ($artPers->{artpers_end}) {
+%#   <div class="columns">
+%#     <div class="column is-2">Aufgelöst</div>
+%#     <div class="column"><%= $artPers->{artpers_end} %></div>
+%#   </div>
+%# % }
 % if ($artPers->{artpers_note}) {
   <div class="columns">
     <div class="column is-2">Bemerkung</div>
@@ -89,25 +89,17 @@
     <section class="hero is-warning is-small">
   <div class="hero-body">
   <div class="container">
-    <h2 class="title is-4"><%= $p->{'production_title'} %></h3>
-    <p class="subtitle is-5">Produktion</p>
+    <p class="subtitle is-5">Produktion
+    % if ($p->{'production_premiere'}) {
+        – <%= $p->{'production_premiere'} %>
+    % }
+    </p>
+    <h3 class="title is-4"><%= $p->{'production_title'} %></h3>
  </div>
  </div>
  </section>
  <div class="container content">
     <section class="box mt-4">
-        % if ($p->{'production_premiere'}) {
-            <div class="columns">
-        <div class="column is-2">Premiere</div>
-        <div class="column"><%= $p->{'production_premiere'} %></div>
-        </div>
-        % } 
-        % if ($p->{'production_derniere'}) {
-        <div class="columns">
-        <div class="column is-2">Dernière</div>
-        <div class="column"><%= $p->{'production_derniere'} %></div>
-        </div>
-        % }
         % if ($p->{'production_note'}) {
         <div class="columns">
         <div class="column is-2">Bemerkung</div>
@@ -121,10 +113,10 @@
             <section class="hero is-small">
             <div class="hero-body">
             <div class="container">
+            <p class="subtitle is-5">OKT Event</p>
             <h4 class="title is-4">
                 <%= $e->{'okt_edition'} %> <%= $e->{'oktevent_type'} ? ' – ' . $e->{oktevent_type} : '' %>
             </h4>
-            <p class="subtitle is-5">OKT Event</p>
             </div>
             </div>
             </section>
@@ -153,10 +145,10 @@
   <div class="hero-body">
   <div class="container">
 
+            <p class="subtitle is-5">Visionierung</p>
             <h4 class="title is-4">
             <%= $e->{'location_name'} %>
             </h4>
-            <p class="subtitle is-5">Visionierung</p>
             </div>
             </div>
             </section>

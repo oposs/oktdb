@@ -34,6 +34,7 @@ has formCfg => sub {
         {
             key => 'search',
             widget => 'text',
+            reloadOnFormReset => false,
             set => {
                 width => 300,
                 liveUpdate => true,
@@ -221,7 +222,7 @@ has actionCfg => sub {
 
         push @actions,{
             label => trm('Report'),
-            action => 'download',
+            action => 'display',
             addToContextMenu => true,
             key => 'report',
             buttonSet => {
@@ -239,9 +240,9 @@ has actionCfg => sub {
                 my $name = lc $id.'-'.$args->{selection}{artpers_name};
                 $name =~ s/[^_0-9a-z]+/-/g;
                 return {
-                    asset    => $rep->getReportPdf($id),
-                    type     => 'applicaton/pdf',
-                    filename => $name.'.pdf',
+                    asset    => $rep->getReportHtml($id),
+                    type     => 'text/html',
+                    filename => $name.'.html',
                 }
             }
         };
@@ -376,6 +377,9 @@ SQL_END
     return $data;
 }
 
+sub getAllFieldValues ($self,$args,$extra,$locale){
+    return {};
+}
 1;
 
 __END__

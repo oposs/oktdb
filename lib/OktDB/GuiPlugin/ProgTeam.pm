@@ -24,6 +24,7 @@ has formCfg => sub {
         {
             key => 'show_current',
             widget => 'checkBox',
+            reloadOnFormReset => false,
             label => trm('Show Current Members'),
         },
     ];
@@ -219,6 +220,9 @@ SQL_END
     return $data;
 }
 
+sub getAllFieldValues ($self,$args,$extra,$locale){
+    return {};
+}
 1;
 
 __END__
