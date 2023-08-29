@@ -9,6 +9,7 @@ qx.Class.define("callbackery.compile.CompilerApi", {
             let cbr = process.env.CALLBACKERY_QX;
             if (cbr) {
                 ["callbackery"].forEach(dir => {
+                    console.log(`pushing ${cbr}/${dir}`);
                     config.libraries.push(cbr+"/"+dir);
 
                 });
