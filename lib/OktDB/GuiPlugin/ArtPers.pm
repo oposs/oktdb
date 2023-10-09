@@ -35,7 +35,7 @@ has formCfg => sub {
             widget => 'text',
             reloadOnFormReset => false,
             set => {
-                width => 300,
+                width => 200,
                 liveUpdate => true,
                 placeholder => trm('search words ...'),
             },
@@ -274,7 +274,7 @@ has actionCfg => sub {
         {
             label => trm('Add Production'),
             action => 'popup',
-            addToContextMenu => false,
+            addToContextMenu => true,
             key => 'addprod',
             buttonSet => {
                 enabled => false

@@ -36,7 +36,7 @@ has formCfg => sub {
             widget => 'text',
             reloadOnFormReset => false,
             set => {
-                width => 300,
+                width => 200,
                 liveUpdate => true,
                 placeholder => trm('search words ...'),
             },

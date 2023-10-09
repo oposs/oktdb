@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: oktdb 0.11.0\n"
+"Project-Id-Version: oktdb 0.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-31 16:20+0200\n"
+"POT-Creation-Date: 2023-10-09 12:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -728,7 +728,7 @@ msgid "Tagalong People"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/Pers.pm:38
-msgid "Show Removed Entries"
+msgid "All"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/Pers.pm:70
@@ -884,7 +884,7 @@ msgstr ""
 msgid "Data Decoding Problem %1"
 msgstr ""
 
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Config.pm:491
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Config.pm:500
 msgid "Wrong password!"
 msgstr ""
 
@@ -931,6 +931,10 @@ msgstr ""
 msgid "Add User"
 msgstr ""
 
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractCardlist.pm:82
+msgid "cardCfg must be defined in child plugin class"
+msgstr ""
+
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/Users.pm:67
 msgid "Rights"
 msgstr ""
@@ -967,10 +971,6 @@ msgstr ""
 
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractForm.pm:92
 msgid "sorry, don't know the field you are talking about"
-msgstr ""
-
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractCardlist.pm:82
-msgid "cardCfg must be defined in child plugin class"
 msgstr ""
 
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractTable.pm:130

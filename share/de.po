@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oktdb 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-31 16:20+0200\n"
+"POT-Creation-Date: 2023-10-09 12:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Config.pm:491
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../Config.pm:500
 msgid "Wrong password!"
 msgstr ""
 
@@ -807,7 +807,7 @@ msgid "Add OKT Edition"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/Pers.pm:38
-msgid "Show Removed Entries"
+msgid "All"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/Pers.pm:70

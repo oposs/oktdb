@@ -35,14 +35,14 @@ has formCfg => sub {
             key => 'show_removed',
             widget => 'checkBox',
             reloadOnFormReset => false,
-            label => trm('Show Removed Entries'),
+            label => trm('All'),
         },
         {
             key => 'search',
             widget => 'text',
             reloadOnFormReset => false,
             set => {
-                width => 300,
+                width => 200,
                 liveUpdate => true,
                 placeholder => trm('search words ...'),
             },
@@ -151,7 +151,7 @@ has actionCfg => sub {
             popupTitle => trm('New Person'),
             set => {
                 height => 600,
-                width => 400
+                width => 800
             },
             backend => {
                 plugin => 'PersForm',
