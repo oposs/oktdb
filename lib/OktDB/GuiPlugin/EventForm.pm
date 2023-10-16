@@ -83,7 +83,13 @@ has formCfg => sub {
                         [\"SUBSTR(location_name || COALESCE('; ' || location_postaladdress,''),0,60)" => 'title']
                     ],undef,{
                         order_by => 'location_name'
-                    })->hashes->to_array}
+                    })->hashes->map(sub {
+                        # clean up location names
+                        $_->{title} //= $_->{key} . ' - UNKNOWN';
+                        $_->{title} =~ s/\s+/ /g;
+                        $_->{title} =~ s/[^-_;.\s\w]/_/ig;
+                        return $_;
+                    })->to_array}
                 ]
             }
         },
