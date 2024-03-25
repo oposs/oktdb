@@ -420,3 +420,7 @@ INSERT INTO cbright (cbright_key,cbright_label)
 
 --sql
 ALTER TABLE oktevent ADD oktevent_expense_note TEXT;
+
+-- 10 up
+--sql
+ALTER TABLE oktevent ADD oktevent_drive_url TEXT;

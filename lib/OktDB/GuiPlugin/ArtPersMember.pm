@@ -259,8 +259,6 @@ has grammar => sub ($self) {
 };
 1;
 
-1;
-
 __END__
 
 =head1 COPYRIGHT

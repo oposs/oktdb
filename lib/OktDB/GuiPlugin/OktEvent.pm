@@ -30,6 +30,7 @@ All the methods of L<CallBackery::GuiPlugin::AbstractTable> plus:
 
 has formCfg => sub {
     my $self = shift;
+    return [] if $self->config->{mode} =~ /filtered/;
     return [
         {
             key => 'search',
@@ -43,6 +44,21 @@ has formCfg => sub {
         },
     ];
 };
+
+has grammar => sub ($self) {
+    $self->mergeGrammar(
+        $self->SUPER::grammar,
+        {
+            _vars => [ qw(mode) ],
+            type => {
+                _doc => 'filtered or full',
+                _re => '(filtered|full)',
+                _default => 'full'
+            }
+        },
+    );
+};
+1;
 
 =head2 tableCfg
 
@@ -60,13 +76,14 @@ has tableCfg => sub {
             sortable => true,
             primary => true
         },
-        {
+        ($self->config->{mode} ne 'filtered-okt' ?
+        ({
             label => trm('OKT'),
             type => 'string',
             width => '6*',
             key => 'okt_edition',
             sortable => true,
-        },
+        }):()),
         {
             label => trm('Production'),
             type => 'string',
@@ -74,13 +91,14 @@ has tableCfg => sub {
             key => 'production_title',
             sortable => true,
         },
-        {
+        ($self->config->{mode} ne 'filtered' ?
+        ({
             label => trm('ArtPers'),
             type => 'string',
             width => '6*',
             key => 'artpers_name',
             sortable => true,
-        },
+        }) : ()),
         {
             label => trm('Type'),
             type => 'string',
@@ -218,7 +236,32 @@ has actionCfg => sub {
                 }
             }
         } if not $self->user or $self->user->may('finance');
-    
+
+        push @actions,{
+            label => trm('Open Drive'),
+            action => 'submit',
+            addToContextMenu => true,
+            key => 'drive',
+            buttonSet => {
+                enabled => false
+            },
+            actionHandler => sub {
+                my $self = shift;
+                my $args = shift;
+                my $url = $args->{selection}{oktevent_drive_url};
+                if ($url) {
+                    return {
+                        action => 'openLink',
+                        url => $url,
+                        target => '_blank',
+                        features => 'noopener,noreferrer'
+                    }
+                }
+                else {
+                    die mkerror(4994,"No Drive URL found for this event");
+                }
+            }
+        };
 
         push @actions,{
             label => trm('Report'),
@@ -268,6 +311,14 @@ sub WHERE {
     my $self = shift;
     my $args = shift;
     my $where = {};
+    if ($self->config->{mode} eq 'filtered') {
+        $where->{production_artpers} = $args->{parentFormData}{selection}{artpers_id};
+        return $where;
+    }if ($self->config->{mode} eq 'filtered-okt') {
+        $where->{oktevent_okt} = $args->{parentFormData}{selection}{okt_id};
+        return $where;
+    }
+
     if (my $str = $args->{formData}{search}) {
         chomp($str);
         for my $search (quotewords('\s+', 0, $str)){
@@ -299,6 +350,7 @@ my $SUB_SELECT = <<SELECT_END;
 
     SELECT 
         oktevent_id,
+        oktevent_okt,
         okt_edition,
         production_title,
         artpers_name,
@@ -307,7 +359,9 @@ my $SUB_SELECT = <<SELECT_END;
         location_name,
         oktevent_start_ts, 
         oktevent_duration_s,
-        oktevent_note
+        oktevent_note,
+        oktevent_drive_url,
+        production_artpers
     FROM oktevent
     JOIN okt ON oktevent_okt = okt_id
     LEFT JOIN location ON oktevent_location = location_id
@@ -324,8 +378,7 @@ sub getTableRowCount {
     my $db = $self->db;
     my ($where,@where_bind) = $sql->where($WHERE);
     return $db->query(<<"SQL_END",@where_bind)->hash->{count};
-    SELECT COUNT(*) AS count FROM ( $SUB_SELECT )
-    $where
+    SELECT COUNT(*) AS count FROM ( $SUB_SELECT ) $where
 SQL_END
 }
 
@@ -369,6 +422,9 @@ SQL_END
             ):(),
             report => {
                 enabled => true,
+            },
+            drive => {
+                enabled => $row->{oktevent_drive_url} ? true : false,
             }
         };
         $row->{oktevent_start_ts} = localtime($row->{oktevent_start_ts})->strftime("%d.%m.%Y %H:%M") if $row->{oktevent_start_ts};

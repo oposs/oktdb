@@ -97,11 +97,10 @@ sub getApMembers ($self,$api) {
 
 sub getProductions ($self,$api) {
     my $db = $self->db;
-    my $productions = $db->select('production',undef,{ 
+    my $productions = [ sort { $b->{sort_key} <=> $a->{sort_key} } $db->select('production',undef,{ 
         production_artpers => $api 
-    },{
-        order_by => { -desc => 'production_premiere_ts' }
     })->hashes->map(sub ($el) {
+        $el->{sort_key} = $el->{production_premiere_ts} // 0;
         $el->{production_premiere} = localtime(delete $el->{production_premiere_ts})->strftime('%d.%m.%Y')
             if $el->{production_premiere_ts};
         $el->{production_derniere} = localtime(delete $el->{production_derniere_ts})->strftime('%d.%m.%Y')
@@ -114,6 +113,8 @@ sub getProductions ($self,$api) {
             },{
                 order_by => { -desc => 'oktevent_start_ts' }
             })->hashes->map(sub ($ev) {
+                $el->{sort_key} = $ev->{oktevent_start_ts}
+                    if not $el->{sort_key} or $el->{sort_key} < $ev->{oktevent_start_ts};
                 $ev->{oktevent_start} = localtime(delete $ev->{oktevent_start_ts})->strftime('%d.%m.%Y %H:%M')
                     if $ev->{oktevent_start_ts};
                 $ev->{oktevent_start} .= gmtime(delete $ev->{oktevent_duration_s})->strftime(' (%H:%M)')
@@ -127,7 +128,10 @@ sub getProductions ($self,$api) {
         }, {
             order_by => { -desc => 'event_date_ts' }
         })->hashes->map(sub ($ev) {
-            $ev->{event_date} = localtime(delete $ev->{event_date_ts})->strftime('%d.%m.%Y') if $ev->{event_date_ts};
+            $el->{sort_key} = $ev->{event_date_ts}
+                if not $el->{sort_key} or $el->{sort_key} < $ev->{event_date_ts};
+            $ev->{event_date} = localtime(delete $ev->{event_date_ts})->strftime('%d.%m.%Y')
+                if $ev->{event_date_ts};
             $ev->{reviews} = $db->select(['review'
                 => [ -left => 'cbuser', 'cbuser_id', 'review.review_cbuser']
             ],undef,{
@@ -139,8 +143,7 @@ sub getProductions ($self,$api) {
             return $ev;
         })->to_array;
         return $el;
-    })->to_array;
-    #$self->log->debug(dumper $productions);
+    })->to_array->@* ];
     return $productions
 }
 

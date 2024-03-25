@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oktdb 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-16 11:44+0200\n"
+"POT-Creation-Date: 2024-03-25 11:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,6 +45,10 @@ msgstr ""
 
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractForm.pm:92
 msgid "sorry, don't know the field you are talking about"
+msgstr ""
+
+#: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractForm.pm:105
+msgid "The %1 field is required"
 msgstr ""
 
 #: /home/oetiker/checkouts/oktdb/thirdparty/lib/perl5/CallBackery/qooxdoo/../GuiPlugin/AbstractTable.pm:130
@@ -95,9 +99,9 @@ msgstr ""
 #: lib/OktDB/GuiPlugin/ArtPers.pm:154 lib/OktDB/GuiPlugin/ArtPersForm.pm:305
 #: lib/OktDB/GuiPlugin/Event.pm:106 lib/OktDB/GuiPlugin/EventForm.pm:140
 #: lib/OktDB/GuiPlugin/Location.pm:101 lib/OktDB/GuiPlugin/LocationForm.pm:110
-#: lib/OktDB/GuiPlugin/OktEvent.pm:113 lib/OktDB/GuiPlugin/OktEventForm.pm:211
+#: lib/OktDB/GuiPlugin/OktEvent.pm:131 lib/OktDB/GuiPlugin/OktEventForm.pm:225
 #: lib/OktDB/GuiPlugin/Pers.pm:120 lib/OktDB/GuiPlugin/PersForm.pm:135
-#: lib/OktDB/GuiPlugin/Production.pm:76
+#: lib/OktDB/GuiPlugin/Production.pm:78
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:115
 msgid "Note"
 msgstr ""
@@ -119,7 +123,7 @@ msgstr ""
 #: lib/OktDB/GuiPlugin/AgencyForm.pm:177 lib/OktDB/GuiPlugin/ArtPersForm.pm:385
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:155
 #: lib/OktDB/GuiPlugin/EventForm.pm:178 lib/OktDB/GuiPlugin/LocationForm.pm:144
-#: lib/OktDB/GuiPlugin/OktEventForm.pm:253 lib/OktDB/GuiPlugin/OktForm.pm:134
+#: lib/OktDB/GuiPlugin/OktEventForm.pm:267 lib/OktDB/GuiPlugin/OktForm.pm:134
 #: lib/OktDB/GuiPlugin/PersForm.pm:190
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:151
 #: lib/OktDB/GuiPlugin/ProgTeamForm.pm:141
@@ -175,10 +179,10 @@ msgstr ""
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:48 lib/OktDB/GuiPlugin/Event.pm:56
 #: lib/OktDB/GuiPlugin/EventForm.pm:48 lib/OktDB/GuiPlugin/EventForm.pm:56
 #: lib/OktDB/GuiPlugin/Location.pm:37 lib/OktDB/GuiPlugin/LocationForm.pm:48
-#: lib/OktDB/GuiPlugin/Okt.pm:38 lib/OktDB/GuiPlugin/OktEvent.pm:56
+#: lib/OktDB/GuiPlugin/Okt.pm:38 lib/OktDB/GuiPlugin/OktEvent.pm:72
 #: lib/OktDB/GuiPlugin/OktEventForm.pm:63 lib/OktDB/GuiPlugin/OktForm.pm:53
 #: lib/OktDB/GuiPlugin/Pers.pm:62 lib/OktDB/GuiPlugin/PersForm.pm:48
-#: lib/OktDB/GuiPlugin/Production.pm:54
+#: lib/OktDB/GuiPlugin/Production.pm:56
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:49 lib/OktDB/GuiPlugin/ProgTeam.pm:48
 #: lib/OktDB/GuiPlugin/ProgTeamForm.pm:48 lib/OktDB/GuiPlugin/Review.pm:58
 #: lib/OktDB/GuiPlugin/ReviewForm.pm:104
@@ -258,8 +262,8 @@ msgid "this prio can be selected"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/Agency.pm:38 lib/OktDB/GuiPlugin/ArtPers.pm:40
-#: lib/OktDB/GuiPlugin/Event.pm:41 lib/OktDB/GuiPlugin/OktEvent.pm:41
-#: lib/OktDB/GuiPlugin/Pers.pm:47 lib/OktDB/GuiPlugin/Production.pm:33
+#: lib/OktDB/GuiPlugin/Event.pm:41 lib/OktDB/GuiPlugin/OktEvent.pm:42
+#: lib/OktDB/GuiPlugin/Pers.pm:47 lib/OktDB/GuiPlugin/Production.pm:35
 #: lib/OktDB/GuiPlugin/Review.pm:39
 msgid "search words ..."
 msgstr ""
@@ -373,8 +377,8 @@ msgstr ""
 #: lib/OktDB/GuiPlugin/ArtPersForm.pm:341
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:101
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:119
-#: lib/OktDB/GuiPlugin/EventForm.pm:109 lib/OktDB/GuiPlugin/OktEventForm.pm:184
-#: lib/OktDB/GuiPlugin/OktEventForm.pm:203 lib/OktDB/GuiPlugin/OktForm.pm:80
+#: lib/OktDB/GuiPlugin/EventForm.pm:109 lib/OktDB/GuiPlugin/OktEventForm.pm:198
+#: lib/OktDB/GuiPlugin/OktEventForm.pm:217 lib/OktDB/GuiPlugin/OktForm.pm:80
 #: lib/OktDB/GuiPlugin/OktForm.pm:98 lib/OktDB/GuiPlugin/PersForm.pm:127
 #: lib/OktDB/GuiPlugin/PersForm.pm:153 lib/OktDB/GuiPlugin/ProductionForm.pm:89
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:107
@@ -417,7 +421,7 @@ msgstr ""
 
 #: lib/OktDB/GuiPlugin/ArtPers.pm:161 lib/OktDB/GuiPlugin/ArtPersMember.pm:76
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:91 lib/OktDB/GuiPlugin/Okt.pm:53
-#: lib/OktDB/GuiPlugin/OktEvent.pm:99 lib/OktDB/GuiPlugin/OktEventForm.pm:173
+#: lib/OktDB/GuiPlugin/OktEvent.pm:117 lib/OktDB/GuiPlugin/OktEventForm.pm:187
 #: lib/OktDB/GuiPlugin/ProgTeam.pm:63
 msgid "Start"
 msgstr ""
@@ -449,17 +453,25 @@ msgstr ""
 msgid "ArtPerson Members"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/ArtPers.pm:275 lib/OktDB/GuiPlugin/ProductionForm.pm:152
+#: lib/OktDB/GuiPlugin/ArtPers.pm:275 lib/OktDB/GuiPlugin/Okt.pm:145
+msgid "Show OktEvents"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/ArtPers.pm:280 lib/OktDB/GuiPlugin/Okt.pm:150
+msgid "OktEvents"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/ArtPers.pm:296 lib/OktDB/GuiPlugin/ProductionForm.pm:152
 msgid "Add Production"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/ArtPers.pm:282
+#: lib/OktDB/GuiPlugin/ArtPers.pm:303
 msgid "New Production"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/ArtPers.pm:298 lib/OktDB/GuiPlugin/Event.pm:197
-#: lib/OktDB/GuiPlugin/OktEvent.pm:224 lib/OktDB/GuiPlugin/Pers.pm:211
-#: lib/OktDB/GuiPlugin/Review.pm:214
+#: lib/OktDB/GuiPlugin/ArtPers.pm:319 lib/OktDB/GuiPlugin/Event.pm:197
+#: lib/OktDB/GuiPlugin/OktEvent.pm:267 lib/OktDB/GuiPlugin/Pers.pm:211
+#: lib/OktDB/GuiPlugin/Production.pm:183 lib/OktDB/GuiPlugin/Review.pm:214
 msgid "Report"
 msgstr ""
 
@@ -526,7 +538,7 @@ msgstr ""
 
 #: lib/OktDB/GuiPlugin/ArtPersMember.pm:56
 #: lib/OktDB/GuiPlugin/ArtPersMemberForm.pm:56
-#: lib/OktDB/GuiPlugin/OktEvent.pm:78 lib/OktDB/GuiPlugin/Production.pm:62
+#: lib/OktDB/GuiPlugin/OktEvent.pm:96 lib/OktDB/GuiPlugin/Production.pm:64
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:57
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:65
 msgid "ArtPers"
@@ -575,7 +587,7 @@ msgid "Date"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/Event.pm:71 lib/OktDB/GuiPlugin/EventForm.pm:64
-#: lib/OktDB/GuiPlugin/OktEvent.pm:71 lib/OktDB/GuiPlugin/OktEventForm.pm:88
+#: lib/OktDB/GuiPlugin/OktEvent.pm:88 lib/OktDB/GuiPlugin/OktEventForm.pm:88
 #: lib/OktDB/GuiPlugin/Review.pm:66 lib/OktDB/GuiPlugin/ReviewForm.pm:120
 msgid "Production"
 msgstr ""
@@ -585,7 +597,7 @@ msgid "Artpers"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/Event.pm:85 lib/OktDB/GuiPlugin/EventForm.pm:73
-#: lib/OktDB/GuiPlugin/OktEvent.pm:92 lib/OktDB/GuiPlugin/OktEventForm.pm:119
+#: lib/OktDB/GuiPlugin/OktEvent.pm:110 lib/OktDB/GuiPlugin/OktEventForm.pm:119
 #: lib/OktDB/GuiPlugin/Review.pm:80 lib/OktDB/GuiPlugin/ReviewForm.pm:128
 msgid "Location"
 msgstr ""
@@ -623,7 +635,7 @@ msgstr "Visionierung"
 msgid "Select Location"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/EventForm.pm:101 lib/OktDB/GuiPlugin/OktEventForm.pm:176
+#: lib/OktDB/GuiPlugin/EventForm.pm:101 lib/OktDB/GuiPlugin/OktEventForm.pm:190
 msgid "dd.mm.yyyy hh:mm"
 msgstr ""
 
@@ -639,11 +651,11 @@ msgstr ""
 msgid "Tagalong People"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/EventForm.pm:179 lib/OktDB/GuiPlugin/Production.pm:158
+#: lib/OktDB/GuiPlugin/EventForm.pm:179 lib/OktDB/GuiPlugin/Production.pm:160
 msgid "Add Event"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Location.pm:52 lib/OktDB/GuiPlugin/OktEvent.pm:64
+#: lib/OktDB/GuiPlugin/Location.pm:52 lib/OktDB/GuiPlugin/OktEvent.pm:81
 msgid "OKT"
 msgstr ""
 
@@ -729,36 +741,40 @@ msgid ""
 "will only work if there are no other entries refering to that Edition."
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/OktEvent.pm:85 lib/OktDB/GuiPlugin/OktEventForm.pm:111
+#: lib/OktDB/GuiPlugin/OktEvent.pm:103 lib/OktDB/GuiPlugin/OktEventForm.pm:111
 msgid "Type"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/OktEvent.pm:106 lib/OktDB/GuiPlugin/OktEventForm.pm:192
+#: lib/OktDB/GuiPlugin/OktEvent.pm:124 lib/OktDB/GuiPlugin/OktEventForm.pm:206
 msgid "Duration"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/OktEvent.pm:134 lib/OktDB/GuiPlugin/OktEventForm.pm:254
+#: lib/OktDB/GuiPlugin/OktEvent.pm:152 lib/OktDB/GuiPlugin/OktEventForm.pm:268
 msgid "Add OktEvent"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/OktEvent.pm:138
+#: lib/OktDB/GuiPlugin/OktEvent.pm:156
 msgid "New OktEvent"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/OktEvent.pm:151 lib/OktDB/GuiPlugin/OktEvent.pm:155
+#: lib/OktDB/GuiPlugin/OktEvent.pm:169 lib/OktDB/GuiPlugin/OktEvent.pm:173
 msgid "Edit OktEvent"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/OktEvent.pm:171
+#: lib/OktDB/GuiPlugin/OktEvent.pm:189
 msgid "Delete OktEvent"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/OktEvent.pm:174
+#: lib/OktDB/GuiPlugin/OktEvent.pm:192
 msgid "Do you really want to delete the selected OktEvent?"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/OktEvent.pm:202 lib/OktDB/GuiPlugin/OktEvent.pm:206
+#: lib/OktDB/GuiPlugin/OktEvent.pm:220 lib/OktDB/GuiPlugin/OktEvent.pm:224
 msgid "View OktEvent"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/OktEvent.pm:241
+msgid "Open Drive"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/OktEventForm.pm:71
@@ -774,23 +790,31 @@ msgid "Select Production"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/OktEventForm.pm:136
-msgid "Honorarium CHF"
+msgid "Drive URL"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/OktEventForm.pm:143
-#: lib/OktDB/GuiPlugin/OktEventForm.pm:157
-msgid "Expected a numeric value"
+msgid "Expected a google drive url"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/OktEventForm.pm:150
-msgid "Expense CHF"
+msgid "Honorarium CHF"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/OktEventForm.pm:157
+#: lib/OktDB/GuiPlugin/OktEventForm.pm:171
+msgid "Expected a numeric value"
 msgstr ""
 
 #: lib/OktDB/GuiPlugin/OktEventForm.pm:164
+msgid "Expense CHF"
+msgstr ""
+
+#: lib/OktDB/GuiPlugin/OktEventForm.pm:178
 msgid "Expense Note"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/OktEventForm.pm:195
+#: lib/OktDB/GuiPlugin/OktEventForm.pm:209
 msgid "hh:mm"
 msgstr ""
 
@@ -845,35 +869,35 @@ msgid ""
 "instead."
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Production.pm:69
+#: lib/OktDB/GuiPlugin/Production.pm:71
 msgid "Titel"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Production.pm:83
+#: lib/OktDB/GuiPlugin/Production.pm:85
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:79
 msgid "Premiere"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Production.pm:90
+#: lib/OktDB/GuiPlugin/Production.pm:92
 #: lib/OktDB/GuiPlugin/ProductionForm.pm:97
 msgid "Derniere"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Production.pm:111 lib/OktDB/GuiPlugin/Production.pm:115
+#: lib/OktDB/GuiPlugin/Production.pm:113 lib/OktDB/GuiPlugin/Production.pm:117
 msgid "Edit Production"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Production.pm:131
+#: lib/OktDB/GuiPlugin/Production.pm:133
 msgid "Remove Production"
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Production.pm:134
+#: lib/OktDB/GuiPlugin/Production.pm:136
 msgid ""
 "Do you really want to delete the selected Production? This will only work if "
 "there are no other entries refering to that Production."
 msgstr ""
 
-#: lib/OktDB/GuiPlugin/Production.pm:165
+#: lib/OktDB/GuiPlugin/Production.pm:167
 msgid "New Event"
 msgstr ""
 

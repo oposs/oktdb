@@ -141,9 +141,30 @@ has actionCfg => sub {
                 };
             }
         },
-         $self->makeExportAction(
-             filename => localtime->strftime('okt-%Y-%m-%d-%H-%M-%S.xlsx')
-         ),
+                {
+            label => trm('Show OktEvents'),
+            action => 'popup',
+            key => 'events',
+            defaultAction => false,
+            addToContextMenu => true,
+            popupTitle => trm('OktEvents'),
+            buttonSet => {
+                enabled => false
+            },
+            set => {
+                height => 750,
+                width => 1200
+            },
+            backend => {
+                plugin => 'OktEvent',
+                config => {
+                    mode => 'filtered-okt'
+                }
+            }
+        },
+        $self->makeExportAction(
+            filename => localtime->strftime('okt-%Y-%m-%d-%H-%M-%S.xlsx')
+        ),
     ];
 };
 
@@ -185,6 +206,9 @@ SQL_END
                 enabled => true
             },
             delete => {
+                enabled => true,
+            },
+            events => {
                 enabled => true,
             },
         };

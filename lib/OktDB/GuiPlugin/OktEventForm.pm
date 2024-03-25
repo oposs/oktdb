@@ -132,6 +132,20 @@ SQL_END
             }
         },
         {
+            key => 'oktevent_drive_url',
+            label => trm('Drive URL'),
+            widget => 'text',
+            set => {
+                %readOnly,
+            },
+            validator => sub ($value,$fieldName,$form) {
+                if ($value and $value !~ m{^https://drive.google.com/\S+$}) {
+                    return trm("Expected a google drive url");
+                }
+                return "";
+            }
+        },
+        {
             key => 'oktevent_honorarium',
             label => trm('Honorarium CHF'),
             widget => 'text',
@@ -228,7 +242,7 @@ has actionCfg => sub {
         my %metaInfo;
         my $fieldMap = { map { 
             "oktevent_".$_ => $args->{"oktevent_".$_} 
-            } qw(okt production type location expense expense_note honorarium start_ts duration_s note)
+            } qw(okt drive_url production type location expense expense_note honorarium start_ts duration_s note)
         };
         if ($self->user->may('oktadmin')) {
             if ($type eq 'add')  {

@@ -5,6 +5,8 @@ use CallBackery::Exception qw(mkerror);
 use Mojo::JSON qw(true false);
 use Time::Piece;
 use Text::ParseWords;
+use OktDB::Model::ArtPersReport;
+
 =head1 NAME
 
 OktDB::GuiPlugin::Production - Production Table
@@ -177,6 +179,33 @@ has actionCfg => sub {
          $self->makeExportAction(
              filename => localtime->strftime('production-%Y-%m-%d-%H-%M-%S.xlsx')
          ),
+         {
+            label => trm('Report'),
+            action => 'display',
+            addToContextMenu => true,
+            key => 'report',
+            buttonSet => {
+                enabled => false
+            },
+            actionHandler => sub {
+                my $self = shift;
+                my $args = shift;
+                my $id = $args->{selection}{artpers_id};
+                my $rep = OktDB::Model::ArtPersReport->new(
+                    app => $self->app,
+                    log => $self->log,
+                    db => $self->db,
+                );
+                my $name = lc $id.'-'.$args->{selection}{artpers_name};
+                $name =~ s/[^_0-9a-z]+/-/g;
+                return {
+                    asset    => $rep->getReportHtml($id),
+                    type     => 'text/html',
+                    filename => $name.'.html',
+                }
+            }
+        },
+
     ];
 };
 
@@ -222,7 +251,7 @@ my $SUB_SELECT = <<SELECT_END;
 
 SELECT 
     production.*,
-    artpers_name
+    artpers_name, artpers_id
 FROM
     production 
 JOIN artpers ON production_artpers = artpers_id
@@ -277,6 +306,9 @@ SQL_END
                 enabled => true,
             },
             addevent => {
+                enabled => true,
+            },
+            report => {
                 enabled => true,
             }
         };

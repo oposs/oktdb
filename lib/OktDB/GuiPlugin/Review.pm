@@ -141,7 +141,7 @@ has actionCfg => sub {
             label => trm('View Review'),
             action => 'popup',
             key => 'view',
-            addToContextMenu => false,
+            addToContextMenu => true,
             popupTitle => trm('View Review'),
             buttonSet => {
                 enabled => false
@@ -207,10 +207,10 @@ has actionCfg => sub {
                 }
             }
         },
-         $self->makeExportAction(
+        ($self->makeExportAction(
              filename => localtime->strftime('review-%Y-%m-%d-%H-%M-%S.xlsx')
-         ),
-         {
+        )),
+        {
             label => trm('Report'),
             action => 'display',
             addToContextMenu => true,

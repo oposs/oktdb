@@ -272,6 +272,27 @@ has actionCfg => sub {
             }
         },
         {
+            label => trm('Show OktEvents'),
+            action => 'popup',
+            key => 'events',
+            defaultAction => false,
+            addToContextMenu => true,
+            popupTitle => trm('OktEvents'),
+            buttonSet => {
+                enabled => false
+            },
+            set => {
+                height => 750,
+                width => 1200
+            },
+            backend => {
+                plugin => 'OktEvent',
+                config => {
+                    mode => 'filtered'
+                }
+            }
+        },
+        {
             label => trm('Add Production'),
             action => 'popup',
             addToContextMenu => true,
@@ -434,6 +455,9 @@ SQL_END
                 enabled => true,
             },
             report => {
+                enabled => true,
+            },
+            events => {
                 enabled => true,
             },
         };

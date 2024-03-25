@@ -124,7 +124,7 @@
   <div class="container">
     <p class="subtitle is-5">Produktion
     % if ($p->{'production_premiere'}) {
-        – <%= $p->{'production_premiere'} %>
+        – Premiere <%= $p->{'production_premiere'} %>
     % }
     </p>
     <h3 class="title is-4"><%= $p->{'production_title'} %></h3>
