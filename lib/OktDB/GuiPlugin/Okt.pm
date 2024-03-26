@@ -104,7 +104,7 @@ has actionCfg => sub {
                 enabled => false
             },
             set => {
-                height => 240,
+                height => 340,
                 width => 400
             },
             backend => {
@@ -141,7 +141,32 @@ has actionCfg => sub {
                 };
             }
         },
-                {
+        {
+            label => trm('Open Drive'),
+            action => 'submit',
+            addToContextMenu => true,
+            key => 'drive',
+            buttonSet => {
+                enabled => false
+            },
+            actionHandler => sub {
+                my $self = shift;
+                my $args = shift;
+                my $url = $args->{selection}{okt_drive_url};
+                if ($url) {
+                    return {
+                        action => 'openLink',
+                        url => $url,
+                        target => '_blank',
+                        features => 'noopener,noreferrer'
+                    }
+                }
+                else {
+                    die mkerror(4994,"No Drive URL found for this event");
+                }
+            }
+        },
+        {
             label => trm('Show OktEvents'),
             action => 'popup',
             key => 'events',
@@ -211,6 +236,9 @@ SQL_END
             events => {
                 enabled => true,
             },
+            drive => {
+                enabled => $row->{okt_drive_url} ? true : false
+            }
         };
         $row->{okt_end_ts} = localtime($row->{okt_end_ts})->strftime("%d.%m.%Y") if $row->{okt_end_ts};
          $row->{okt_start_ts} = localtime($row->{okt_start_ts})->strftime("%d.%m.%Y") if $row->{okt_start_ts};

@@ -65,6 +65,7 @@ has formCfg => sub {
                 required => true,
             },
         },
+                
         {
             key => 'okt_start_ts',
             label => trm('First Day'),
@@ -100,7 +101,18 @@ has formCfg => sub {
                 $_[0] = $t;
                 return "";
             },
-        }
+        },
+        {
+            key => 'okt_drive_url',
+            label => trm('Drive URL'),
+            widget => 'text',
+            validator => sub ($value,$fieldName,$form) {
+                if ($value and $value !~ m{^https://drive.google.com/\S+$}) {
+                    return trm("Expected a google drive url");
+                }
+                return "";
+            }
+        },
     ];
 };
 
@@ -114,7 +126,7 @@ has actionCfg => sub {
         my %metaInfo;
         my $fieldMap = { map { 
             "okt_".$_ => $args->{"okt_".$_} 
-            } qw(edition start_ts end_ts)
+            } qw(edition start_ts end_ts drive_url)
         };
         if ($type eq 'add')  {
             $metaInfo{recId} = $self->db->insert('okt',$fieldMap)->last_insert_id;

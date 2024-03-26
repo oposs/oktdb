@@ -424,3 +424,11 @@ ALTER TABLE oktevent ADD oktevent_expense_note TEXT;
 -- 10 up
 --sql
 ALTER TABLE oktevent ADD oktevent_drive_url TEXT;
+
+-- 11 up
+--sql
+ALTER TABLE oktevent ADD okt_drive_url TEXT;
+
+-- 12 up
+--sql
+ALTER TABLE okt ADD okt_drive_url TEXT;
